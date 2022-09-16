@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Program.h" />
+    <ClInclude Include="Demos\GUIDemo.h" />
+    <ClInclude Include="Demos\TextureDemo.h" />
+    <ClInclude Include="Demos\AnimationDemo.h" />
+    <ClInclude Include="Demos\PlayerDemo.h" />
+    <ClInclude Include="Demos\FileStreamDemo.h" />
+    <ClInclude Include="Demos\Test.h" />
+    <ClInclude Include="Demos\GameDemo.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Program.cpp" />
+    <ClCompile Include="Demos\GUIDemo.cpp" />
+    <ClCompile Include="Demos\TextureDemo.cpp" />
+    <ClCompile Include="Demos\AnimationDemo.cpp" />
+    <ClCompile Include="Demos\PlayerDemo.cpp" />
+    <ClCompile Include="Demos\FileStreamDemo.cpp" />
+    <ClCompile Include="Demos\Test.cpp" />
+    <ClCompile Include="Demos\GameDemo.cpp" />
+  </ItemGroup>
+</Project>
