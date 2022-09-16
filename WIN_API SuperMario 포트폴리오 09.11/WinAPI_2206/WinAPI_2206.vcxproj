@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{2164806e-915f-4951-9d53-048cc150ec57}</ProjectGuid>
+    <RootNamespace>WinAPI2206</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>Framework.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>./</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Camera\Camera.h" />
+    <ClInclude Include="Framework.h" />
+    <ClInclude Include="GameObjects\Effect\Effect.h" />
+    <ClInclude Include="GameObjects\Basic\ImageRect.h" />
+    <ClInclude Include="GameObjects\Basic\Line.h" />
+    <ClInclude Include="GameObjects\Basic\Rect.h" />
+    <ClInclude Include="GameObjects\Effect\EffectManager.h" />
+    <ClInclude Include="GameObjects\Basic\Circle.h" />
+    <ClInclude Include="GameObjects\Mario\Enemy\Enemy.h" />
+    <ClInclude Include="GameObjects\Mario\Enemy\EnemyManager.h" />
+    <ClInclude Include="GameObjects\Mario\Enemy\Goomba.h" />
+    <ClInclude Include="GameObjects\Mario\Enemy\Shell.h" />
+    <ClInclude Include="GameObjects\Mario\Enemy\ShellManager.h" />
+    <ClInclude Include="GameObjects\Mario\Enemy\Tutle.h" />
+    <ClInclude Include="GameObjects\Mario\Item\Coin.h" />
+    <ClInclude Include="GameObjects\Mario\Item\Flower.h" />
+    <ClInclude Include="GameObjects\Mario\Item\Item.h" />
+    <ClInclude Include="GameObjects\Mario\Item\Mushroom.h" />
+    <ClInclude Include="GameObjects\Mario\MariioMapEditer\MapEditerUIManager.h" />
+    <ClInclude Include="GameObjects\Mario\MariioMapEditer\TileMapManager.h" />
+    <ClInclude Include="GameObjects\Mario\MarioDataManager.h" />
+    <ClInclude Include="GameObjects\Mario\MarioGameManager.h" />
+    <ClInclude Include="GameObjects\Mario\Mario\Bullet.h" />
+    <ClInclude Include="GameObjects\Mario\Mario\BulletManager.h" />
+    <ClInclude Include="GameObjects\Mario\Mario\Mario.h" />
+    <ClInclude Include="GameObjects\Mario\Mario\MarioEventManager.h" />
+    <ClInclude Include="GameObjects\Mario\Tile\BlockManager.h" />
+    <ClInclude Include="GameObjects\Mario\Tile\BlockTile.h" />
+    <ClInclude Include="GameObjects\Mario\Tile\EventTile.h" />
+    <ClInclude Include="GameObjects\Mario\Tile\ItemBlockTile.h" />
+    <ClInclude Include="GameObjects\Mario\Tile\Tile.h" />
+    <ClInclude Include="GameObjects\Mario\Tile\TileTextureData.h" />
+    <ClInclude Include="GameObjects\Mario\UI\UIManager.h" />
+    <ClInclude Include="GameObjects\UI\Button.h" />
+    <ClInclude Include="GameObjects\UI\ProgressBar.h" />
+    <ClInclude Include="Math\Vector2.h" />
+    <ClInclude Include="Render\Animation.h" />
+    <ClInclude Include="Render\Texture.h" />
+    <ClInclude Include="Render\TextureManager.h" />
+    <ClInclude Include="Scenes\MapEditerScene.h" />
+    <ClInclude Include="Scenes\MarioScene.h" />
+    <ClInclude Include="Scenes\UIScene.h" />
+    <ClInclude Include="System\GameManager.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="Scenes\Scene.h" />
+    <ClInclude Include="System\SceneManager.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Math\GameMath.h" />
+    <ClInclude Include="Utilities\Audio.h" />
+    <ClInclude Include="Utilities\BinaryReader.h" />
+    <ClInclude Include="Utilities\BinaryWriter.h" />
+    <ClInclude Include="Utilities\Keyboard.h" />
+    <ClInclude Include="Utilities\Singleton.h" />
+    <ClInclude Include="Utilities\Timer.h" />
+    <ClInclude Include="WinAPI_2206.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Camera\Camera.cpp" />
+    <ClCompile Include="Framework.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Effect\Effect.cpp" />
+    <ClCompile Include="GameObjects\Basic\ImageRect.cpp" />
+    <ClCompile Include="GameObjects\Basic\Line.cpp" />
+    <ClCompile Include="GameObjects\Basic\Rect.cpp" />
+    <ClCompile Include="GameObjects\Effect\EffectManager.cpp" />
+    <ClCompile Include="GameObjects\Basic\Circle.cpp" />
+    <ClCompile Include="GameObjects\Mario\Enemy\Enemy.cpp" />
+    <ClCompile Include="GameObjects\Mario\Enemy\EnemyManager.cpp" />
+    <ClCompile Include="GameObjects\Mario\Enemy\Goomba.cpp" />
+    <ClCompile Include="GameObjects\Mario\Enemy\Shell.cpp" />
+    <ClCompile Include="GameObjects\Mario\Enemy\ShellManager.cpp" />
+    <ClCompile Include="GameObjects\Mario\Enemy\Tutle.cpp" />
+    <ClCompile Include="GameObjects\Mario\Item\Coin.cpp" />
+    <ClCompile Include="GameObjects\Mario\Item\Flower.cpp" />
+    <ClCompile Include="GameObjects\Mario\Item\Item.cpp" />
+    <ClCompile Include="GameObjects\Mario\Item\Mushroom.cpp" />
+    <ClCompile Include="GameObjects\Mario\MariioMapEditer\MapEditerUIManager.cpp" />
+    <ClCompile Include="GameObjects\Mario\MariioMapEditer\TileMapManager.cpp" />
+    <ClCompile Include="GameObjects\Mario\MarioDataManager.cpp" />
+    <ClCompile Include="GameObjects\Mario\MarioGameManager.cpp" />
+    <ClCompile Include="GameObjects\Mario\Mario\Bullet.cpp" />
+    <ClCompile Include="GameObjects\Mario\Mario\BulletManager.cpp" />
+    <ClCompile Include="GameObjects\Mario\Mario\Mario.cpp" />
+    <ClCompile Include="GameObjects\Mario\Mario\MarioEventManager.cpp" />
+    <ClCompile Include="GameObjects\Mario\Tile\BlockManager.cpp" />
+    <ClCompile Include="GameObjects\Mario\Tile\BlockTile.cpp" />
+    <ClCompile Include="GameObjects\Mario\Tile\EventTile.cpp" />
+    <ClCompile Include="GameObjects\Mario\Tile\ItemBlockTile.cpp" />
+    <ClCompile Include="GameObjects\Mario\Tile\Tile.cpp" />
+    <ClCompile Include="GameObjects\Mario\Tile\TileTextureData.cpp" />
+    <ClCompile Include="GameObjects\Mario\UI\UIManager.cpp" />
+    <ClCompile Include="GameObjects\UI\Button.cpp" />
+    <ClCompile Include="GameObjects\UI\ProgressBar.cpp" />
+    <ClCompile Include="Render\Animation.cpp" />
+    <ClCompile Include="Render\Texture.cpp" />
+    <ClCompile Include="Render\TextureManager.cpp" />
+    <ClCompile Include="Scenes\MapEditerScene.cpp" />
+    <ClCompile Include="Scenes\MarioScene.cpp" />
+    <ClCompile Include="Scenes\UIScene.cpp" />
+    <ClCompile Include="System\GameManager.cpp" />
+    <ClCompile Include="Math\GameMath.cpp" />
+    <ClCompile Include="System\SceneManager.cpp" />
+    <ClCompile Include="Utilities\Audio.cpp" />
+    <ClCompile Include="Utilities\BinaryReader.cpp" />
+    <ClCompile Include="Utilities\BinaryWriter.cpp" />
+    <ClCompile Include="Utilities\Keyboard.cpp" />
+    <ClCompile Include="Utilities\Timer.cpp" />
+    <ClCompile Include="WinAPI_2206.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="WinAPI_2206.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico" />
+    <Image Include="WinAPI_2206.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
