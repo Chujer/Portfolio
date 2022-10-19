@@ -27,6 +27,8 @@ Quad::Quad(Vector2 size, Vector2 pos)
     float top = pos.y + size.y * 0.5f;
     float bottom = pos.y - size.y * 0.5f;
 
+    this->size = size;
+
     vertices.emplace_back(left, top, 0, 0);
     vertices.emplace_back(right, top, 1, 0);
     vertices.emplace_back(left, bottom, 0, 1);

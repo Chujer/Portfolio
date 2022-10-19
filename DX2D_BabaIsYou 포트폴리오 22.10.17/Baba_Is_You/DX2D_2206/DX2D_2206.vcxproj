@@ -177,6 +177,7 @@
     <ClInclude Include="GameObject\Algoritm\DNode.h" />
     <ClInclude Include="GameObject\Algoritm\Heap.h" />
     <ClInclude Include="GameObject\Algoritm\Node.h" />
+    <ClInclude Include="GameObject\BabaIsYou\InstanceQuad.h" />
     <ClInclude Include="GameObject\BabaIsYou\Object.h" />
     <ClInclude Include="GameObject\BabaIsYou\ObjectSample.h" />
     <ClInclude Include="GameObject\Basic\AnimObject.h" />
@@ -245,6 +246,7 @@
     <ClCompile Include="GameObject\Algoritm\DNode.cpp" />
     <ClCompile Include="GameObject\Algoritm\Heap.cpp" />
     <ClCompile Include="GameObject\Algoritm\Node.cpp" />
+    <ClCompile Include="GameObject\BabaIsYou\InstanceQuad.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\Object.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\ObjectSample.cpp" />
     <ClCompile Include="GameObject\Basic\AnimObject.cpp" />

@@ -5,6 +5,7 @@ class ObjectSample : public Singleton<ObjectSample>
 public:
 	struct InstanceData
 	{
+		wstring path;
 		Matrix transform;
 		Vector2 maxFrame;
 		Vector2 curFrame;
@@ -13,9 +14,10 @@ public:
 public:
 	ObjectSample();
 	~ObjectSample();
+	InstanceData GetInstanceData(string key);
 
 private:
 	void SetSampleClips();
 private:
-	map<string, Clip*> sampleClips;
+	map<string, InstanceData> sampleData;
 };

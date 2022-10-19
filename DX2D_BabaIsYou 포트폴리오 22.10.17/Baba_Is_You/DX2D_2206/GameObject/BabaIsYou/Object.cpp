@@ -1,18 +1,12 @@
 #include "Framework.h"
 
-Object::Object()
+Object::Object(string key)
 {
-	Texture* texture = Texture::Add(L"Textures/Object/Image/VAVA.png");
-	Vector2 cutSize = texture->GetSize() / Vector2(3, 8);
-
-	vector<Frame*> frame;
-	frame.push_back(new Frame(L"Textures/Object/Image/VAVA.png", cutSize.x * 0, cutSize.y * 2, cutSize.x, cutSize.y));
-	frame.push_back(new Frame(L"Textures/Object/Image/VAVA.png", cutSize.x * 1, cutSize.y * 2, cutSize.x, cutSize.y));
-	frame.push_back(new Frame(L"Textures/Object/Image/VAVA.png", cutSize.x * 2, cutSize.y * 2, cutSize.x, cutSize.y));
-	clips[0] = new Clip(frame, true,0.3f);
-	curClip = clips[0];
-	curClip->Play();
-
+	instanceData = ObjectSample::Get()->GetInstanceData(key);
+	Position() = { CENTER_X,CENTER_Y };
+	Rotation().z =0;
+	Scale() = { 2.0f,2.0f };
+	UpdateTransform();
 }
 
 Object::~Object()
@@ -21,12 +15,39 @@ Object::~Object()
 
 void Object::Update()
 {
-	AnimObject::Update();
-	curClip->Update();
+	Animation();
+	//UpdateWorld();
+	//instanceData.transform = XMMatrixTranspose(GetWorld());
 }
 
 void Object::Render()
 {
-	AnimObject::Render();
-	curClip->Render();
+}
+
+
+void Object::Animation()
+{
+	if (!isAnimPlay)
+		return;
+	animTime += DELTA;
+	if (animTime > 0.2f)
+	{
+		instanceData.curFrame.y++;
+		if (instanceData.curFrame.y == instanceData.maxFrame.y)
+		{
+			instanceData.curFrame.y = 0;
+		}
+		animTime = 0;
+	}
+}
+
+void Object::UpdateTransform()
+{
+	UpdateWorld();
+	instanceData.transform = XMMatrixTranspose(GetWorld());
+}
+
+ObjectSample::InstanceData Object::GetInstanceData()
+{
+	return instanceData;
 }

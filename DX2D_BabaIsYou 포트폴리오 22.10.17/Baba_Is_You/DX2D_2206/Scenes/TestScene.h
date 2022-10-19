@@ -18,7 +18,15 @@ public:
     virtual void PostRender() override;
 
 private:
-	Quad* quad;
+
+    Object* objectData;
+    Quad* quad;
+    VertexBuffer* instanceBuffer;
+    InstanceData instanceData;
+
+	/*Quad* quad;
     InstanceData instanceData;
     VertexBuffer* instanceBuffer;
+    int temp = 0;
+    float time = 0;*/
 };

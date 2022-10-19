@@ -40,15 +40,7 @@ void AnimObject::Render()
     curClip->Render();
 }
 
-void AnimObject::InstancingRender()
-{
-}
 
-void AnimObject::SetIntancingShaders()
-{
-    vertexShader = Shader::AddVS(L"Shaders/VertexInstancing.hlsl");
-    pixelShader = Shader::AddPS(L"Shaders/PixelInstancing.hlsl");
-}
 
 void AnimObject::SetColor(float r, float g, float b, float a)
 {

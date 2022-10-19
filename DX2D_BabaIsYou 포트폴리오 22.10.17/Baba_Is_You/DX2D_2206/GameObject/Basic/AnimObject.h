@@ -8,8 +8,6 @@ public:
 
     void Update();
     void Render();
-    void InstancingRender();
-    void SetIntancingShaders();
 
     void SetColor(float r, float g, float b, float a = 1.0f);
 

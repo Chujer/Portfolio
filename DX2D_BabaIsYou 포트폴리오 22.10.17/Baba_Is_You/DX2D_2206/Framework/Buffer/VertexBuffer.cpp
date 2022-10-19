@@ -34,4 +34,5 @@ void VertexBuffer::Set(UINT slot, D3D11_PRIMITIVE_TOPOLOGY type)
 void VertexBuffer::Update(void * data, UINT count)
 {
     DC->UpdateSubresource(buffer, 0, nullptr, data, stride, count);
+    
 }

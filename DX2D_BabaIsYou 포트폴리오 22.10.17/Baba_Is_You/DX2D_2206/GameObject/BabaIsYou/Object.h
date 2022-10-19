@@ -1,15 +1,22 @@
 #pragma once
 
-class Object : public AnimObject
+class Object : public Transform
 {
-
 public:
-	Object();
+	Object(string key);
 	~Object();
 
 	void Update();
 	void Render();
 
-private:
+	void Animation();
 
+	void UpdateTransform();
+
+	ObjectSample::InstanceData GetInstanceData();
+
+private:
+	ObjectSample::InstanceData instanceData;
+	float animTime = 0.0f;
+	bool isAnimPlay = true;
 };

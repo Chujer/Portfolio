@@ -12,5 +12,8 @@ public:
 	virtual void PostRender() override;
 
 private:
-	Object* temp;
+	map<string, InstanceQuad*> instanceQuads;
+	Object* object;
+	Object* object2;
+
 };

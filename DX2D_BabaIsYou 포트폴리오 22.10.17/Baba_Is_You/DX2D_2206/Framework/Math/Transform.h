@@ -28,6 +28,7 @@ public:
     Vector2 GlobalPosition() { return globalPosition; }
     Vector2 GlobalScale () { return globalScale; }
 
+
 protected:
     string tag;
 

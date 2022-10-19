@@ -140,6 +140,8 @@ using namespace GameMath;
 #include "GameObject/BabaIsYou/ObjectSample.h"
 #include "GameObject/BabaIsYou/Object.h"
 
+#include "GameObject/BabaIsYou/InstanceQuad.h"
+
 //Scene
 #include "Scenes/Scene.h"
 #include "System/GameManager.h"
