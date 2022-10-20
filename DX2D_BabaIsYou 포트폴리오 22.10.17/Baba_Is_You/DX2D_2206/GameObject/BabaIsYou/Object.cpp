@@ -16,12 +16,21 @@ Object::~Object()
 void Object::Update()
 {
 	Animation();
-	//UpdateWorld();
+	UpdateWorld();
+	if (collider != nullptr)
+	{
+		//collider->Position() = Position();
+		collider->UpdateWorld();
+	}
 	//instanceData.transform = XMMatrixTranspose(GetWorld());
 }
 
 void Object::Render()
 {
+	if (collider != nullptr)
+	{
+		collider->Render();
+	}
 }
 
 

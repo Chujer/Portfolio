@@ -16,15 +16,15 @@ public:
 	void Update();
 	void Render();
 
-	void SetEvent(Event event) { this->event = event; }	
+	void SetEvent(Event event) { this->event = event; }
 	void SetObjectEvent(ObjectEvent event) { objectEvent = event; }
 
-	void SetObject(void * object) { this->object = object; }
+	void SetObject(void* object) { this->object = object; }
 
-	Collider * GetCollider() { return collider; }
+	Collider* GetCollider() { return collider; }
 
 private:
-	Collider * collider;
+	Collider* collider;
 
 	State state = NONE;
 
@@ -34,8 +34,8 @@ private:
 
 	bool isDownCheck = false;
 
-	Event event = nullptr;	
+	Event event = nullptr;
 	ObjectEvent objectEvent = nullptr;
 
-	void * object;
+	void* object;
 };

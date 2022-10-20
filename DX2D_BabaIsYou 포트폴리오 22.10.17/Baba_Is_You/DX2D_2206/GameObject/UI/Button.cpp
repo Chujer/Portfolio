@@ -62,9 +62,9 @@ void Button::Update()
         break;
     case Button::OVER:
         GetColorBuffer()->Set(overColor);
-        break;    
+        break;
     }
-        
+
     UpdateWorld();
     collider->UpdateWorld();
 }

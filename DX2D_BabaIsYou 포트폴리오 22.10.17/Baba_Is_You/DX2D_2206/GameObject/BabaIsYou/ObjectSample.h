@@ -15,6 +15,7 @@ public:
 	ObjectSample();
 	~ObjectSample();
 	InstanceData GetInstanceData(string key);
+	map<string, InstanceData> GetSampleData() { return sampleData; }
 
 private:
 	void SetSampleClips();

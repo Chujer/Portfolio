@@ -3,14 +3,14 @@
 
 BabaScene::BabaScene()
 {
-	object = new Object("Flag");
-	object2 = new Object("Flag");
+	object = new Object("GRASS_16");
+	object2 = new Object("GRASS_16");
 	object->Position() = {200, CENTER_Y};
 	object->UpdateTransform();
 	
-	instanceQuads["Flag"] = new InstanceQuad(ObjectSample::Get()->GetInstanceData("Flag"));
-	instanceQuads["Flag"]->AddPushDatas(object);
-	instanceQuads["Flag"]->AddPushDatas(object2);
+	instanceQuads["GRASS_16"] = new InstanceQuad("GRASS_16");
+	instanceQuads["GRASS_16"]->AddPushDatas(object);
+	instanceQuads["GRASS_16"]->AddPushDatas(object2);
 }
 
 BabaScene::~BabaScene()
@@ -23,6 +23,7 @@ BabaScene::~BabaScene()
 
 void BabaScene::Update()
 {
+	object->Position() += 100*DELTA;
 	for (pair<string, InstanceQuad*> instanceQuad : instanceQuads)
 	{
 		instanceQuad.second->Update();

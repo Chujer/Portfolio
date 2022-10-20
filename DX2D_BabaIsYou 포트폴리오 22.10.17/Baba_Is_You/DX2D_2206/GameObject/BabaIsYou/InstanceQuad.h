@@ -3,6 +3,8 @@
 class InstanceQuad
 {
 private:
+    const UINT DESC_SIZE = 100;
+
     struct InstanceData
     {
         Matrix transform;
@@ -10,13 +12,18 @@ private:
         Vector2 curFrame;
     };
 public:
-    InstanceQuad(ObjectSample::InstanceData data);
+    InstanceQuad(string key);
     ~InstanceQuad();
 
     void AddPushDatas(Object* object);
 
     void Update();
     void Render();
+
+    void SetPixelShader(wstring path)
+    {
+        quad->SetPixelShader(path);
+    }
 
 private:
     void CreateInstanceBuffer();
