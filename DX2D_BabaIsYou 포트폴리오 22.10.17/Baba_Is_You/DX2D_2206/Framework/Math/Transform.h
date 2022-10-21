@@ -19,7 +19,7 @@ public:
     void SetTag(string tag) { this->tag = tag; }
 
     bool Active();
-    void SetActive(bool isActive) { this->isActive = isActive; }
+    virtual void SetActive(bool isActive) { this->isActive = isActive; }
 
     Vector2 & Position() { return localPosition; }
     Float3 & Rotation() { return localRotation; }

@@ -22,6 +22,15 @@ public:
 		collider->UpdateWorld();
 	}
 
+	virtual void SetActive(bool isActive) 
+	{
+		this->isActive = isActive;
+		if (!isActive)
+			Scale() = { 0,0 };
+		else
+			Scale() = { 2,2 };
+	}
+
 private:
 	ObjectSample::InstanceData instanceData;
 	Collider* collider = nullptr;

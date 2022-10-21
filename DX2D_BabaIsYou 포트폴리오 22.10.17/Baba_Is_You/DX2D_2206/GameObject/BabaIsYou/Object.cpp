@@ -11,10 +11,12 @@ Object::Object(string key)
 
 Object::~Object()
 {
+	delete collider;
 }
 
 void Object::Update()
 {
+
 	Animation();
 	UpdateWorld();
 	if (collider != nullptr)

@@ -2,7 +2,11 @@
 
 class MapEditerScene : public Scene
 {
+private:
+	enum Mode
+	{
 
+	};
 public:
 	MapEditerScene();
 	~MapEditerScene();
@@ -24,9 +28,10 @@ private:
 	map<string, InstanceQuad*> instanceQuads;
 
 	Object* selectTile;
-	vector<Object*> sampleTile;
+	map<string, vector<Object*>> sampleTile;
 	vector<Object*> tileMap;
-
+	map<string, bool> checkTiles;
+	bool tempNameBool = false;
 
 	Tile::Type selectType = Tile::BG;
 

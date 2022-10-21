@@ -6,6 +6,8 @@ InstanceQuad::InstanceQuad(string key)
 	quad = new Quad(data.path, { 0,0 }, { 1 / data.maxFrame.x,1 / data.maxFrame.y });
 	quad->SetVertexShader(L"Shaders/VertexInstancing.hlsl");
 	quad->SetPixelShader(L"Shaders/PixelInstancing.hlsl");
+
+	CreateInstanceBuffer();
 }
 
 InstanceQuad::~InstanceQuad()
@@ -25,13 +27,9 @@ void InstanceQuad::AddPushDatas(Object* object)
 	instanceData.maxFrame = object->GetInstanceData().maxFrame;
 	instanceData.transform = object->GetInstanceData().transform;
 	object->SetCollider({size.x / object->GetInstanceData().maxFrame.x, size.y / object->GetInstanceData().maxFrame.y});
-	instanceDatas.push_back(instanceData);
+	instanceDatas[objectDatas.size() - 1] = instanceData;
 
-	if (instanceDatas.size() == 1)
-		CreateInstanceBuffer();
-	else
-		instanceBuffer->Update(instanceDatas.data(), instanceDatas.size());
-
+	//instanceBuffer->Update(instanceDatas.data(), instanceDatas.size());
 }
 
 void InstanceQuad::Update()
@@ -53,8 +51,9 @@ void InstanceQuad::Render()
 	instanceBuffer->Set(1);
 
 	quad->SetRender();
+	
+	DC->DrawIndexedInstanced(6, objectDatas.size(), 0, 0, 0);
 
-	DC->DrawIndexedInstanced(6, instanceDatas.size(), 0, 0, 0);
 	for (Object* object : objectDatas)
 	{
 		if (object->Active())
@@ -64,5 +63,6 @@ void InstanceQuad::Render()
 
 void InstanceQuad::CreateInstanceBuffer()
 {
+	instanceDatas.resize(DESC_SIZE);
 	instanceBuffer = new VertexBuffer(instanceDatas.data(), sizeof(InstanceData), DESC_SIZE);
 }
