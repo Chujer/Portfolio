@@ -34,6 +34,7 @@ public:
 		else
 			Scale() = { 2,2 };
 	}
+	Action* GetAction() { return action; }
 
 	Collider* GetCollider() { return collider; }
 

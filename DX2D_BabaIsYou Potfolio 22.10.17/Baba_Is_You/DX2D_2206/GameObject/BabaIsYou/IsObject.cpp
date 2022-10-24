@@ -48,4 +48,7 @@ void IsObject::RemoveHaveObject()
 	{
 		haveObject.bottom = nullptr;
 	}
+
+	EventManager::Get()->PlayObjEvent("SetPropertyHeight", this);
+	EventManager::Get()->PlayObjEvent("SetPropertyWidth", this);
 }

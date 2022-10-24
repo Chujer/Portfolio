@@ -22,7 +22,10 @@ public:
 
 	void CheckIs();
 
-	void SetPropertyObject(void* object);
+	void SetWidthPropertyObject(void* object);
+	void SetHeightPropertyObject(void* object);
+	void RemoveWidthPropertyObject(void* object);
+	void RemoveHeightPropertyObject(void* object);
 
 private:
 	map<string, InstanceQuad*> instanceQuads;
