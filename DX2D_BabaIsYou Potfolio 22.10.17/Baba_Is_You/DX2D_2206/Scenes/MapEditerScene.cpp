@@ -62,6 +62,7 @@ void MapEditerScene::Render()
 
 void MapEditerScene::PostRender()
 {
+    ImGui::Text("Tile");
     for (pair<string, bool> check : checkTiles)
     {
         if (ImGui::Checkbox(check.first.c_str(), &checkTiles[check.first]))
@@ -80,7 +81,8 @@ void MapEditerScene::PostRender()
             }
         }
     }
-  
+
+    ImGui::Text("TileSize");
     ImGui::InputInt2("Size", size);
     if (ImGui::Button("Create"))
     {
@@ -93,11 +95,12 @@ void MapEditerScene::PostRender()
         if (tileMap != nullptr)
             delete tileMap;
         tileMap = new BabaTileMap(size[0], size[1]);
-        tileMap->SetBufferSize("BG", size[0] * size[1]);
+        tileMap->SetBufferSize("ABG", size[0] * size[1]);
        // tileMap->Position() = { 80,80 };
         tileMap->UpdateWorld();
     }
 
+    ImGui::Text("");
     Save();
     Load();
 }
@@ -117,7 +120,9 @@ void MapEditerScene::ClickSampleBtn()
                 {
                     if (selectTile != nullptr)
                     {
-                        if (selectTile->tag.find("NAME") == string::npos)
+                        if (selectTile->tag.find("PROPERTY") != string::npos)
+                            instanceQuads[selectTile->tag]->DeleteObject(selectTile);
+                        else if (selectTile->tag.find("NAME") == string::npos)
                             instanceQuads[selectTile->tag.substr(0, selectTile->tag.find('_'))]->DeleteObject(selectTile);
                         else
                             instanceQuads[selectTile->tag]->DeleteObject(selectTile);
@@ -128,7 +133,9 @@ void MapEditerScene::ClickSampleBtn()
                     selectTile->UpdateTransform();
                     
 
-                    if(selectTile->tag.find("NAME") == string::npos)
+                    if(selectTile->tag.find("PROPERTY") != string::npos)
+                        instanceQuads[selectTile->tag]->AddPushDatas(selectTile);
+                    else if(selectTile->tag.find("NAME") == string::npos)
                         instanceQuads[selectTile->tag.substr(0, selectTile->tag.find('_'))]->AddPushDatas(selectTile);
                     else
                         instanceQuads[selectTile->tag]->AddPushDatas(selectTile);
@@ -161,7 +168,15 @@ void MapEditerScene::CreateSample()
         object->AnimPlay() = false;
         
 
-        if (data.first.find("NAME") != string::npos)
+        if (data.first.find("PROPERTY") != string::npos)
+        {
+            if (instanceQuads.count(data.first) == 0)
+                instanceQuads[data.first] = new InstanceQuad(data.first);
+
+            instanceQuads[data.first]->AddPushDatas(object);
+            sampleTile[data.first].push_back(object);
+        }
+        else if (data.first.find("NAME") != string::npos)
         {
             instanceQuads[data.first] = new InstanceQuad(data.first);
             instanceQuads[data.first]->AddPushDatas(object);

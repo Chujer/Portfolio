@@ -112,6 +112,14 @@ public:
         return false;
     }
 
+    bool operator != (const Vector2 & value)
+    {
+        if (x != value.x || y != value.y)
+            return true;
+
+        return false;
+    }
+
     float Angle()
     {
         return atan2(y, x);

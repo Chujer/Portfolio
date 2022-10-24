@@ -23,6 +23,8 @@ public:
 	void ClickTile(Object* selectSample);
 	void DeleteObjTile();
 
+	vector<Object*> GetTiles() { return tiles; }
+
 	void Save(string file);
 	void Load(string file); 
 private:

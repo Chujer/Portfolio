@@ -11,6 +11,8 @@ public:
 
 	void Animation();
 
+	void SetAction(Action* action);
+
 	void UpdateTransform();
 	bool& AnimPlay() { return isAnimPlay; }
 	float& AnimTime() { return animTime; }
@@ -41,4 +43,5 @@ private:
 	Collider* collider = nullptr;
 	float animTime = 0.0f;
 	bool isAnimPlay = true;
+	Action* action = nullptr;
 };

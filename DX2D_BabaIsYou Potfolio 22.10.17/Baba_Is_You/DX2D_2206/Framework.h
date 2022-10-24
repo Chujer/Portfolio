@@ -126,8 +126,14 @@ using namespace GameMath;
 
 #include "GameObject/Manager/EffectManager.h"
 
+#include "GameObject/BabaIsYou/Utility/EventManager.h"
+
+#include "GameObject/BabaIsYou/Property/Action.h"
+#include "GameObject/BabaIsYou/Property/Move.h"
+
 #include "GameObject/BabaIsYou/ObjectSample.h"
 #include "GameObject/BabaIsYou/Object.h"
+#include "GameObject/BabaIsYou/IsObject.h"
 
 #include "GameObject/BabaIsYou/InstanceQuad.h"
 

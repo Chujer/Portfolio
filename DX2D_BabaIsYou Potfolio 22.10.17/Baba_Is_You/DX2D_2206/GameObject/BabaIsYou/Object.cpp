@@ -17,6 +17,12 @@ Object::~Object()
 
 void Object::Update()
 {
+	if (!isActive)
+		return;
+
+	if (action != nullptr)
+		action->Update();
+
 	if (isAnimPlay)
 		Animation();
 	else
@@ -30,6 +36,9 @@ void Object::Update()
 
 void Object::Render()
 {
+	if (!isActive)
+		return;
+
 	if (collider != nullptr)
 	{
 		collider->Render();
@@ -51,6 +60,14 @@ void Object::Animation()
 		}
 		animTime = 0;
 	}
+}
+
+void Object::SetAction(Action* action)
+{
+	if (this->action != nullptr)
+		delete this->action;
+
+	this->action = action;
 }
 
 void Object::UpdateTransform()

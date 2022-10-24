@@ -3,6 +3,11 @@
 class BabaScene : public Scene
 {
 public:
+	enum class ActionType
+	{
+		NONE = 0, MOVE, STOP, DEFEAT, HOT, MELT, PUSH, SINK, WIN, YOU
+	};
+public:
 	BabaScene();
 	~BabaScene();
 
@@ -11,9 +16,27 @@ public:
 	virtual void Render() override;
 	virtual void PostRender() override;
 
+	void Load();
+
+	void SetAction(Object* object, ActionType action);
+
+	void CheckIs();
+
+	void SetPropertyObject(void* object);
+
 private:
 	map<string, InstanceQuad*> instanceQuads;
-	Object* object;
-	Object* object2;
 
+	BabaTileMap* tileMap;
+	vector<Object*> objects;
+
+	vector<Object*> objectNames;
+	vector<Object*> objectImgs;
+	vector<Object*> propertys;
+
+	vector<IsObject*> propertyIs;
+	
+	map<ActionType, vector<Object*>> propertyObject;
+
+	Quad* backGround;
 };

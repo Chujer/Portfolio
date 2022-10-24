@@ -170,7 +170,7 @@ void BabaTileMap::Load(string file)
         tile->UpdateTransform();
         
         if (instanceQuads.count(tile->tag) == 0)
-            instanceQuads[tile->tag] = new InstanceQuad(tile->tag);
+            instanceQuads[tile->tag] = new InstanceQuad(tile->tag,width*height);
         instanceQuads[tile->tag]->AddPushDatas(tile);
     }
 
@@ -207,15 +207,15 @@ void BabaTileMap::CreateTile()
     {
         for (UINT x = 0; x < width; x++)
         {
-            Object* object = new Object("BG");
+            Object* object = new Object("ABG");
             object->Position() = Vector2(tileSize.x * x, tileSize.y * y);
 
             object->SetParent(this);
             object->UpdateTransform();
             bgTiles.push_back(object);
-            if(instanceQuads.count("BG")==0)
-               instanceQuads["BG"] = new InstanceQuad("BG");
-            instanceQuads["BG"]->AddPushDatas(object);
+            if(instanceQuads.count("ABG")==0)
+               instanceQuads["ABG"] = new InstanceQuad("ABG",height*width);
+            instanceQuads["ABG"]->AddPushDatas(object);
         }
     }
 
