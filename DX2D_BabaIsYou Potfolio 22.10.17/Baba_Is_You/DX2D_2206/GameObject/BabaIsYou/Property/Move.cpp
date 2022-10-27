@@ -10,9 +10,9 @@ Move::~Move()
 {
 }
 
+
 void Move::Update()
 {
-
 	MoveTarget();
 	Animaion();
 
@@ -27,6 +27,7 @@ void Move::MoveTarget()
 		if (KEY_DOWN(VK_RIGHT))
 		{
 			endPos = { target->Position().x + MOVE_POWER,target->Position().y };
+
 			if (curFrame != nullptr)
 			{
 				curFrame->x = 1;
@@ -64,6 +65,15 @@ void Move::MoveTarget()
 			}
 			isMove = true;
 		}
+
+		if (BabaMapManager::Get()->GetPositionTile(endPos) != nullptr && BabaMapManager::Get()->GetPositionTile(endPos)->effect == "STOP" )
+			endPos = target->Position();
+
+		if(endPos.x > BabaMapManager::Get()->Right() ||
+			endPos.x < BabaMapManager::Get()->Left() ||
+			endPos.y > BabaMapManager::Get()->Top() ||
+			endPos.y < BabaMapManager::Get()->Bottom() )
+			endPos = target->Position();
 	}
 
 	if ((target->Position() - endPos).Length() < 0.5f)
@@ -71,6 +81,8 @@ void Move::MoveTarget()
 		target->Position() = endPos;
 		isMove = false;
 	}
+
+
 }
 
 void Move::Animaion()

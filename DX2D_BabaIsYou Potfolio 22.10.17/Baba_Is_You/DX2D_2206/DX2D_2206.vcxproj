@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="GameObject\BabaIsYou\BabaMapManager.h" />
     <ClInclude Include="DX2D_2206.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Framework\Buffer\ConstBuffer.h" />
@@ -237,6 +238,7 @@
     <ClCompile Include="Framework\Utilities\Timer.cpp" />
     <ClCompile Include="Framework\Utilities\tinyxml2.cpp" />
     <ClCompile Include="Framework\Utilities\Utility.cpp" />
+    <ClCompile Include="GameObject\BabaIsYou\BabaMapManager.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\BabaTileMap.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\InstanceQuad.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\IsObject.cpp" />

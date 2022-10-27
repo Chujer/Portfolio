@@ -12,6 +12,8 @@ BabaScene::BabaScene()
 	// EventManager를 이용해 propertys변수안의 값을 추가 제거할수 있도록 사용 사용처(IsObject클래스)
 	EventManager::Get()->Add("SetPropertyHeight", bind(&BabaScene::SetHeightPropertyObject, this, placeholders::_1));
 	EventManager::Get()->Add("SetPropertyWidth", bind(&BabaScene::SetWidthPropertyObject, this, placeholders::_1));
+	EventManager::Get()->Add("RemoveHeightPropertyObject", bind(&BabaScene::RemoveHeightPropertyObject, this, placeholders::_1));
+	EventManager::Get()->Add("RemoveWidthPropertyObject", bind(&BabaScene::RemoveWidthPropertyObject, this, placeholders::_1));
 
 	Load();
 }
@@ -35,6 +37,15 @@ void BabaScene::Update()
 	{
 		instanceQuad.second->Update();
 	}
+
+	if (KEY_DOWN(VK_SPACE))
+	{
+		objectNames.front()->SetActive(false);
+	}
+	if (KEY_DOWN('W'))
+	{
+		objectNames.front()->SetActive(true);
+	}
 }
 
 void BabaScene::Render()
@@ -57,6 +68,7 @@ void BabaScene::Load()
 	tileMap->Load("TextData/test.map");
 	objects.clear();
 	objects = tileMap->GetTiles();
+	BabaMapManager::Get()->SetMapData(tileMap);
 
 	objectNames.clear();
 	propertyIs.clear();
@@ -73,7 +85,7 @@ void BabaScene::Load()
 		else if (object->tag.find("PROPERTY") != string::npos)
 			propertys.push_back(object);
 		else
-			objectImgs.push_back(object);
+			objectImgs[object->tag.substr(0,object->tag.find('_'))].push_back(object);
 	}
 
 }
@@ -84,8 +96,12 @@ void BabaScene::SetAction(Object* object, ActionType action)
 	switch (action)
 	{
 	case BabaScene::ActionType::NONE:
-		delete object->GetAction();
-		object->SetAction(new Action());
+		if (object->GetAction() != nullptr)
+		{
+			delete object->GetAction();
+			object->GetAction() = nullptr;
+		}
+		object->effect = "NONE";
 		break;
 	case BabaScene::ActionType::MOVE:
 		if (object->tag.find("NAME") == string::npos)
@@ -93,12 +109,15 @@ void BabaScene::SetAction(Object* object, ActionType action)
 			if (object->tag.find("BABA") != string::npos)
 			{
 				object->SetAction(new Move((Transform*)object, &object->GetInstanceData().curFrame));
+				object->effect = "MOVE";
 				return;
 			}
 			object->SetAction(new Move((Transform*)object));
+			object->effect = "MOVE";
 		}
 		break;
 	case BabaScene::ActionType::STOP:
+		object->effect = "STOP";
 		break;
 	case BabaScene::ActionType::DEFEAT:
 		break;
@@ -107,6 +126,7 @@ void BabaScene::SetAction(Object* object, ActionType action)
 	case BabaScene::ActionType::MELT:
 		break;
 	case BabaScene::ActionType::PUSH:
+		object->effect = "PUSH";
 		break;
 	case BabaScene::ActionType::SINK:
 		break;
@@ -150,7 +170,7 @@ void BabaScene::CheckIs()
 
 }
 
-//Check Is이후 설정된 기능의 Action설정과 오브젝트에 담는 역할 - 실질적 사용은 IsObject->RemoveHaveObject()에서 사용할 예정
+//Check Is이후 설정된 기능의 Action을 설정하는 역할
 void BabaScene::SetWidthPropertyObject(void* object)
 {
 	IsObject* temp = (IsObject*)object;
@@ -161,16 +181,10 @@ void BabaScene::SetWidthPropertyObject(void* object)
 	string tag = temp->GetHaveObject().left->tag.substr(0, temp->GetHaveObject().left->tag.find('_'));
 	ActionType property = (ActionType)temp->GetWidthProperty();
 
-	for (Object* target : objects)
+	for (Object* object : objectImgs[tag])
 	{
-		if (target->tag.find(tag) != string::npos)
-		{
-			if (find(propertyObject[property].begin(), propertyObject[property].end(), target) == propertyObject[property].end())
-			{
-				propertyObject[property].push_back(target);
-				SetAction(target, property);
-			}
-		}
+		if (object->GetAction() == nullptr)
+			SetAction(object, property);
 	}
 }
 
@@ -184,16 +198,10 @@ void BabaScene::SetHeightPropertyObject(void* object)
 	string tag = temp->GetHaveObject().top->tag.substr(0, temp->GetHaveObject().top->tag.find('_'));
 	ActionType property = (ActionType)temp->GetHeightProperty();
 
-	for (Object* target : objects)
+	for (Object* object : objectImgs[tag])
 	{
-		if (target->tag.find(tag) != string::npos)
-		{
-			if (find(propertyObject[property].begin(), propertyObject[property].end(), target) == propertyObject[property].end())
-			{
-				propertyObject[property].push_back(target);
-				SetAction(target, property);
-			}
-		}
+		if(object->GetAction() == nullptr)
+			SetAction(object, property);
 	}
 }
 
@@ -201,23 +209,30 @@ void BabaScene::RemoveWidthPropertyObject(void* object)
 {
 	IsObject* temp = (IsObject*)object;
 
+	if (temp->GetHaveObject().left == nullptr || temp->GetHaveObject().right == nullptr)
+		return;
+
 	string tag = temp->GetHaveObject().left->tag.substr(0, temp->GetHaveObject().left->tag.find('_'));
 	ActionType property = (ActionType)temp->GetWidthProperty();
 
-	for (Object* target : objects)
+	for (Object* object : objectImgs[tag])
 	{
-		if (target->tag.find(tag) != string::npos)
-		{
-			if (find(propertyObject[property].begin(), propertyObject[property].end(), target) == propertyObject[property].end())
-			{
-				continue;
-			}
-			SetAction(target, ActionType::NONE);
-			propertyObject[property].erase(find(propertyObject[property].begin(), propertyObject[property].end(), target));
-		}
+		SetAction(object, ActionType::NONE);
 	}
 }
 
 void BabaScene::RemoveHeightPropertyObject(void* object)
 {
+	IsObject* temp = (IsObject*)object;
+
+	if (temp->GetHaveObject().top == nullptr || temp->GetHaveObject().bottom == nullptr)
+		return;
+
+	string tag = temp->GetHaveObject().top->tag.substr(0, temp->GetHaveObject().top->tag.find('_'));
+	ActionType property = (ActionType)temp->GetWidthProperty();
+
+	for (Object* object : objectImgs[tag])
+	{
+		SetAction(object, ActionType::NONE);
+	}
 }

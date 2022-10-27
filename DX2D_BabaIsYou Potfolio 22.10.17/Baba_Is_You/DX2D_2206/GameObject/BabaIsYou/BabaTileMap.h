@@ -24,6 +24,7 @@ public:
 	void DeleteObjTile();
 
 	vector<Object*> GetTiles() { return tiles; }
+	vector<Object*> GetBGTiles() { return bgTiles; }
 
 	void Save(string file);
 	void Load(string file); 

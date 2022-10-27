@@ -135,9 +135,12 @@ using namespace GameMath;
 #include "GameObject/BabaIsYou/Object.h"
 #include "GameObject/BabaIsYou/IsObject.h"
 
+
 #include "GameObject/BabaIsYou/InstanceQuad.h"
 
 #include "GameObject/BabaIsYou/BabaTileMap.h"
+
+#include "GameObject/BabaIsYou/BabaMapManager.h"
 
 //Scene
 #include "Scenes/Scene.h"

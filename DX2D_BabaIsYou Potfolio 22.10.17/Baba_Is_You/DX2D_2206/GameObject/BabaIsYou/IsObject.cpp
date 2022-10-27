@@ -12,41 +12,61 @@ IsObject::~IsObject()
 
 int IsObject::GetWidthProperty()
 {
-	if (haveObject.left != nullptr && haveObject.right != nullptr)
+	if (haveObject.left != nullptr && haveObject.right != nullptr && haveObject.left->Active() && haveObject.right->Active())
 	{
 		if (haveObject.right->tag.find("YOU") != string::npos)
 			return 1;
+		if (haveObject.right->tag.find("STOP") != string::npos)
+			return 2;
 	}
 	return 0;
 }
 
 int IsObject::GetHeightProperty()
 {
-	if (haveObject.top != nullptr && haveObject.left != nullptr)
+	if (haveObject.top != nullptr && haveObject.bottom != nullptr && haveObject.top->Active() && haveObject.bottom->Active())
 	{
 		if (haveObject.bottom->tag.find("YOU") != string::npos)
 			return 1;
+		if (haveObject.bottom->tag.find("STOP") != string::npos)
+			return 2;
 	}
 	return 0;
 }
 
 void IsObject::RemoveHaveObject()
 {
-	if (haveObject.left != nullptr && haveObject.left->Position() != Position() - Vector2(48.0f, 0))
+	if (haveObject.left != nullptr)
 	{
-		haveObject.left = nullptr;
+		if (haveObject.left->Position() != Position() - Vector2(48.0f, 0) || !haveObject.left->Active())
+		{
+			EventManager::Get()->PlayObjEvent("RemoveWidthPropertyObject", this);
+			haveObject.left = nullptr;
+		}
 	}
-	else if (haveObject.right != nullptr && haveObject.right->Position() != Position() + Vector2(48.0f, 0) )
+	if (haveObject.right != nullptr)
 	{
-		haveObject.right = nullptr;
+		if (haveObject.right->Position() != Position() + Vector2(48.0f, 0) || !haveObject.right->Active())
+		{
+			EventManager::Get()->PlayObjEvent("RemoveWidthPropertyObject", this);
+			haveObject.right = nullptr;
+		}
 	}
-	else if (haveObject.top != nullptr && haveObject.top->Position() != Position() + Vector2(0, 48.0f))
+	if (haveObject.top != nullptr)
 	{
-		haveObject.top = nullptr;
+		if (haveObject.top != nullptr && haveObject.top->Position() != Position() + Vector2(0, 48.0f) || !haveObject.top->Active())
+		{
+			EventManager::Get()->PlayObjEvent("RemoveHeightPropertyObject", this);
+			haveObject.top = nullptr;
+		}
 	}
-	else if (haveObject.bottom != nullptr && haveObject.bottom->Position() != Position() - Vector2(0, 48.0f))
+	if (haveObject.bottom != nullptr)
 	{
-		haveObject.bottom = nullptr;
+		if (haveObject.bottom != nullptr && haveObject.bottom->Position() != Position() - Vector2(0, 48.0f) || !haveObject.bottom->Active())
+		{
+			EventManager::Get()->PlayObjEvent("RemoveHeightPropertyObject", this);
+			haveObject.bottom = nullptr;
+		}
 	}
 
 	EventManager::Get()->PlayObjEvent("SetPropertyHeight", this);

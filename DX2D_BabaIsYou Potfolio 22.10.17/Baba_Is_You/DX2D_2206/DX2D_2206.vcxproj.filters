@@ -210,6 +210,9 @@
     <ClInclude Include="GameObject\BabaIsYou\Utility\EventManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="GameObject\BabaIsYou\BabaMapManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DX2D_2206.cpp">
@@ -354,6 +357,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GameObject\BabaIsYou\Utility\EventManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\BabaIsYou\BabaMapManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

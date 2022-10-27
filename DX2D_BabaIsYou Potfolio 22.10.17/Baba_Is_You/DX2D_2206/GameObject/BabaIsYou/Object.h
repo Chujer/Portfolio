@@ -33,12 +33,15 @@ public:
 			Scale() = { 0,0 };
 		else
 			Scale() = { 2,2 };
+
+		UpdateWorld();
 	}
-	Action* GetAction() { return action; }
+	Action*& GetAction() { return action; }
 
 	Collider* GetCollider() { return collider; }
 
 	string tag = "";
+	string effect = "";
 private:
 	ObjectSample::InstanceData instanceData;
 	Collider* collider = nullptr;

@@ -72,7 +72,7 @@ void InstanceQuad::Render()
 
 	for (Object* object : objectDatas)
 	{
-		if (object->Active())
+ 		if (object->Active())
 			object->Render();
 	}
 }

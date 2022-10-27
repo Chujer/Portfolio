@@ -5,7 +5,7 @@ class BabaScene : public Scene
 public:
 	enum class ActionType
 	{
-		NONE = 0, MOVE, STOP, DEFEAT, HOT, MELT, PUSH, SINK, WIN, YOU
+		NONE = 0, MOVE, STOP, PUSH, WIN, DEFEAT, HOT, MELT, SINK, YOU
 	};
 public:
 	BabaScene();
@@ -34,12 +34,14 @@ private:
 	vector<Object*> objects;
 
 	vector<Object*> objectNames;
-	vector<Object*> objectImgs;
+	map<string,vector<Object*>> objectImgs;
 	vector<Object*> propertys;
 
-	vector<IsObject*> propertyIs;
+	vector<IsObject*> propertyIs;		//IS블럭을 담는 객체
 	
-	map<ActionType, vector<Object*>> propertyObject;
+
+
+	//map<ActionType, vector<Object*>> propertyObject;
 
 	Quad* backGround;
 };

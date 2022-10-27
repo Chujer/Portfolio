@@ -8,6 +8,7 @@ public:
 	Move(Transform* target, Vector2* curFrame = nullptr);
 	~Move();
 
+
 	virtual void Update() override;
 
 	void MoveTarget();
