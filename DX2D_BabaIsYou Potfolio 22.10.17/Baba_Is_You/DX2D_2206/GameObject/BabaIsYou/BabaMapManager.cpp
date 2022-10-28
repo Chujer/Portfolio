@@ -28,3 +28,16 @@ Object* BabaMapManager::GetPositionTile(Vector2 pos)
 
 	return nullptr;
 }
+
+Object* BabaMapManager::GetPositionandEffectTile(Vector2 pos, string effect)
+{
+	for (Object* object : maps)
+	{
+		if (object->effect == effect && object->Position() == pos)
+		{
+			return object;
+		}
+	}
+
+	return nullptr;
+}

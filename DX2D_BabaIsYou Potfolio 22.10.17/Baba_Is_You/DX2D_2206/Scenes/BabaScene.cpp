@@ -14,6 +14,8 @@ BabaScene::BabaScene()
 	EventManager::Get()->Add("SetPropertyWidth", bind(&BabaScene::SetWidthPropertyObject, this, placeholders::_1));
 	EventManager::Get()->Add("RemoveHeightPropertyObject", bind(&BabaScene::RemoveHeightPropertyObject, this, placeholders::_1));
 	EventManager::Get()->Add("RemoveWidthPropertyObject", bind(&BabaScene::RemoveWidthPropertyObject, this, placeholders::_1));
+	EventManager::Get()->Adda("Check", bind(&BabaScene::CheckIs, this));
+
 
 	Load();
 }
@@ -79,11 +81,20 @@ void BabaScene::Load()
 	for (Object* object : objects)
 	{
 		if (object->tag.find("NAME") != string::npos)
+		{
+			SetAction(object, ActionType::PUSH);
 			objectNames.push_back(object);
+		}
 		else if (object->tag.find("IS") != string::npos)
+		{
+			SetAction(object, ActionType::PUSH);
 			propertyIs.push_back((IsObject*)object);
+		}
 		else if (object->tag.find("PROPERTY") != string::npos)
+		{
+			SetAction(object, ActionType::PUSH);
 			propertys.push_back(object);
+		}
 		else
 			objectImgs[object->tag.substr(0,object->tag.find('_'))].push_back(object);
 	}

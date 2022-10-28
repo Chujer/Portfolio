@@ -13,10 +13,18 @@ public:
 
 	void MoveTarget();
 	void Animaion();
+
+private:
+	void SetStop();
+	void SetPushObject(Vector2 nextPos);
+	void SetFinishMove();
 private:
 	Transform* target;
 	Vector2* curFrame;
+	Vector2 nextPos = {0,0};
 	Vector2 endPos = {0,0};
+
+	vector<Transform*> pushTargets;
 
 	bool isMove = false;
 };
