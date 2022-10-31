@@ -13,7 +13,6 @@ Move::~Move()
 
 void Move::Update()
 {
-	MoveTarget();
 	Animaion();
 
 	target->Position() = SLERP(target->Position(),  endPos, 100.0f * DELTA);
@@ -22,6 +21,7 @@ void Move::Update()
 	{
 		pushTargets[i]->Position() = SLERP(pushTargets[i]->Position(), endPos + (nextPos * (i + 1)), 100 * DELTA);
 	}
+	MoveTarget();
 }
 
 void Move::MoveTarget()
@@ -147,7 +147,7 @@ void Move::SetPushObject(Vector2 nextPos)
 
 void Move::SetFinishMove()
 {
-	if ((target->Position() - endPos).Length() < 0.5f)
+	if ((target->Position() - endPos).Length() < 0.5f && isMove == true)
 	{
 		target->Position() = endPos;
 		for (int i = 0; i < pushTargets.size(); i++)
@@ -156,5 +156,6 @@ void Move::SetFinishMove()
 		}
 
 		isMove = false;
+		EventManager::Get()->PlayEvent("CheckIs");
 	}
 }

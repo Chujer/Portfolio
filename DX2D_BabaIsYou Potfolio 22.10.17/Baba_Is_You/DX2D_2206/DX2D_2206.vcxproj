@@ -178,6 +178,9 @@
     <ClInclude Include="GameObject\BabaIsYou\Object.h" />
     <ClInclude Include="GameObject\BabaIsYou\ObjectSample.h" />
     <ClInclude Include="GameObject\BabaIsYou\BabaTileMap.h" />
+    <ClInclude Include="GameObject\BabaIsYou\Property\Defeat.h" />
+    <ClInclude Include="GameObject\BabaIsYou\Property\Hot.h" />
+    <ClInclude Include="GameObject\BabaIsYou\Property\Sink.h" />
     <ClInclude Include="GameObject\BabaIsYou\Utility\EventManager.h" />
     <ClInclude Include="GameObject\Basic\AnimObject.h" />
     <ClInclude Include="GameObject\Basic\Effect.h" />
@@ -244,6 +247,9 @@
     <ClCompile Include="GameObject\BabaIsYou\IsObject.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\Object.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\ObjectSample.cpp" />
+    <ClCompile Include="GameObject\BabaIsYou\Property\Defeat.cpp" />
+    <ClCompile Include="GameObject\BabaIsYou\Property\Hot.cpp" />
+    <ClCompile Include="GameObject\BabaIsYou\Property\Sink.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\Utility\EventManager.cpp" />
     <ClCompile Include="GameObject\Basic\AnimObject.cpp" />
     <ClCompile Include="GameObject\Basic\Effect.cpp" />

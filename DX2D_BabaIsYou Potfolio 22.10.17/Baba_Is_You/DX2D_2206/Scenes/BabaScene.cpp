@@ -6,18 +6,19 @@ BabaScene::BabaScene()
 	backGround = new Quad(L"Textures/BackGround.png");
 	backGround->Position() = { CENTER_X,CENTER_Y };
 	backGround->UpdateWorld();
-
+	
 	EventManager::Get();
-	//EventManager  관련
-	// EventManager를 이용해 propertys변수안의 값을 추가 제거할수 있도록 사용 사용처(IsObject클래스)
 	EventManager::Get()->Add("SetPropertyHeight", bind(&BabaScene::SetHeightPropertyObject, this, placeholders::_1));
 	EventManager::Get()->Add("SetPropertyWidth", bind(&BabaScene::SetWidthPropertyObject, this, placeholders::_1));
 	EventManager::Get()->Add("RemoveHeightPropertyObject", bind(&BabaScene::RemoveHeightPropertyObject, this, placeholders::_1));
 	EventManager::Get()->Add("RemoveWidthPropertyObject", bind(&BabaScene::RemoveWidthPropertyObject, this, placeholders::_1));
-	EventManager::Get()->Adda("Check", bind(&BabaScene::CheckIs, this));
+	EventManager::Get()->AddEvent("CheckIs", bind(&BabaScene::CheckIs, this));
 
 
 	Load();
+//	CheckIs();
+	EventManager::Get()->PlayEvent("CheckIs");
+	
 }
 
 BabaScene::~BabaScene()
@@ -33,7 +34,7 @@ void BabaScene::Update()
 {
 	tileMap->Update();
 
-	CheckIs();
+	//CheckIs();
 
 	for (pair<string, InstanceQuad*> instanceQuad : instanceQuads)
 	{
@@ -67,7 +68,7 @@ void BabaScene::Load()
 {
 	if (tileMap == nullptr)
 		tileMap = new BabaTileMap(0, 0);
-	tileMap->Load("TextData/test.map");
+	tileMap->Load("TextData/test2.map");
 	objects.clear();
 	objects = tileMap->GetTiles();
 	BabaMapManager::Get()->SetMapData(tileMap);
@@ -131,15 +132,22 @@ void BabaScene::SetAction(Object* object, ActionType action)
 		object->effect = "STOP";
 		break;
 	case BabaScene::ActionType::DEFEAT:
+		object->effect = "DEFEAT";
+		object->SetAction(new Defeat((Transform*)object));
 		break;
 	case BabaScene::ActionType::HOT:
+		object->effect = "HOT";
+		object->SetAction(new Hot((Transform*)object));
 		break;
 	case BabaScene::ActionType::MELT:
+		object->effect = "MELT";
 		break;
 	case BabaScene::ActionType::PUSH:
 		object->effect = "PUSH";
 		break;
 	case BabaScene::ActionType::SINK:
+		object->effect = "SINK";
+		object->SetAction(new Sink((Transform*)object));
 		break;
 	case BabaScene::ActionType::WIN:
 		break;

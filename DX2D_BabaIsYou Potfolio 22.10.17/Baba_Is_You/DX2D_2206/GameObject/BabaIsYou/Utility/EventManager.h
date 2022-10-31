@@ -6,10 +6,10 @@ public:
 	EventManager();
 	~EventManager();
 
-	void Adda(string key, function<void()> event) { nomalEvents[key] = event; }
+	void AddEvent(string key, function<void()> event) { nomalEvents[key] = event; }
 	void Add(string key, function<void(void*)> event) { objEvents[key] = event; }
 
-	//void PlayEvent(string key) { events[key]; }
+	void PlayEvent(string key) { nomalEvents[key](); }
 	void PlayObjEvent(string key,void* obj) { objEvents[key](obj); }
 
 private:

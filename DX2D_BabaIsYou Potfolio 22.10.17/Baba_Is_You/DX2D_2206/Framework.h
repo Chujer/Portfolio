@@ -130,6 +130,9 @@ using namespace GameMath;
 
 #include "GameObject/BabaIsYou/Property/Action.h"
 #include "GameObject/BabaIsYou/Property/Move.h"
+#include "GameObject/BabaIsYou/Property/Defeat.h"
+#include "GameObject/BabaIsYou/Property/Hot.h"
+#include "GameObject/BabaIsYou/Property/Sink.h"
 
 #include "GameObject/BabaIsYou/ObjectSample.h"
 #include "GameObject/BabaIsYou/Object.h"
