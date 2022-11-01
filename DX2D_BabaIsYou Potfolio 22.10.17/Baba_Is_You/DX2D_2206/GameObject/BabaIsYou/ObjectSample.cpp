@@ -118,6 +118,28 @@ void ObjectSample::SetSampleClips()
 		sampleData["LAVA_" + to_string(i)].maxFrame = maxFrame;
 	}
 
+	//LAVA
+	path = L"Textures/Object/Name/WALL.png";
+	curFrame = { 0,0 };
+	maxFrame = { 1,3 };
+	cutSize.x = Texture::Add(path)->GetSize().x / maxFrame.x;
+	cutSize.y = Texture::Add(path)->GetSize().y / maxFrame.y;
+	sampleData["WALL_NAME"].path = path;
+	sampleData["WALL_NAME"].curFrame = curFrame;
+	sampleData["WALL_NAME"].maxFrame = maxFrame;
+
+	path = L"Textures/Object/Image/WALL_ALL.png";
+	for (int i = 1; i < 17; i++)
+	{
+		curFrame = { i - 1.0f,0 };
+		maxFrame = { 16,3 };
+		cutSize.x = Texture::Add(path)->GetSize().x / maxFrame.x;
+		cutSize.y = Texture::Add(path)->GetSize().y / maxFrame.y;
+		sampleData["WALL_" + to_string(i)].path = path;
+		sampleData["WALL_" + to_string(i)].curFrame = curFrame;
+		sampleData["WALL_" + to_string(i)].maxFrame = maxFrame;
+	}
+
 	//WATER
 	
 	path = L"Textures/Object/Name/WATER.png";

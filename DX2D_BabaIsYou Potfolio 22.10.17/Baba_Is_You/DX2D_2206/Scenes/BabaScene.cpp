@@ -68,7 +68,7 @@ void BabaScene::Load()
 {
 	if (tileMap == nullptr)
 		tileMap = new BabaTileMap(0, 0);
-	tileMap->Load("TextData/test2.map");
+	tileMap->Load("TextData/Stage1.map");
 	objects.clear();
 	objects = tileMap->GetTiles();
 	BabaMapManager::Get()->SetMapData(tileMap);
@@ -89,7 +89,10 @@ void BabaScene::Load()
 		else if (object->tag.find("IS") != string::npos)
 		{
 			SetAction(object, ActionType::PUSH);
-			propertyIs.push_back((IsObject*)object);
+			IsObject* temp = (IsObject*)object;
+			temp->SetHaveObject();
+			propertyIs.push_back(temp);
+
 		}
 		else if (object->tag.find("PROPERTY") != string::npos)
 		{
@@ -162,9 +165,16 @@ void BabaScene::SetAction(Object* object, ActionType action)
 //Is타일 가로 세로의 정보를 갱신하는 함수
 void BabaScene::CheckIs()
 {
-	for (IsObject* object : propertyIs)
+	/*for (IsObject* object : propertyIs)
 	{
-		for (Object* target : objects)
+		object->GetHaveObject().bottom = nullptr;
+		object->GetHaveObject().top = nullptr;
+		object->GetHaveObject().left = nullptr;
+		object->GetHaveObject().right = nullptr;
+	}*/
+	for (IsObject*& object : propertyIs)
+	{
+		for (Object*& target : objects)
 		{
 			if ((target->tag.find("NAME") != string::npos || target->tag.find("PROPERTY") != string::npos )
 				&& target->tag.find("IS") == string::npos)

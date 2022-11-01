@@ -3,11 +3,20 @@
 IsObject::IsObject(string key)
 	:Object(key)
 {
+
 }
 
 
 IsObject::~IsObject()
 {
+}
+
+void IsObject::SetHaveObject()
+{
+	haveObject.left = nullptr;
+	haveObject.right = nullptr;
+	haveObject.top = nullptr;
+	haveObject.bottom = nullptr;
 }
 
 int IsObject::GetWidthProperty()
@@ -52,7 +61,7 @@ int IsObject::GetHeightProperty()
 
 void IsObject::RemoveHaveObject()
 {
-	if (haveObject.left != nullptr)
+	if (haveObject.left != nullptr )
 	{
 		if (haveObject.left->Position() != Position() - Vector2(48.0f, 0) || !haveObject.left->Active())
 		{
