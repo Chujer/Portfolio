@@ -47,13 +47,13 @@ int IsObject::GetHeightProperty()
 			return 1;
 		else if (haveObject.bottom->tag.find("STOP") != string::npos)
 			return 2;
-		else if (haveObject.right->tag.find("PUSH") != string::npos)
+		else if (haveObject.bottom->tag.find("PUSH") != string::npos)
 			return 3;
-		else if (haveObject.right->tag.find("DEFEAT") != string::npos)
+		else if (haveObject.bottom->tag.find("DEFEAT") != string::npos)
 			return 5;
-		else if (haveObject.right->tag.find("HOT") != string::npos)
+		else if (haveObject.bottom->tag.find("HOT") != string::npos)
 			return 6;
-		else if (haveObject.right->tag.find("SINK") != string::npos)
+		else if (haveObject.bottom->tag.find("SINK") != string::npos)
 			return 8;
 	}
 	return 0;

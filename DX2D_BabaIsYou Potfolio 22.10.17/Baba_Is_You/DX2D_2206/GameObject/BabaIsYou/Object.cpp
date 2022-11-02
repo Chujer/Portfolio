@@ -13,6 +13,7 @@ Object::Object(string key)
 Object::~Object()
 {
 	delete collider;
+	delete action;
 }
 
 void Object::Update()

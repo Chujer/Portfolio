@@ -104,7 +104,7 @@ void Move::SetStop()
 {
 	if (pushTargets.size() > 0)
 	{
-		if (BabaMapManager::Get()->GetPositionandEffectTile(pushTargets.back()->Position()+nextPos, "STOP") != nullptr)
+		if (BabaMapManager::Get()->GetPositionAndEffectTile(pushTargets.back()->Position()+nextPos, "STOP") != nullptr)
 		{
 			endPos = target->Position();
 			pushTargets.clear();
@@ -122,7 +122,7 @@ void Move::SetStop()
 		}
 	}
 
-	if (BabaMapManager::Get()->GetPositionandEffectTile(endPos, "STOP") != nullptr)
+	if (BabaMapManager::Get()->GetPositionAndEffectTile(endPos, "STOP") != nullptr)
 		endPos = target->Position();
 
 	if (endPos.x > BabaMapManager::Get()->Right() ||
@@ -136,12 +136,12 @@ void Move::SetPushObject(Vector2 nextPos)
 {
 	Object* temp = BabaMapManager::Get()->GetPositionTile(nextPos);
 
-	if (BabaMapManager::Get()->GetPositionandEffectTile(nextPos,"PUSH") == nullptr || BabaMapManager::Get()->GetPositionandEffectTile(nextPos, "PUSH")->effect != "PUSH")
+	if (BabaMapManager::Get()->GetPositionAndEffectTile(nextPos,"PUSH") == nullptr || BabaMapManager::Get()->GetPositionAndEffectTile(nextPos, "PUSH")->effect != "PUSH")
 	{
 		return;
 	}
 
-	pushTargets.push_back(BabaMapManager::Get()->GetPositionandEffectTile(nextPos,"PUSH"));
+	pushTargets.push_back(BabaMapManager::Get()->GetPositionAndEffectTile(nextPos,"PUSH"));
 	SetPushObject(nextPos + this->nextPos);
 }
 

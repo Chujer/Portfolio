@@ -16,7 +16,8 @@ public:
 	virtual void Render() override;
 	virtual void PostRender() override;
 
-	void Load();
+	void Load(int curstage);
+	void SetLoad();
 
 	void SetAction(Object* object, ActionType action);
 
@@ -39,6 +40,7 @@ private:
 
 	vector<IsObject*> propertyIs;		//IS블럭을 담는 객체
 	
+	int stage = 0;
 
 
 	//map<ActionType, vector<Object*>> propertyObject;

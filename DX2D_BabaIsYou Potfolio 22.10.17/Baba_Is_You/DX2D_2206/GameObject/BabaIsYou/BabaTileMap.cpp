@@ -12,10 +12,15 @@ BabaTileMap::BabaTileMap(UINT width, UINT height)
 
 BabaTileMap::~BabaTileMap()
 {
+  
     for (Object* tile : tiles)
         delete tile;
     for (Object* tile : bgTiles)
         delete tile;
+    for (pair<string, InstanceQuad*> quad : instanceQuads)
+    {
+        delete quad.second;
+    }
 }
 
 void BabaTileMap::Update()
@@ -187,6 +192,12 @@ void BabaTileMap::Load(string file)
         data.pos.y = reader->Float();
 
         tile = new Object(data.key);
+        if (tile->tag.find("IS"))
+        {
+            Object* temp = tile;
+            tile = new IsObject(tile->tag);
+            delete temp;
+        }
         tile->Position() = data.pos;
         tile->SetParent(this);
         tile->UpdateTransform();

@@ -13,7 +13,6 @@ Collider::Collider()
 Collider::~Collider()
 {
     delete vertexBuffer;
-    
 
     delete colorBuffer;
     delete worldBuffer;

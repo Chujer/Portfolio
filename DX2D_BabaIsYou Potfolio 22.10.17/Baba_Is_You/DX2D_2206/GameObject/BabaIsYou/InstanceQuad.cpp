@@ -24,8 +24,8 @@ InstanceQuad::~InstanceQuad()
 {
 	delete quad;
 	delete instanceBuffer;
-	for (Object* object : objectDatas)
-		delete object;
+	//for (Object* object : objectDatas)
+	//	delete object;
 }
 
 void InstanceQuad::SetBufferSize(int count)

@@ -14,7 +14,7 @@ public:
 	};
 public:
 	IsObject(string key);
-	~IsObject();
+	virtual ~IsObject();
 
 	HaveObject& GetHaveObject() { return haveObject; }
 	void SetHaveObject();

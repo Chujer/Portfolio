@@ -29,11 +29,24 @@ Object* BabaMapManager::GetPositionTile(Vector2 pos)
 	return nullptr;
 }
 
-Object* BabaMapManager::GetPositionandEffectTile(Vector2 pos, string effect)
+Object* BabaMapManager::GetPositionAndEffectTile(Vector2 pos, string effect)
 {
 	for (Object* object : maps)
 	{
 		if (object->effect == effect && object->Position() == pos)
+		{
+			return object;
+		}
+	}
+
+	return nullptr;
+}
+
+Object* BabaMapManager::GetPositionExceptMyself(Vector2 pos, string tag)
+{
+	for (Object* object : maps)
+	{
+		if (object->tag != tag && object->Position() == pos)
 		{
 			return object;
 		}

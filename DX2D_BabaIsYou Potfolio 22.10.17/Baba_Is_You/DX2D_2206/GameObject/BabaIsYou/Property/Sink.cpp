@@ -1,7 +1,7 @@
 #include "Framework.h"
 
-Sink::Sink(Transform* target)
-	:target(target)
+Sink::Sink(Transform* target, string tag)
+	:target(target), tag(tag)
 {
 }
 
@@ -13,7 +13,8 @@ void Sink::Update()
 {
 	if (!target->Active()) return;
 
-	Object* brokenTarget = BabaMapManager::Get()->GetPositionTile(target->Position());
+	Object* brokenTarget = BabaMapManager::Get()->GetPositionExceptMyself(target->Position(),tag);
+
 	if (brokenTarget != nullptr)
 	{
 		brokenTarget->SetActive(false);

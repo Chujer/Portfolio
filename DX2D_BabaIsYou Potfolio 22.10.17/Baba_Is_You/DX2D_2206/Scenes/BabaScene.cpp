@@ -6,7 +6,7 @@ BabaScene::BabaScene()
 	backGround = new Quad(L"Textures/BackGround.png");
 	backGround->Position() = { CENTER_X,CENTER_Y };
 	backGround->UpdateWorld();
-	
+
 	EventManager::Get();
 	EventManager::Get()->Add("SetPropertyHeight", bind(&BabaScene::SetHeightPropertyObject, this, placeholders::_1));
 	EventManager::Get()->Add("SetPropertyWidth", bind(&BabaScene::SetWidthPropertyObject, this, placeholders::_1));
@@ -15,10 +15,8 @@ BabaScene::BabaScene()
 	EventManager::Get()->AddEvent("CheckIs", bind(&BabaScene::CheckIs, this));
 
 
-	Load();
-//	CheckIs();
-	EventManager::Get()->PlayEvent("CheckIs");
-	
+	Load(0);
+//	CheckIs();Z
 }
 
 BabaScene::~BabaScene()
@@ -43,12 +41,18 @@ void BabaScene::Update()
 
 	if (KEY_DOWN(VK_SPACE))
 	{
-		objectNames.front()->SetActive(false);
+		stage++;
+		Load(stage);
 	}
-	if (KEY_DOWN('W'))
+	if (KEY_DOWN(VK_BACK))
+	{
+		stage--;
+		Load(stage);
+	}
+	/*if (KEY_DOWN('W'))
 	{
 		objectNames.front()->SetActive(true);
-	}
+	}*/
 }
 
 void BabaScene::Render()
@@ -56,19 +60,22 @@ void BabaScene::Render()
 	backGround->Render();
 	tileMap->Render();
 
-	for (pair<string, InstanceQuad*> instanceQuad : instanceQuads)
-		instanceQuad.second->Render();
+	//for (pair<string, InstanceQuad*> instanceQuad : instanceQuads)
+	//	instanceQuad.second->Render();
 }
 
 void BabaScene::PostRender()
 {
 }
 
-void BabaScene::Load()
+void BabaScene::Load(int curstage)
 {
-	if (tileMap == nullptr)
-		tileMap = new BabaTileMap(0, 0);
-	tileMap->Load("TextData/Stage1.map");
+	string path = "TextData/Stage" + to_string(curstage);
+	path += ".map";
+	SetLoad();
+	//if (tileMap == nullptr)
+	//	tileMap = new BabaTileMap(0, 0);
+	tileMap->Load(path);
 	objects.clear();
 	objects = tileMap->GetTiles();
 	BabaMapManager::Get()->SetMapData(tileMap);
@@ -102,6 +109,17 @@ void BabaScene::Load()
 		else
 			objectImgs[object->tag.substr(0,object->tag.find('_'))].push_back(object);
 	}
+
+	EventManager::Get()->PlayEvent("CheckIs");
+}
+
+void BabaScene::SetLoad()
+{
+	if (tileMap != nullptr)
+	{
+		delete tileMap;
+	}
+	tileMap = new BabaTileMap(0, 0);
 
 }
 
@@ -138,19 +156,20 @@ void BabaScene::SetAction(Object* object, ActionType action)
 		object->effect = "DEFEAT";
 		object->SetAction(new Defeat((Transform*)object));
 		break;
+	case BabaScene::ActionType::PUSH:
+		object->effect = "PUSH";
+		break;
 	case BabaScene::ActionType::HOT:
-		object->effect = "HOT";
-		object->SetAction(new Hot((Transform*)object));
+		if(object->effect != "PUSH")
+			object->effect = "HOT";
+		object->SetAction(new Hot((Transform*)object,object->tag));
 		break;
 	case BabaScene::ActionType::MELT:
 		object->effect = "MELT";
 		break;
-	case BabaScene::ActionType::PUSH:
-		object->effect = "PUSH";
-		break;
 	case BabaScene::ActionType::SINK:
 		object->effect = "SINK";
-		object->SetAction(new Sink((Transform*)object));
+		object->SetAction(new Sink((Transform*)object,object->tag));
 		break;
 	case BabaScene::ActionType::WIN:
 		break;
@@ -214,6 +233,8 @@ void BabaScene::SetWidthPropertyObject(void* object)
 	{
 		if (object->GetAction() == nullptr)
 			SetAction(object, property);
+		if (object->effect == "HOT")
+			SetAction(object, property);
 	}
 }
 
@@ -230,6 +251,8 @@ void BabaScene::SetHeightPropertyObject(void* object)
 	for (Object* object : objectImgs[tag])
 	{
 		if(object->GetAction() == nullptr)
+			SetAction(object, property);
+		if (object->effect == "HOT")
 			SetAction(object, property);
 	}
 }

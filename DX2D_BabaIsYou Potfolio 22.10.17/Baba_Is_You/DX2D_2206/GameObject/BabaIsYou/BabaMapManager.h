@@ -9,7 +9,8 @@ public:
 	void SetMapData(BabaTileMap* data);
 	vector<Object*> GetMapData() { return maps; }
 	Object* GetPositionTile(Vector2 pos);
-	Object* GetPositionandEffectTile(Vector2 pos, string effect);
+	Object* GetPositionAndEffectTile(Vector2 pos, string effect);
+	Object* GetPositionExceptMyself(Vector2 pos, string tag);
 
 	float Left() { return LB.x; }
 	float Top() { return RT.y; }

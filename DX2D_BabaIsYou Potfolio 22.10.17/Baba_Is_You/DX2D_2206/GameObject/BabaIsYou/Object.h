@@ -4,7 +4,7 @@ class Object : public Transform
 {
 public:
 	Object(string key);
-	~Object();
+	virtual ~Object();
 
 	void Update();
 	void Render();
@@ -42,6 +42,7 @@ public:
 
 	string tag = "";
 	string effect = "";
+	string isMelt = "MELT";
 private:
 	ObjectSample::InstanceData instanceData;
 	Collider* collider = nullptr;

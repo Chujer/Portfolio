@@ -11,7 +11,7 @@ Defeat::~Defeat()
 
 void Defeat::Update()
 {
-	Object* brokenTarget = BabaMapManager::Get()->GetPositionandEffectTile(target->Position(), "MOVE");
+	Object* brokenTarget = BabaMapManager::Get()->GetPositionAndEffectTile(target->Position(), "MOVE");
 	if (brokenTarget != nullptr)
 	{
 		brokenTarget->SetActive(false);
