@@ -6,7 +6,7 @@ int GameMath::Random(const int & min, const int & max)
     return rand() % (max - min) + min;
 }
 
-int GameMath::Random(const float & min, const float & max)
+float GameMath::Random(const float & min, const float & max)
 {
     float normal = rand() / (float)RAND_MAX;
 

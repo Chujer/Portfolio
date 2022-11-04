@@ -185,6 +185,7 @@
     <ClInclude Include="GameObject\BabaIsYou\Utility\EventManager.h" />
     <ClInclude Include="GameObject\Basic\AnimObject.h" />
     <ClInclude Include="GameObject\Basic\Effect.h" />
+    <ClInclude Include="GameObject\Basic\Particle.h" />
     <ClInclude Include="GameObject\Manager\EffectManager.h" />
     <ClInclude Include="GameObject\BabaIsYou\Property\Action.h" />
     <ClInclude Include="GameObject\BabaIsYou\Property\Move.h" />
@@ -205,6 +206,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scenes\BabaScene.h" />
     <ClInclude Include="Scenes\MapEditerScene.h" />
+    <ClInclude Include="Scenes\ParticleScene.h" />
     <ClInclude Include="Scenes\Scene.h" />
     <ClInclude Include="Scenes\TestScene.h" />
     <ClInclude Include="System\GameManager.h" />
@@ -255,6 +257,7 @@
     <ClCompile Include="GameObject\BabaIsYou\Utility\EventManager.cpp" />
     <ClCompile Include="GameObject\Basic\AnimObject.cpp" />
     <ClCompile Include="GameObject\Basic\Effect.cpp" />
+    <ClCompile Include="GameObject\Basic\Particle.cpp" />
     <ClCompile Include="GameObject\Basic\Quad.cpp" />
     <ClCompile Include="GameObject\Manager\EffectManager.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\Property\Action.cpp" />
@@ -266,6 +269,7 @@
     </ClCompile>
     <ClCompile Include="Scenes\BabaScene.cpp" />
     <ClCompile Include="Scenes\MapEditerScene.cpp" />
+    <ClCompile Include="Scenes\ParticleScene.cpp" />
     <ClCompile Include="Scenes\TestScene.cpp" />
     <ClCompile Include="System\GameManager.cpp" />
     <ClCompile Include="System\SceneManager.cpp" />

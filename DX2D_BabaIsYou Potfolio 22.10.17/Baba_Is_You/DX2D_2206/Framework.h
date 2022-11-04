@@ -122,6 +122,7 @@ using namespace GameMath;
 #include "GameObject/Basic/Quad.h"
 #include "GameObject/Basic/AnimObject.h"
 #include "GameObject/Basic/Effect.h"
+#include "GameObject/Basic/Particle.h"
 
 #include "GameObject/UI/Button.h"
 #include "GameObject/UI/ImageFont.h"

@@ -3,6 +3,7 @@
 #include "Scenes/MapEditerScene.h"
 #include "Scenes/BabaScene.h"
 #include "Scenes/TestScene.h"
+#include "Scenes/ParticleScene.h"
 
 GameManager::GameManager()
 {
@@ -21,7 +22,7 @@ GameManager::GameManager()
     //scene = new InstancingScene();
     //scene = new FontScene();
 
-    Scene * scene = new BabaScene();
+    Scene * scene = new ParticleScene();
     scene->SetDepth(1);
     SCENE->Create("Start", scene);    
     

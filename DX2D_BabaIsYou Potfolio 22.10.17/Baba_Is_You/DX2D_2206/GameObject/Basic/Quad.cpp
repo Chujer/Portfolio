@@ -17,7 +17,7 @@ Quad::Quad(wstring file, Vector2 startUV, Vector2 endUV, Vector2 pos)
     vertices.emplace_back(left, bottom, startUV.x, endUV.y);
     vertices.emplace_back(right, bottom, endUV.x, endUV.y);
 
-    Init();    
+    Init();
 }
 
 Quad::Quad(Vector2 size, Vector2 pos)
@@ -27,13 +27,11 @@ Quad::Quad(Vector2 size, Vector2 pos)
     float top = pos.y + size.y * 0.5f;
     float bottom = pos.y - size.y * 0.5f;
 
-    this->size = size;
-
     vertices.emplace_back(left, top, 0, 0);
     vertices.emplace_back(right, top, 1, 0);
     vertices.emplace_back(left, bottom, 0, 1);
     vertices.emplace_back(right, bottom, 1, 1);
-    
+
     Init();
 }
 
@@ -106,7 +104,7 @@ void Quad::Resize(Vector2 size, Vector2 pos)
 void Quad::Init()
 {
     vertexShader = Shader::AddVS(L"Shaders/VertexUV.hlsl");
-    pixelShader = Shader::AddPS(L"Shaders/PixelUV.hlsl");    
+    pixelShader = Shader::AddPS(L"Shaders/PixelUV.hlsl");
 
     vertexBuffer = new VertexBuffer(vertices.data(),
         sizeof(Vertex), vertices.size());

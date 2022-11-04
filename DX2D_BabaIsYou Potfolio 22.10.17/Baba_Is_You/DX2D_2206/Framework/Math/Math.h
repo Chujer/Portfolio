@@ -8,7 +8,7 @@ namespace GameMath
     };
 
     int Random(const int & min, const int & max);
-    int Random(const float & min, const float & max);
+    float Random(const float & min, const float & max);
 
     float Clamp(const float & min, const float & max, float value);
 
