@@ -17,6 +17,7 @@ public:
 
 	void Update();
 	void Render();
+	void OneMoreRender(string key);
 
 	void SetBufferSize(string key, int count);
 
@@ -25,6 +26,8 @@ public:
 
 	vector<Object*> GetTiles() { return tiles; }
 	vector<Object*> GetBGTiles() { return bgTiles; }
+
+	map<string, InstanceQuad*> GetInstanceQuads() { return instanceQuads; }
 
 	void Save(string file);
 	void Load(string file); 

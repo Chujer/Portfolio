@@ -28,6 +28,7 @@ public:
     Vector2 GlobalPosition() { return globalPosition; }
     Vector2 GlobalScale () { return globalScale; }
 
+    Transform* GetTransform() { return this; }
 
 protected:
     string tag;

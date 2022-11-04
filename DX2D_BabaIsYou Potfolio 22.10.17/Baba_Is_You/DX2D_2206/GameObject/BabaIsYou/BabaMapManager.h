@@ -11,6 +11,7 @@ public:
 	Object* GetPositionTile(Vector2 pos);
 	Object* GetPositionAndEffectTile(Vector2 pos, string effect);
 	Object* GetPositionExceptMyself(Vector2 pos, string tag);
+	Object* GetPositionMyself(Transform* transform);
 
 	float Left() { return LB.x; }
 	float Top() { return RT.y; }

@@ -3,6 +3,7 @@
 
 BabaScene::BabaScene()
 {
+	stage = 1;
 	backGround = new Quad(L"Textures/BackGround.png");
 	backGround->Position() = { CENTER_X,CENTER_Y };
 	backGround->UpdateWorld();
@@ -15,7 +16,7 @@ BabaScene::BabaScene()
 	EventManager::Get()->AddEvent("CheckIs", bind(&BabaScene::CheckIs, this));
 
 
-	Load(0);
+	Load(stage);
 //	CheckIs();Z
 }
 
@@ -34,10 +35,10 @@ void BabaScene::Update()
 
 	//CheckIs();
 
-	for (pair<string, InstanceQuad*> instanceQuad : instanceQuads)
-	{
-		instanceQuad.second->Update();
-	}
+	//for (pair<string, instancequad*> instancequad : instancequads)
+	//{
+	//	instancequad.second->update();
+	//}
 
 	if (KEY_DOWN(VK_SPACE))
 	{
@@ -49,10 +50,14 @@ void BabaScene::Update()
 		stage--;
 		Load(stage);
 	}
-	/*if (KEY_DOWN('W'))
+	if (KEY_DOWN('Q'))
 	{
-		objectNames.front()->SetActive(true);
-	}*/
+		GetBackObject::Get()->GetBack();
+	}
+	if (KEY_DOWN('E'))
+	{
+		Load(stage);
+	}
 }
 
 void BabaScene::Render()
@@ -70,6 +75,8 @@ void BabaScene::PostRender()
 
 void BabaScene::Load(int curstage)
 {
+	GetBackObject::Get()->ClearData();
+
 	string path = "TextData/Stage" + to_string(curstage);
 	path += ".map";
 	SetLoad();
@@ -181,16 +188,15 @@ void BabaScene::SetAction(Object* object, ActionType action)
 	
 }
 
+void BabaScene::ChangeImg(Object* object, Object* changeObject)
+{
+	tileMap->GetInstanceQuads()[changeObject->tag]->AddPushDatas(changeObject);
+	tileMap->GetInstanceQuads()[object->tag]->DeleteObject(object);
+}
+
 //Is타일 가로 세로의 정보를 갱신하는 함수
 void BabaScene::CheckIs()
 {
-	/*for (IsObject* object : propertyIs)
-	{
-		object->GetHaveObject().bottom = nullptr;
-		object->GetHaveObject().top = nullptr;
-		object->GetHaveObject().left = nullptr;
-		object->GetHaveObject().right = nullptr;
-	}*/
 	for (IsObject*& object : propertyIs)
 	{
 		for (Object*& target : objects)
@@ -199,16 +205,32 @@ void BabaScene::CheckIs()
 				&& target->tag.find("IS") == string::npos)
 			{
 				if (target->Position() == object->Position() - Vector2(48.0f, 0) && target->tag.find("PROPERTY") == string::npos)
+				{
+					if (object->GetHaveObject().left != target)
+						object->RemoveHaveObject();
 					object->GetHaveObject().left = target;
+				}
 
 				if (target->Position() == object->Position() + Vector2(48.0f, 0))
+				{
+					if (object->GetHaveObject().right != target)
+						object->RemoveHaveObject();
 					object->GetHaveObject().right = target;
+				}
 
 				if (target->Position() == object->Position() + Vector2(0, 48.0f) && target->tag.find("PROPERTY") == string::npos)
+				{
+					if (object->GetHaveObject().top != target)
+						object->RemoveHaveObject();
 					object->GetHaveObject().top = target;
+				}
 
 				if (target->Position() == object->Position() - Vector2(0, 48.0f))
+				{
+					if (object->GetHaveObject().bottom != target)
+						object->RemoveHaveObject();
 					object->GetHaveObject().bottom = target;
+				}
 			}
 		}
 		object->RemoveHaveObject();
@@ -235,7 +257,13 @@ void BabaScene::SetWidthPropertyObject(void* object)
 			SetAction(object, property);
 		if (object->effect == "HOT")
 			SetAction(object, property);
+
+		/*if (temp->GetHaveObject().right->tag.find("NAME") != string::npos)
+		{
+			ChangeImg(object, temp);
+		}*/
 	}
+
 }
 
 void BabaScene::SetHeightPropertyObject(void* object)

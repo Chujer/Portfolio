@@ -17,7 +17,12 @@ void Sink::Update()
 
 	if (brokenTarget != nullptr)
 	{
+		GetBackObject::Get()->SetPrevData(BabaMapManager::Get()->GetPositionMyself(target));
+		GetBackObject::Get()->SetPrevData(brokenTarget);
 		brokenTarget->SetActive(false);
 		target->SetActive(false);
+		GetBackObject::Get()->SetNextData(BabaMapManager::Get()->GetPositionMyself(target));
+		GetBackObject::Get()->SetNextData(brokenTarget);
+
 	}
 }

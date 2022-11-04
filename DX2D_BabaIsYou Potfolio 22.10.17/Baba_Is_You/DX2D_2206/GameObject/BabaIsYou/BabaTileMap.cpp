@@ -38,6 +38,16 @@ void BabaTileMap::Render()
         quad.second->Render();
     }
 
+    for (Object* tile : tiles)
+    {
+        if (tile->effect == "MOVE")
+            OneMoreRender(tile->tag);
+    }
+}
+
+void BabaTileMap::OneMoreRender(string key)
+{
+    instanceQuads[key]->Render();
 }
 
 void BabaTileMap::SetBufferSize(string key, int count)

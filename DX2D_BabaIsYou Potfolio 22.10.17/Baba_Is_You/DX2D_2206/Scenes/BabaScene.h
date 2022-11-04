@@ -20,6 +20,7 @@ public:
 	void SetLoad();
 
 	void SetAction(Object* object, ActionType action);
+	void ChangeImg(Object* object, Object* changeObject);
 
 	void CheckIs();
 

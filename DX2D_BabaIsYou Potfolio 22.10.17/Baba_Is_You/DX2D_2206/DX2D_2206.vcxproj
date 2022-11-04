@@ -173,6 +173,7 @@
     <ClInclude Include="Framework\Utilities\Timer.h" />
     <ClInclude Include="Framework\Utilities\tinyxml2.h" />
     <ClInclude Include="Framework\Utilities\Utility.h" />
+    <ClInclude Include="GameObject\BabaIsYou\GetBackObject.h" />
     <ClInclude Include="GameObject\BabaIsYou\InstanceQuad.h" />
     <ClInclude Include="GameObject\BabaIsYou\IsObject.h" />
     <ClInclude Include="GameObject\BabaIsYou\Object.h" />
@@ -243,6 +244,7 @@
     <ClCompile Include="Framework\Utilities\Utility.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\BabaMapManager.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\BabaTileMap.cpp" />
+    <ClCompile Include="GameObject\BabaIsYou\GetBackObject.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\InstanceQuad.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\IsObject.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\Object.cpp" />

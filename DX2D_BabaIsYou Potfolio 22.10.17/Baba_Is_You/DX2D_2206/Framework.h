@@ -31,7 +31,9 @@
 #include <map>
 #include <unordered_map>
 #include <functional>
+#include <stack>
 #include <algorithm>
+
 
 #include <d3d11.h>
 #include <DirectXMath.h>
@@ -144,6 +146,8 @@ using namespace GameMath;
 #include "GameObject/BabaIsYou/BabaTileMap.h"
 
 #include "GameObject/BabaIsYou/BabaMapManager.h"
+
+#include "GameObject/BabaIsYou/GetBackObject.h"
 
 //Scene
 #include "Scenes/Scene.h"

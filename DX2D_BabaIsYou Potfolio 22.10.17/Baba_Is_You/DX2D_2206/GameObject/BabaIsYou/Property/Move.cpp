@@ -13,13 +13,17 @@ Move::~Move()
 
 void Move::Update()
 {
+	//if (!isMove) return;
 	Animaion();
 
-	target->Position() = SLERP(target->Position(),  endPos, 100.0f * DELTA);
-
-	for (int i = 0; i < pushTargets.size(); i++)
+	if (isMove)
 	{
-		pushTargets[i]->Position() = SLERP(pushTargets[i]->Position(), endPos + (nextPos * (i + 1)), 100 * DELTA);
+		target->Position() = SLERP(target->Position(), endPos, 100.0f * DELTA);
+
+		for (int i = 0; i < pushTargets.size(); i++)
+		{
+			pushTargets[i]->Position() = SLERP(pushTargets[i]->Position(), endPos + (nextPos * (i + 1)), 100 * DELTA);
+		}
 	}
 	MoveTarget();
 }
@@ -30,6 +34,7 @@ void Move::MoveTarget()
 	{
 		if (KEY_DOWN(VK_RIGHT))
 		{
+			GetBackObject::Get()->SetPrevData(BabaMapManager::Get()->GetPositionMyself(target));
 			endPos = { target->Position().x + MOVE_POWER,target->Position().y };
 			nextPos = { MOVE_POWER, 0 };
 			if (curFrame != nullptr)
@@ -43,6 +48,7 @@ void Move::MoveTarget()
 		}
 		if (KEY_DOWN(VK_LEFT))
 		{
+			GetBackObject::Get()->SetPrevData(BabaMapManager::Get()->GetPositionMyself(target));
 			endPos = { target->Position().x - MOVE_POWER,target->Position().y };
 			nextPos = { -MOVE_POWER, 0 };
 			if (curFrame != nullptr)
@@ -56,6 +62,7 @@ void Move::MoveTarget()
 		}
 		if (KEY_DOWN(VK_UP))
 		{
+			GetBackObject::Get()->SetPrevData(BabaMapManager::Get()->GetPositionMyself(target));
 			endPos = { target->Position().x ,target->Position().y + MOVE_POWER };
 			nextPos = { 0, MOVE_POWER };
 			if (curFrame != nullptr)
@@ -69,6 +76,7 @@ void Move::MoveTarget()
 		}
 		if (KEY_DOWN(VK_DOWN))
 		{
+			GetBackObject::Get()->SetPrevData(BabaMapManager::Get()->GetPositionMyself(target));
 			endPos = { target->Position().x ,target->Position().y - MOVE_POWER };
 			nextPos = { 0, -MOVE_POWER };
 			if (curFrame != nullptr)
@@ -90,6 +98,7 @@ void Move::MoveTarget()
 void Move::Animaion()
 {
 	if (curFrame == nullptr)return;
+	if (isMove) return;
 
 	if ((int)curFrame->x % 2 == 1)
 	{
@@ -141,6 +150,7 @@ void Move::SetPushObject(Vector2 nextPos)
 		return;
 	}
 
+	GetBackObject::Get()->SetPrevData(BabaMapManager::Get()->GetPositionAndEffectTile(nextPos, "PUSH"));
 	pushTargets.push_back(BabaMapManager::Get()->GetPositionAndEffectTile(nextPos,"PUSH"));
 	SetPushObject(nextPos + this->nextPos);
 }
@@ -149,13 +159,16 @@ void Move::SetFinishMove()
 {
 	if ((target->Position() - endPos).Length() < 0.5f && isMove == true)
 	{
-		target->Position() = endPos;
+		target->Position() = endPos; 
+		GetBackObject::Get()->SetNextData(BabaMapManager::Get()->GetPositionMyself(target));
 		for (int i = 0; i < pushTargets.size(); i++)
 		{
 			pushTargets[i]->Position() = endPos + (nextPos * (i + 1));
+			GetBackObject::Get()->SetNextData(BabaMapManager::Get()->GetPositionAndEffectTile(pushTargets[i]->Position(), "PUSH"));
 		}
 
 		isMove = false;
+
 		EventManager::Get()->PlayEvent("CheckIs");
 	}
 }

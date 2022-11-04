@@ -54,3 +54,16 @@ Object* BabaMapManager::GetPositionExceptMyself(Vector2 pos, string tag)
 
 	return nullptr;
 }
+
+Object* BabaMapManager::GetPositionMyself(Transform* transform)
+{
+	for (Object* object : maps)
+	{
+		if (object->GetTransform() == transform && object->Position() == transform->Position())
+		{
+			return object;
+		}
+	}
+
+	return nullptr;
+}
