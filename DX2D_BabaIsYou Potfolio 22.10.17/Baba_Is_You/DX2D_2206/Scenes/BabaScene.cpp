@@ -3,7 +3,7 @@
 
 BabaScene::BabaScene()
 {
-	stage = 1;
+	stage = 0;
 	backGround = new Quad(L"Textures/BackGround.png");
 	backGround->Position() = { CENTER_X,CENTER_Y };
 	backGround->UpdateWorld();
@@ -83,6 +83,7 @@ void BabaScene::Load(int curstage)
 	//if (tileMap == nullptr)
 	//	tileMap = new BabaTileMap(0, 0);
 	tileMap->Load(path);
+	tileMap->SetColliderOff();
 	objects.clear();
 	objects = tileMap->GetTiles();
 	BabaMapManager::Get()->SetMapData(tileMap);
@@ -179,6 +180,8 @@ void BabaScene::SetAction(Object* object, ActionType action)
 		object->SetAction(new Sink((Transform*)object,object->tag));
 		break;
 	case BabaScene::ActionType::WIN:
+		object->effect = "WIN";
+		object->SetAction(new Win((Transform*)object));
 		break;
 	case BabaScene::ActionType::YOU:
 		break;

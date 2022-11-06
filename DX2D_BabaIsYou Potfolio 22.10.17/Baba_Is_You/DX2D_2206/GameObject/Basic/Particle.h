@@ -10,6 +10,13 @@ private:
         Vector2 curFrame = { 1, 1 };
     };
 
+    struct FluidParticleData
+    {
+        bool isFluidParticle = false;
+        Vector2 Scale = { 1,1 };
+        float Time = 0.0f;
+    };
+
     struct ParticleData
     {
         UINT count = 100;
@@ -24,10 +31,10 @@ private:
         float maxAngularVelocity = 10.0f;
         float minStartTime = 0.0f;
         float maxStartTime = 0.0f;
-        Vector2 minScale = { 1, 1 };
-        Vector2 maxScale = { 1, 1 };
+        Vector2 Scale = { 1, 1 };
         Float4 startColor = { 1, 1, 1, 1 };
         Float4 endColor = { 1, 1 ,1, 1 };
+        FluidParticleData fluidData;
     };
 
     struct ParticleInfo
@@ -38,6 +45,7 @@ private:
         float speed;
         float angularVelocity;
         float startTime;
+        FluidParticleData fluidData;
     };
 
 public:
@@ -49,7 +57,10 @@ public:
 
     void Play(Vector2 pos);
     void Stop();
+    void SetCustomColor(Float4 color);
 
+    bool GetIsPlay() { return isPlay; }
+    void SetRotate(bool isRotate) { this->isRotate = isRotate; }
 private:
     void LoadData(string file);
     void UpdateParticleInfo();
@@ -68,4 +79,7 @@ private:
 
     float lifeTime = 0.0f;
     Float4 color;
+    Float4 customColor;
+    bool isCustomColor = false;
+    bool isRotate = false;
 };

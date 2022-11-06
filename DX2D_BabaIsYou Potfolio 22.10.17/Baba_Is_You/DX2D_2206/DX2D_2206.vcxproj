@@ -182,6 +182,7 @@
     <ClInclude Include="GameObject\BabaIsYou\Property\Defeat.h" />
     <ClInclude Include="GameObject\BabaIsYou\Property\Hot.h" />
     <ClInclude Include="GameObject\BabaIsYou\Property\Sink.h" />
+    <ClInclude Include="GameObject\BabaIsYou\Property\Win.h" />
     <ClInclude Include="GameObject\BabaIsYou\Utility\EventManager.h" />
     <ClInclude Include="GameObject\Basic\AnimObject.h" />
     <ClInclude Include="GameObject\Basic\Effect.h" />
@@ -254,6 +255,7 @@
     <ClCompile Include="GameObject\BabaIsYou\Property\Defeat.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\Property\Hot.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\Property\Sink.cpp" />
+    <ClCompile Include="GameObject\BabaIsYou\Property\Win.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\Utility\EventManager.cpp" />
     <ClCompile Include="GameObject\Basic\AnimObject.cpp" />
     <ClCompile Include="GameObject\Basic\Effect.cpp" />
@@ -384,6 +386,13 @@
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VS</EntryPointName>
     </FxCompile>
     <FxCompile Include="Shaders\VertexUV.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VS</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="Shaders\VertexParticle.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>

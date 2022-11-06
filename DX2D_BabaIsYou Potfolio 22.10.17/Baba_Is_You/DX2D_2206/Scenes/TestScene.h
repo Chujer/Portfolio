@@ -19,10 +19,7 @@ public:
 
 private:
 
-    Object* objectData;
-    Quad* quad;
-    VertexBuffer* instanceBuffer;
-    InstanceData instanceData;
+    Particle* test;
 
 	/*Quad* quad;
     InstanceData instanceData;

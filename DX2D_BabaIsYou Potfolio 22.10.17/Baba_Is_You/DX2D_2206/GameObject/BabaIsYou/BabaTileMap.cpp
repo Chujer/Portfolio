@@ -123,6 +123,15 @@ void BabaTileMap::DeleteObjTile()
     }
 }
 
+void BabaTileMap::SetColliderOff()
+{
+
+    for (Object* tile : tiles)
+        tile->GetCollider()->SetActive(false);
+    for (Object* tile : bgTiles)
+        tile->GetCollider()->SetActive(false);
+}
+
 void BabaTileMap::Save(string file)
 {
     BinaryWriter* writer = new BinaryWriter(file);

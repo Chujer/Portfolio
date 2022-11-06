@@ -22,7 +22,7 @@ GameManager::GameManager()
     //scene = new InstancingScene();
     //scene = new FontScene();
 
-    Scene * scene = new ParticleScene();
+    Scene * scene = new BabaScene();
     scene->SetDepth(1);
     SCENE->Create("Start", scene);    
     

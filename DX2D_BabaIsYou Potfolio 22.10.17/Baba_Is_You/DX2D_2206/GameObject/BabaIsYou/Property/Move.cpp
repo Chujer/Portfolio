@@ -4,6 +4,13 @@ Move::Move(Transform* target, Vector2* curFrame)
 	:target(target), curFrame(curFrame)
 {
 	endPos = target->Position();
+	particles.resize(5);
+	for (int i = 0; i < 5; i++)
+	{
+		particles[i] = new Particle("Particle/MoveParticle.fx");
+		particles[i]->SetRotate(true);
+	}
+	GetColor();
 }
 
 Move::~Move()
@@ -26,6 +33,11 @@ void Move::Update()
 		}
 	}
 	MoveTarget();
+
+	for (Particle* particle : particles)
+	{
+		particle->Update();
+	}
 }
 
 void Move::MoveTarget()
@@ -35,6 +47,7 @@ void Move::MoveTarget()
 		if (KEY_DOWN(VK_RIGHT))
 		{
 			GetBackObject::Get()->SetPrevData(BabaMapManager::Get()->GetPositionMyself(target));
+			ParticlePlay(target->GlobalPosition());
 			endPos = { target->Position().x + MOVE_POWER,target->Position().y };
 			nextPos = { MOVE_POWER, 0 };
 			if (curFrame != nullptr)
@@ -49,6 +62,7 @@ void Move::MoveTarget()
 		if (KEY_DOWN(VK_LEFT))
 		{
 			GetBackObject::Get()->SetPrevData(BabaMapManager::Get()->GetPositionMyself(target));
+			ParticlePlay(target->GlobalPosition());
 			endPos = { target->Position().x - MOVE_POWER,target->Position().y };
 			nextPos = { -MOVE_POWER, 0 };
 			if (curFrame != nullptr)
@@ -63,6 +77,7 @@ void Move::MoveTarget()
 		if (KEY_DOWN(VK_UP))
 		{
 			GetBackObject::Get()->SetPrevData(BabaMapManager::Get()->GetPositionMyself(target));
+			ParticlePlay(target->GlobalPosition());
 			endPos = { target->Position().x ,target->Position().y + MOVE_POWER };
 			nextPos = { 0, MOVE_POWER };
 			if (curFrame != nullptr)
@@ -77,6 +92,7 @@ void Move::MoveTarget()
 		if (KEY_DOWN(VK_DOWN))
 		{
 			GetBackObject::Get()->SetPrevData(BabaMapManager::Get()->GetPositionMyself(target));
+			ParticlePlay(target->GlobalPosition());
 			endPos = { target->Position().x ,target->Position().y - MOVE_POWER };
 			nextPos = { 0, -MOVE_POWER };
 			if (curFrame != nullptr)
@@ -170,5 +186,28 @@ void Move::SetFinishMove()
 		isMove = false;
 
 		EventManager::Get()->PlayEvent("CheckIs");
+	}
+}
+
+void Move::ParticlePlay(Vector2 pos)
+{
+	for (Particle* particle : particles)
+	{
+		if (!particle->GetIsPlay())
+		{
+			particle->Play(pos - Vector2(0,10));
+			return;
+		}
+	}
+}
+
+void Move::GetColor()
+{
+	string temp = BabaMapManager::Get()->GetPositionMyself(target)->tag;
+	wstring path = ObjectSample::Get()->GetInstanceData(temp).path;
+	Float4 color = Texture::Add(path)->GetCenterPixels();
+	for (Particle* particle : particles)
+	{
+		particle->SetCustomColor(color);
 	}
 }

@@ -6,6 +6,8 @@ Particle::Particle(string file)
     
     instanceBuffer = new VertexBuffer(instances.data(),
         sizeof(InstanceData), data.count);
+
+    Float4 customColor = { -1.0f,-1.0f,-1.0f,-1.0f };
 }
 
 Particle::~Particle()
@@ -38,14 +40,34 @@ void Particle::Update()
         particleInfos[i].velocity += particleInfos[i].accelation * DELTA;
         transforms[i].Position() += particleInfos[i].velocity
             * particleInfos[i].speed * DELTA;
-        transforms[i].Rotation().z += particleInfos[i].angularVelocity * DELTA;
-        transforms[i].Scale() = particleInfos[i].scale;
+
+        if(isRotate)
+             transforms[i].Rotation().z += particleInfos[i].angularVelocity * DELTA;
+        else
+            transforms[i].Rotation().z = particleInfos[i].angularVelocity * DELTA;
+
+        if (particleInfos[i].fluidData.isFluidParticle == true)     // 설정한 시간부터 크기변동
+        {
+            if (particleInfos[i].fluidData.Time < lifeTime)
+            {
+                transforms[i].Scale() = LERP(particleInfos[i].scale, particleInfos[i].fluidData.Scale,
+                    (lifeTime - particleInfos[i].fluidData.Time) / (data.duration - particleInfos[i].fluidData.Time));
+            }
+            else
+                transforms[i].Scale() = particleInfos[i].scale;
+        }
+        else
+            transforms[i].Scale() = particleInfos[i].scale;
         transforms[i].UpdateWorld();
 
         instances[i].transform = XMMatrixTranspose(transforms[i].GetWorld());
     }
 
-    quad->GetColorBuffer()->Set(color);
+    if (!isCustomColor)        //받아온 색상이 있다면 그걸로 설정
+        quad->GetColorBuffer()->Set(color);
+    else
+        quad->GetColorBuffer()->Set(customColor);
+
     instanceBuffer->Update(instances.data(), instances.size());
 
     if (lifeTime > data.duration)
@@ -120,9 +142,15 @@ void Particle::UpdateParticleInfo()
         info.angularVelocity = Random(data.minAngularVelocity, data.maxAngularVelocity);
         info.speed = Random(data.minSpeed, data.maxSpeed);
         info.startTime = Random(data.minStartTime, data.maxStartTime);
-        info.scale.x = Random(data.minScale.x, data.maxScale.x);
-        info.scale.y = Random(data.minScale.y, data.maxScale.y);
+        info.scale = data.Scale;
+        info.fluidData = data.fluidData;
 
         info.velocity = info.velocity.Normalize();
     }
+}
+
+void Particle::SetCustomColor(Float4 color)
+{
+    customColor = color; 
+    isCustomColor = true;
 }

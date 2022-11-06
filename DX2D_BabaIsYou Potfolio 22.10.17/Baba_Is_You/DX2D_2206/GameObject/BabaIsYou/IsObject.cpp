@@ -29,6 +29,8 @@ int IsObject::GetWidthProperty()
 			return 2;
 		else if (haveObject.right->tag.find("PUSH") != string::npos)
 			return 3;
+		else if (haveObject.right->tag.find("WIN") != string::npos)
+			return 4;
 		else if (haveObject.right->tag.find("DEFEAT") != string::npos)
 			return 5;
 		else if (haveObject.right->tag.find("HOT") != string::npos)
@@ -49,6 +51,8 @@ int IsObject::GetHeightProperty()
 			return 2;
 		else if (haveObject.bottom->tag.find("PUSH") != string::npos)
 			return 3;
+		else if (haveObject.bottom->tag.find("WIN") != string::npos)
+			return 4;
 		else if (haveObject.bottom->tag.find("DEFEAT") != string::npos)
 			return 5;
 		else if (haveObject.bottom->tag.find("HOT") != string::npos)

@@ -17,6 +17,8 @@ public:
 	bool& AnimPlay() { return isAnimPlay; }
 	float& AnimTime() { return animTime; }
 
+
+
 	ObjectSample::InstanceData& GetInstanceData();
 
 	void SetCollider(Vector2 size)

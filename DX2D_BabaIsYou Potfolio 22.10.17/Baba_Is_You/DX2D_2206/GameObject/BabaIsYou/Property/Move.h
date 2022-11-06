@@ -18,6 +18,8 @@ private:
 	void SetStop();
 	void SetPushObject(Vector2 nextPos);
 	void SetFinishMove();
+	void ParticlePlay(Vector2 pos);
+	void GetColor();
 private:
 	Transform* target;
 	Vector2* curFrame;
@@ -27,4 +29,5 @@ private:
 	vector<Transform*> pushTargets;
 
 	bool isMove = false;
+	Float4 Color;
 };

@@ -3,7 +3,7 @@
 
 ParticleScene::ParticleScene()
 {
-    wstring file = L"Textures/Particle/ClearRing.png";
+    wstring file = L"Textures/Particle/MoveParticle.png";
     quad = new Quad(file);
     quad->SetVertexShader(L"Shaders/VertexInstancing.hlsl");
     quad->SetPixelShader(L"Shaders/PixelInstancing.hlsl");
@@ -43,31 +43,34 @@ void ParticleScene::PostRender()
     EditTexture();
 
     ImGui::TextColored({ 255, 255, 0,1 }, "Count");
-    ImGui::SliderInt("ParticleCount", (int*)&particleCount, 1, MAX_PARTICLE);
+    ImGui::InputInt("ParticleCount", (int*)&particleCount);
     ImGui::TextColored({ 255, 255, 0,1 }, "Duration");
-    ImGui::DragFloat("Duration", &data.duration);
+    ImGui::InputFloat("Duration", &data.duration);
     ImGui::TextColored({ 255, 255, 0,1 }, "Color");
     ImGui::ColorEdit4("StartColor", (float*)&data.startColor);
     ImGui::ColorEdit4("EndColor", (float*)&data.endColor);
     ImGui::TextColored({ 255, 255, 0,1 }, "Velocity");
-    ImGui::SliderFloat2("MinVelocity", (float*)&data.minVelocity, -1, 1);
-    ImGui::SliderFloat2("MaxVelocity", (float*)&data.maxVelocity, -1, 1);
+    ImGui::InputFloat2("MinVelocity", (float*)&data.minVelocity);
+    ImGui::InputFloat2("MaxVelocity", (float*)&data.maxVelocity);
     ImGui::TextColored({ 255, 255, 0,1 }, "Accelation");
-    ImGui::SliderFloat2("MinAccelation", (float*)&data.minAccelation, -5, 5);
-    ImGui::SliderFloat2("MaxAccelation", (float*)&data.maxAccelation, -5, 5);
+    ImGui::InputFloat2("MinAccelation", (float*)&data.minAccelation);
+    ImGui::InputFloat2("MaxAccelation", (float*)&data.maxAccelation);
     ImGui::TextColored({ 255, 255, 0,1 }, "Angle");
     ImGui::SliderFloat("MinAngule", (float*)&data.minAngularVelocity, -10, data.maxAngularVelocity);
     ImGui::SliderFloat("MaxAngule", (float*)&data.maxAngularVelocity, data.minAngularVelocity, 10);
     ImGui::TextColored({ 255, 255, 0,1 }, "Speed");
     ImGui::SliderFloat("MinSpeed", &data.minSpeed, 1, data.maxSpeed);
-    ImGui::InputFloat("MinSpeed", &data.minSpeed, 1, data.maxSpeed);
+    //ImGui::InputFloat("MinSpeed", &data.minSpeed, 1, data.maxSpeed);
     ImGui::SliderFloat("MaxSpeed", &data.maxSpeed, data.minSpeed, 200);
     ImGui::TextColored({ 255, 255, 0,1 }, "StartTime");
     ImGui::SliderFloat("MinStartTime", &data.minStartTime, 0.0f, data.maxStartTime);
     ImGui::SliderFloat("MaxStartTime", &data.maxStartTime, data.minStartTime, data.duration);
     ImGui::TextColored({ 255, 255, 0,1 }, "Scale");
-    ImGui::SliderFloat2("MinScale", (float*)&data.minScale, 0.0f, 5.0f);
-    ImGui::SliderFloat2("MaxScale", (float*)&data.maxScale, 0.0f, 5.0f);
+    ImGui::InputFloat2("Scale", (float*)&data.Scale);
+    ImGui::TextColored({ 255,255,0,1 }, "FluidParticleData");
+    ImGui::InputFloat2("FluidScale", (float*)&data.fluidData.Scale);
+    ImGui::InputFloat("FluidTime", &data.fluidData.Time);
+    ImGui::Checkbox("isFluid", &data.fluidData.isFluidParticle);
 
     SaveDialog();
     ImGui::SameLine();
@@ -97,7 +100,19 @@ void ParticleScene::Play()
         transforms[i].Position() += particleInfos[i].velocity
             * particleInfos[i].speed * DELTA;
         transforms[i].Rotation().z = particleInfos[i].angularVelocity;
-        transforms[i].Scale() = particleInfos[i].scale;
+
+        if (particleInfos[i].fluidData.isFluidParticle == true)
+        {
+            if (particleInfos[i].fluidData.Time < lifeTime)
+            {
+                transforms[i].Scale() =  LERP(particleInfos[i].scale, particleInfos[i].fluidData.Scale, 
+                    (lifeTime - particleInfos[i].fluidData.Time) / (data.duration - particleInfos[i].fluidData.Time));
+            }
+            else
+                transforms[i].Scale() = particleInfos[i].scale;
+        }
+        else
+            transforms[i].Scale() = particleInfos[i].scale;
         transforms[i].UpdateWorld();
 
         instances[i].transform = XMMatrixTranspose(transforms[i].GetWorld());
@@ -127,8 +142,8 @@ void ParticleScene::UpdateParticleInfo()
         info.angularVelocity = Random(data.minAngularVelocity, data.maxAngularVelocity);
         info.speed = Random(data.minSpeed, data.maxSpeed);
         info.startTime = Random(data.minStartTime, data.maxStartTime);
-        info.scale.x = Random(data.minScale.x, data.maxScale.x);
-        info.scale.y = Random(data.minScale.y, data.maxScale.y);
+        info.scale = data.Scale;
+        info.fluidData = data.fluidData;
 
         info.velocity = info.velocity.Normalize();
     }

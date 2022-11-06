@@ -18,6 +18,7 @@ public:
 	wstring GetFile() { return file; }
 	ID3D11ShaderResourceView* GetSRV() { return srv; }
 
+	Float4 GetCenterPixels();
 public:
 	static Texture* Add(wstring file);
 	static Texture* Add(wstring key, ID3D11ShaderResourceView* srv);

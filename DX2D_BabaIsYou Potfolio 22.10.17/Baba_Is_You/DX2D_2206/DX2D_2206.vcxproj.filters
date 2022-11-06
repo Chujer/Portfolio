@@ -231,6 +231,9 @@
     <ClInclude Include="Scenes\ParticleScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="GameObject\BabaIsYou\Property\Win.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DX2D_2206.cpp">
@@ -398,6 +401,9 @@
     <ClCompile Include="Scenes\ParticleScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\BabaIsYou\Property\Win.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX2D_2206.rc">
@@ -430,5 +436,6 @@
     <FxCompile Include="Shaders\PixelInstancing.hlsl" />
     <FxCompile Include="Shaders\PixelImageFont.hlsl" />
     <FxCompile Include="Shaders\PixelClosing.hlsl" />
+    <FxCompile Include="Shaders\VertexParticle.hlsl" />
   </ItemGroup>
 </Project>

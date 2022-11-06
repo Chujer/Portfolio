@@ -40,10 +40,12 @@ void Object::Render()
 	if (!isActive)
 		return;
 
-	if (collider != nullptr)
+	if (collider != nullptr && collider->Active())
 	{
 		collider->Render();
 	}
+	if (action != nullptr)
+		action->Render();
 }
 
 

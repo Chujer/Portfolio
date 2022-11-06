@@ -24,6 +24,8 @@ public:
 	void ClickTile(Object* selectSample);
 	void DeleteObjTile();
 
+	void SetColliderOff();
+
 	vector<Object*> GetTiles() { return tiles; }
 	vector<Object*> GetBGTiles() { return bgTiles; }
 
