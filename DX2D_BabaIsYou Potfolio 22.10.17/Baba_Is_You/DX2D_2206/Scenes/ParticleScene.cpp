@@ -3,7 +3,7 @@
 
 ParticleScene::ParticleScene()
 {
-    wstring file = L"Textures/Particle/enemy_particle0001.png";
+    wstring file = L"Textures/Particle/ClearRing.png";
     quad = new Quad(file);
     quad->SetVertexShader(L"Shaders/VertexInstancing.hlsl");
     quad->SetPixelShader(L"Shaders/PixelInstancing.hlsl");
@@ -42,20 +42,30 @@ void ParticleScene::PostRender()
 
     EditTexture();
 
+    ImGui::TextColored({ 255, 255, 0,1 }, "Count");
     ImGui::SliderInt("ParticleCount", (int*)&particleCount, 1, MAX_PARTICLE);
+    ImGui::TextColored({ 255, 255, 0,1 }, "Duration");
     ImGui::DragFloat("Duration", &data.duration);
+    ImGui::TextColored({ 255, 255, 0,1 }, "Color");
     ImGui::ColorEdit4("StartColor", (float*)&data.startColor);
     ImGui::ColorEdit4("EndColor", (float*)&data.endColor);
+    ImGui::TextColored({ 255, 255, 0,1 }, "Velocity");
     ImGui::SliderFloat2("MinVelocity", (float*)&data.minVelocity, -1, 1);
     ImGui::SliderFloat2("MaxVelocity", (float*)&data.maxVelocity, -1, 1);
+    ImGui::TextColored({ 255, 255, 0,1 }, "Accelation");
     ImGui::SliderFloat2("MinAccelation", (float*)&data.minAccelation, -5, 5);
     ImGui::SliderFloat2("MaxAccelation", (float*)&data.maxAccelation, -5, 5);
-    ImGui::SliderFloat("MinAngularVelocity", (float*)&data.minAngularVelocity, -10, data.maxAngularVelocity);
-    ImGui::SliderFloat("MaxAngularVelocity", (float*)&data.maxAngularVelocity, data.minAngularVelocity, 10);
+    ImGui::TextColored({ 255, 255, 0,1 }, "Angle");
+    ImGui::SliderFloat("MinAngule", (float*)&data.minAngularVelocity, -10, data.maxAngularVelocity);
+    ImGui::SliderFloat("MaxAngule", (float*)&data.maxAngularVelocity, data.minAngularVelocity, 10);
+    ImGui::TextColored({ 255, 255, 0,1 }, "Speed");
     ImGui::SliderFloat("MinSpeed", &data.minSpeed, 1, data.maxSpeed);
+    ImGui::InputFloat("MinSpeed", &data.minSpeed, 1, data.maxSpeed);
     ImGui::SliderFloat("MaxSpeed", &data.maxSpeed, data.minSpeed, 200);
+    ImGui::TextColored({ 255, 255, 0,1 }, "StartTime");
     ImGui::SliderFloat("MinStartTime", &data.minStartTime, 0.0f, data.maxStartTime);
     ImGui::SliderFloat("MaxStartTime", &data.maxStartTime, data.minStartTime, data.duration);
+    ImGui::TextColored({ 255, 255, 0,1 }, "Scale");
     ImGui::SliderFloat2("MinScale", (float*)&data.minScale, 0.0f, 5.0f);
     ImGui::SliderFloat2("MaxScale", (float*)&data.maxScale, 0.0f, 5.0f);
 
@@ -86,7 +96,7 @@ void ParticleScene::Play()
         particleInfos[i].velocity += particleInfos[i].accelation * DELTA;
         transforms[i].Position() += particleInfos[i].velocity
             * particleInfos[i].speed * DELTA;
-        transforms[i].Rotation().z += particleInfos[i].angularVelocity * DELTA;
+        transforms[i].Rotation().z = particleInfos[i].angularVelocity;
         transforms[i].Scale() = particleInfos[i].scale;
         transforms[i].UpdateWorld();
 

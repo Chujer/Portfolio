@@ -29,7 +29,7 @@ private:
         Vector2 minScale = { 1, 1 };
         Vector2 maxScale = { 1, 1 };
         Float4 startColor = { 1, 1, 1, 1 };
-        Float4 endColor = { 1, 1 ,1, 1 };                
+        Float4 endColor = { 1, 1 ,1, 1 };
     };
 
     struct ParticleInfo
@@ -72,6 +72,8 @@ private:
     VertexBuffer* instanceBuffer;
 
     ParticleData data;
+
+    
 
     float lifeTime = 0.0f;
     Float4 color;
