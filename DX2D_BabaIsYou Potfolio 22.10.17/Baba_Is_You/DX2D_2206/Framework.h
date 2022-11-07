@@ -138,7 +138,7 @@ using namespace GameMath;
 #include "GameObject/BabaIsYou/Property/Sink.h"
 #include "GameObject/BabaIsYou/Property/Win.h"
 
-#include "GameObject/BabaIsYou/ObjectSample.h"
+#include "GameObject/BabaIsYou/Manager/ObjectSample.h"
 #include "GameObject/BabaIsYou/Object.h"
 #include "GameObject/BabaIsYou/IsObject.h"
 
@@ -147,9 +147,10 @@ using namespace GameMath;
 
 #include "GameObject/BabaIsYou/BabaTileMap.h"
 
-#include "GameObject/BabaIsYou/BabaMapManager.h"
+#include "GameObject/BabaIsYou/Manager/BabaMapManager.h"
 
 #include "GameObject/BabaIsYou/GetBackObject.h"
+#include "GameObject/BabaIsYou/Manager/ParticleManager.h"
 
 //Scene
 #include "Scenes/Scene.h"

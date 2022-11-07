@@ -186,7 +186,7 @@
     <ClInclude Include="GameObject\BabaIsYou\Object.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject\BabaIsYou\ObjectSample.h">
+    <ClInclude Include="GameObject\BabaIsYou\Manager\ObjectSample.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Scenes\TestScene.h">
@@ -210,7 +210,7 @@
     <ClInclude Include="GameObject\BabaIsYou\Utility\EventManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject\BabaIsYou\BabaMapManager.h">
+    <ClInclude Include="GameObject\BabaIsYou\Manager\BabaMapManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\BabaIsYou\Property\Defeat.h">
@@ -232,6 +232,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\BabaIsYou\Property\Win.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\BabaIsYou\Manager\ParticleManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -356,7 +359,7 @@
     <ClCompile Include="GameObject\BabaIsYou\Object.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject\BabaIsYou\ObjectSample.cpp">
+    <ClCompile Include="GameObject\BabaIsYou\Manager\ObjectSample.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scenes\TestScene.cpp">
@@ -380,7 +383,7 @@
     <ClCompile Include="GameObject\BabaIsYou\Utility\EventManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject\BabaIsYou\BabaMapManager.cpp">
+    <ClCompile Include="GameObject\BabaIsYou\Manager\BabaMapManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GameObject\BabaIsYou\Property\Defeat.cpp">
@@ -402,6 +405,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GameObject\BabaIsYou\Property\Win.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\BabaIsYou\Manager\ParticleManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

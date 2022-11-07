@@ -3,7 +3,7 @@
 
 BabaScene::BabaScene()
 {
-	stage = 0;
+	stage = 3;
 	backGround = new Quad(L"Textures/BackGround.png");
 	backGround->Position() = { CENTER_X,CENTER_Y };
 	backGround->UpdateWorld();

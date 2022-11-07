@@ -7,7 +7,7 @@ public:
 	~Action();
 
 	virtual void Update() {};
-	void Render();
+	virtual void Render();
 
 protected:
 	vector<Particle*> particles;

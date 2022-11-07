@@ -2,10 +2,13 @@
 
 Particle::Particle(string file)
 {
+    path = file;
     LoadData(file);
     
     instanceBuffer = new VertexBuffer(instances.data(),
         sizeof(InstanceData), data.count);
+
+    particleInstanceData.instanceBuffer = instanceBuffer;
 
     Float4 customColor = { -1.0f,-1.0f,-1.0f,-1.0f };
 }
@@ -117,6 +120,8 @@ void Particle::LoadData(string file)
     instances.resize(data.count);
     particleInfos.resize(data.count);
     transforms.resize(data.count);
+
+    particleInstanceData.instances = &instances;
 
     delete reader;
 }

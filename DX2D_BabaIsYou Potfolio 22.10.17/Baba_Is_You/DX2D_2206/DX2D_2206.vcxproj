@@ -140,7 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="GameObject\BabaIsYou\BabaMapManager.h" />
+    <ClInclude Include="GameObject\BabaIsYou\Manager\BabaMapManager.h" />
     <ClInclude Include="DX2D_2206.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Framework\Buffer\ConstBuffer.h" />
@@ -176,8 +176,9 @@
     <ClInclude Include="GameObject\BabaIsYou\GetBackObject.h" />
     <ClInclude Include="GameObject\BabaIsYou\InstanceQuad.h" />
     <ClInclude Include="GameObject\BabaIsYou\IsObject.h" />
+    <ClInclude Include="GameObject\BabaIsYou\Manager\ParticleManager.h" />
     <ClInclude Include="GameObject\BabaIsYou\Object.h" />
-    <ClInclude Include="GameObject\BabaIsYou\ObjectSample.h" />
+    <ClInclude Include="GameObject\BabaIsYou\Manager\ObjectSample.h" />
     <ClInclude Include="GameObject\BabaIsYou\BabaTileMap.h" />
     <ClInclude Include="GameObject\BabaIsYou\Property\Defeat.h" />
     <ClInclude Include="GameObject\BabaIsYou\Property\Hot.h" />
@@ -245,13 +246,14 @@
     <ClCompile Include="Framework\Utilities\Timer.cpp" />
     <ClCompile Include="Framework\Utilities\tinyxml2.cpp" />
     <ClCompile Include="Framework\Utilities\Utility.cpp" />
-    <ClCompile Include="GameObject\BabaIsYou\BabaMapManager.cpp" />
+    <ClCompile Include="GameObject\BabaIsYou\Manager\BabaMapManager.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\BabaTileMap.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\GetBackObject.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\InstanceQuad.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\IsObject.cpp" />
+    <ClCompile Include="GameObject\BabaIsYou\Manager\ParticleManager.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\Object.cpp" />
-    <ClCompile Include="GameObject\BabaIsYou\ObjectSample.cpp" />
+    <ClCompile Include="GameObject\BabaIsYou\Manager\ObjectSample.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\Property\Defeat.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\Property\Hot.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\Property\Sink.cpp" />

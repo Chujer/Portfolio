@@ -48,6 +48,11 @@ private:
         FluidParticleData fluidData;
     };
 
+    struct ParticleInstanceData
+    {
+        vector<InstanceData>* instances;
+        VertexBuffer* instanceBuffer;
+    };
 public:
     Particle(string file);
     ~Particle();
@@ -61,11 +66,21 @@ public:
 
     bool GetIsPlay() { return isPlay; }
     void SetRotate(bool isRotate) { this->isRotate = isRotate; }
+    Quad* GetQuad() { return quad; }
+
+    string GetPath() { return path; }
+
+    ParticleInstanceData GetParticleInstanceData()
+    {
+        return particleInstanceData;
+    }
+    
 private:
     void LoadData(string file);
     void UpdateParticleInfo();
 
 private:
+    string path;
     bool isPlay = false;
 
     Quad* quad;
@@ -76,6 +91,7 @@ private:
     VertexBuffer* instanceBuffer;
 
     ParticleData data;
+    ParticleInstanceData particleInstanceData;
 
     float lifeTime = 0.0f;
     Float4 color;

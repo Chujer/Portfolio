@@ -9,7 +9,9 @@ Move::Move(Transform* target, Vector2* curFrame)
 	{
 		particles[i] = new Particle("Particle/MoveParticle.fx");
 		particles[i]->SetRotate(true);
+		ParticleManager::Get()->AddParticle(particles[i]);
 	}
+
 	GetColor();
 }
 
@@ -124,6 +126,11 @@ void Move::Animaion()
 		}
 	}
 }
+
+//void Move::Render()
+//{
+//	ParticleManager::Get()->Render();
+//}
 
 void Move::SetStop()
 {

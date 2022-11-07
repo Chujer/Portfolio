@@ -14,6 +14,8 @@ public:
 	void MoveTarget();
 	void Animaion();
 
+	//virtual void Render() override;
+
 private:
 	void SetStop();
 	void SetPushObject(Vector2 nextPos);

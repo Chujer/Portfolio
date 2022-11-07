@@ -18,16 +18,17 @@ Object::~Object()
 
 void Object::Update()
 {
-	if (!isActive)
-		return;
-
 	if (action != nullptr)
 		action->Update();
+
+	if (!isActive)
+		return;
 
 	if (isAnimPlay)
 		Animation();
 	else
 		instanceData.curFrame.y = 0;
+
 	UpdateWorld();
 	if (collider != nullptr)
 	{
@@ -37,6 +38,9 @@ void Object::Update()
 
 void Object::Render()
 {
+	if (action != nullptr)
+		action->Render();
+
 	if (!isActive)
 		return;
 
@@ -44,8 +48,6 @@ void Object::Render()
 	{
 		collider->Render();
 	}
-	if (action != nullptr)
-		action->Render();
 }
 
 
