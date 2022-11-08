@@ -10,6 +10,7 @@ public:
 
     void SetLockFPS(float lockFPS) { this->lockFPS = lockFPS; }
 
+   // float GetTimeElapsed() { return timeElapsed > 0.05f ? 0.05f : timeElapsed; }
     float GetTimeElapsed() { return timeElapsed; }
     int GetFPS() { return frameRate; }
 

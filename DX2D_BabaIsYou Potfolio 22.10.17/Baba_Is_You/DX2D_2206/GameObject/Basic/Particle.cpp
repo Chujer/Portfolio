@@ -121,7 +121,7 @@ void Particle::LoadData(string file)
     particleInfos.resize(data.count);
     transforms.resize(data.count);
 
-    particleInstanceData.instances = &instances;
+   // particleInstanceData.instances = &instances;
 
     delete reader;
 }

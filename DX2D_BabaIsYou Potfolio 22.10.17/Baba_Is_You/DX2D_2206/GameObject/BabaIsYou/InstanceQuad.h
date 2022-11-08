@@ -22,6 +22,7 @@ public:
 
     void Update();
     void Render();
+    void ParticleRender();
 
     void SetPixelShader(wstring path)
     {

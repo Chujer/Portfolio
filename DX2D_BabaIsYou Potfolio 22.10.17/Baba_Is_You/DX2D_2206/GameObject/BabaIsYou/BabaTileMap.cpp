@@ -43,6 +43,10 @@ void BabaTileMap::Render()
         if (tile->effect == "MOVE")
             OneMoreRender(tile->tag);
     }
+    for (pair<string, InstanceQuad*> quad : instanceQuads)
+    {
+        quad.second->ParticleRender();
+    }
 }
 
 void BabaTileMap::OneMoreRender(string key)

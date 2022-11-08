@@ -20,6 +20,7 @@ void SceneManager::PreRender()
 {
     for (Scene * scene : curScenes)
         scene->PreRender();
+
 }
 
 void SceneManager::Render()

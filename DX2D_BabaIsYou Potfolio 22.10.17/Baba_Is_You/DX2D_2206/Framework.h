@@ -25,6 +25,7 @@
 #define LERP(s, e, t) (s + (e - s) * t)
 #define SLERP(s, e, t) (s + (e - s) * (t * t))
 
+
 #include <windows.h>
 #include <string>
 #include <vector>
@@ -151,6 +152,7 @@ using namespace GameMath;
 
 #include "GameObject/BabaIsYou/GetBackObject.h"
 #include "GameObject/BabaIsYou/Manager/ParticleManager.h"
+#include "GameObject/BabaIsYou/Manager/BabaGameManager.h"
 
 //Scene
 #include "Scenes/Scene.h"

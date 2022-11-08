@@ -4,7 +4,7 @@ class Action
 {
 public:
 	Action();
-	~Action();
+	virtual ~Action();
 
 	virtual void Update() {};
 	virtual void Render();

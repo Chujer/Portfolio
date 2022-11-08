@@ -2,6 +2,7 @@
 
 class Particle
 {
+    friend class ParticleManager;
 private:
     struct InstanceData
     {
@@ -50,8 +51,9 @@ private:
 
     struct ParticleInstanceData
     {
-        vector<InstanceData>* instances;
+        vector<InstanceData*> instances;
         VertexBuffer* instanceBuffer;
+
     };
 public:
     Particle(string file);
@@ -72,6 +74,11 @@ public:
 
     ParticleInstanceData GetParticleInstanceData()
     {
+        particleInstanceData.instances.clear();
+        for (InstanceData instanceData : instances)
+        {
+            particleInstanceData.instances.push_back(&instanceData);
+        }
         return particleInstanceData;
     }
     

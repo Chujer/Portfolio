@@ -19,6 +19,14 @@ void ParticleManager::AddParticle(Particle* particle)
 	quads[path]->SetVertexShader(L"Shaders/VertexParticle.hlsl");
 	quads[path]->SetPixelShader(L"Shaders/PixelInstancing.hlsl");
 
+	vector<Particle::InstanceData*> temp = particle->GetParticleInstanceData().instances;
+	for (Particle::InstanceData* instanceData : temp)
+	{
+		instances[path].push_back(instanceData);
+	}
+
+	if(instanceBuffers.count(path) == 0)
+		instanceBuffers[path] = new VertexBuffer(instances[path].data(), sizeof(Particle::InstanceData), 500);
 }
 
 void ParticleManager::RemoveParticle(Particle* particle)
@@ -26,6 +34,25 @@ void ParticleManager::RemoveParticle(Particle* particle)
 	string path = particle->GetPath();
 
 	//delete particle;
+	
+
+	for (Particle::InstanceData* instanceData : particle->GetParticleInstanceData().instances)
+	{
+		vector<Particle::InstanceData*>::iterator iter = instances[path].begin();
+
+		for (Particle::InstanceData* temp : instances[path])
+		{
+			if ((*iter) == instanceData)
+			{
+				iter = instances[path].erase(iter);
+			}
+			else
+			{
+				iter++;
+			}
+		}
+		//instances[path].erase(find(instances[path].begin(), instances[path].end(), instanceData));
+	}
 	particles[path].erase(find(particles[path].begin(),particles[path].end(),particle));
 }
 
@@ -38,26 +65,21 @@ void ParticleManager::Update()
 			particle->Update();
 		}
 	}
+	for (pair<string, VertexBuffer*> instanceBuffer : instanceBuffers)
+	{
+		instanceBuffer.second->Update(instances[instanceBuffer.first].data(), instances[instanceBuffer.first].size());
+	}
 }
 
 void ParticleManager::Render()
 {
+	//if (!isPlay) return;
 	for (pair<string, Quad*> quad : quads)
 	{
-		for (Particle* particle : particles[quad.first])
-		{
-			if (!particle->GetIsPlay()) continue;
+		 instanceBuffers[quad.first]->Set(1);
 
-			quad.second->GetColorBuffer()->Set(Float4(1, 1, 1, 1));
-			quad.second->Position() = particle->GetQuad()->Position();
-			quad.second->UpdateWorld();
-			particle->GetParticleInstanceData().instanceBuffer->Set(1);
-		}
+		quads[quad.first]->SetRender();
 
-
-
-		quad.second->SetRender();
-
-		//DC->DrawIndexedInstanced(6, particle->GetParticleInstanceData().instances->size(), 0, 0, 0);
+		DC->DrawIndexedInstanced(6, instances[quad.first].size(), 0, 0, 0);
 	}
 }

@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="GameObject\BabaIsYou\Manager\BabaGameManager.h" />
     <ClInclude Include="GameObject\BabaIsYou\Manager\BabaMapManager.h" />
     <ClInclude Include="DX2D_2206.h" />
     <ClInclude Include="Framework.h" />
@@ -207,6 +208,7 @@
     <ClInclude Include="Libraries\ImGui\imstb_truetype.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scenes\BabaScene.h" />
+    <ClInclude Include="Scenes\FadeScene.h" />
     <ClInclude Include="Scenes\MapEditerScene.h" />
     <ClInclude Include="Scenes\ParticleScene.h" />
     <ClInclude Include="Scenes\Scene.h" />
@@ -246,6 +248,7 @@
     <ClCompile Include="Framework\Utilities\Timer.cpp" />
     <ClCompile Include="Framework\Utilities\tinyxml2.cpp" />
     <ClCompile Include="Framework\Utilities\Utility.cpp" />
+    <ClCompile Include="GameObject\BabaIsYou\Manager\BabaGameManager.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\Manager\BabaMapManager.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\BabaTileMap.cpp" />
     <ClCompile Include="GameObject\BabaIsYou\GetBackObject.cpp" />
@@ -272,6 +275,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Scenes\BabaScene.cpp" />
+    <ClCompile Include="Scenes\FadeScene.cpp" />
     <ClCompile Include="Scenes\MapEditerScene.cpp" />
     <ClCompile Include="Scenes\ParticleScene.cpp" />
     <ClCompile Include="Scenes\TestScene.cpp" />

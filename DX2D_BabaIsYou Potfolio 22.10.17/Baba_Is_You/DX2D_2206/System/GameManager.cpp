@@ -4,6 +4,7 @@
 #include "Scenes/BabaScene.h"
 #include "Scenes/TestScene.h"
 #include "Scenes/ParticleScene.h"
+#include "Scenes/FadeScene.h"
 
 GameManager::GameManager()
 {
@@ -23,9 +24,13 @@ GameManager::GameManager()
     //scene = new FontScene();
 
     Scene * scene = new BabaScene();
+    Scene * fadeScene = new FadeScene();
     scene->SetDepth(1);
+    fadeScene->SetDepth(2);
     SCENE->Create("Start", scene);    
+    SCENE->Create("Fade", fadeScene);
     
+    SCENE->Add("Fade");        
     SCENE->Add("Start");        
 }
 

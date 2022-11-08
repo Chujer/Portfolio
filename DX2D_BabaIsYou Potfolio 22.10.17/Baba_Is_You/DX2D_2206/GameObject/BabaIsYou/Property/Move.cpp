@@ -9,7 +9,7 @@ Move::Move(Transform* target, Vector2* curFrame)
 	{
 		particles[i] = new Particle("Particle/MoveParticle.fx");
 		particles[i]->SetRotate(true);
-		ParticleManager::Get()->AddParticle(particles[i]);
+		//ParticleManager::Get()->AddParticle(particles[i]);
 	}
 
 	GetColor();
@@ -17,6 +17,10 @@ Move::Move(Transform* target, Vector2* curFrame)
 
 Move::~Move()
 {
+	//for (int i = 0; i < 5; i++)
+	//{
+	//	ParticleManager::Get()->RemoveParticle(particles[i]);
+	//}
 }
 
 
@@ -31,7 +35,7 @@ void Move::Update()
 
 		for (int i = 0; i < pushTargets.size(); i++)
 		{
-			pushTargets[i]->Position() = SLERP(pushTargets[i]->Position(), endPos + (nextPos * (i + 1)), 100 * DELTA);
+			pushTargets[i]->Position() = SLERP(pushTargets[i]->Position(), endPos + (nextPos * (i + 1)), 100 * DELTA);//  LERP(pushTargets[i]->Position(), endPos + (nextPos * (i + 1)), 100 * DELTA);
 		}
 	}
 	MoveTarget();

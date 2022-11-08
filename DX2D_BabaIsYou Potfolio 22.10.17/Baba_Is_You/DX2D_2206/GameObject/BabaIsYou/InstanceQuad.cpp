@@ -70,10 +70,14 @@ void InstanceQuad::Render()
 	
 	DC->DrawIndexedInstanced(6, objectDatas.size(), 0, 0, 0);
 
+}
+
+void InstanceQuad::ParticleRender()
+{
 	for (Object* object : objectDatas)
 	{
- 		//if (object->Active())
-			object->Render();
+		//if (object->Active())
+		object->Render();
 	}
 }
 

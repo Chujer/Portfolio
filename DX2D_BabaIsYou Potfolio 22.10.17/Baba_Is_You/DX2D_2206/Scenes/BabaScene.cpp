@@ -3,7 +3,8 @@
 
 BabaScene::BabaScene()
 {
-	stage = 3;
+	BabaGameManager::Get()->CallLoad() = false;
+	stage = 0;
 	backGround = new Quad(L"Textures/BackGround.png");
 	backGround->Position() = { CENTER_X,CENTER_Y };
 	backGround->UpdateWorld();
@@ -40,16 +41,13 @@ void BabaScene::Update()
 	//	instancequad.second->update();
 	//}
 
-	if (KEY_DOWN(VK_SPACE))
+	if (BabaMapManager::Get()->IsClear())
 	{
+		BabaMapManager::Get()->IsClear() = false;
 		stage++;
 		Load(stage);
 	}
-	if (KEY_DOWN(VK_BACK))
-	{
-		stage--;
-		Load(stage);
-	}
+
 	if (KEY_DOWN('Q'))
 	{
 		GetBackObject::Get()->GetBack();
@@ -58,12 +56,14 @@ void BabaScene::Update()
 	{
 		Load(stage);
 	}
+	//ParticleManager::Get()->Update();
 }
 
 void BabaScene::Render()
 {
 	backGround->Render();
 	tileMap->Render();
+	//ParticleManager::Get()->Render();
 
 	//for (pair<string, InstanceQuad*> instanceQuad : instanceQuads)
 	//	instanceQuad.second->Render();

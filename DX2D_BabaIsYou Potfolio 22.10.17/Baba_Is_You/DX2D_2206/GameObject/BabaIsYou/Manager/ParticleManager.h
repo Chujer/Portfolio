@@ -14,5 +14,7 @@ public:
 
 private:
 	map<string, vector<Particle*>> particles;
+	map<string, vector<Particle::InstanceData*>> instances;
 	map<string, Quad*> quads;
+	map<string, VertexBuffer*> instanceBuffers;
 };

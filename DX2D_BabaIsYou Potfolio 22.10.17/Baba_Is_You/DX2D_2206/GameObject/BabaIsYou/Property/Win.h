@@ -11,4 +11,7 @@ public:
 
 private:
 	Transform* target;
+	
+	bool isClear = false;
+	float time = 0.0f;
 };
