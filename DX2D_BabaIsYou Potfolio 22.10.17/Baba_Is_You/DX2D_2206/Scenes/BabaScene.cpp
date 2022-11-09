@@ -3,6 +3,7 @@
 
 BabaScene::BabaScene()
 {
+	SetSound();
 	BabaGameManager::Get()->CallLoad() = false;
 	stage = 0;
 	backGround = new Quad(L"Textures/BackGround.png");
@@ -33,13 +34,7 @@ BabaScene::~BabaScene()
 void BabaScene::Update()
 {
 	tileMap->Update();
-
-	//CheckIs();
-
-	//for (pair<string, instancequad*> instancequad : instancequads)
-	//{
-	//	instancequad.second->update();
-	//}
+	BabaMapManager::Get()->Update();
 
 	if (BabaMapManager::Get()->IsClear())
 	{
@@ -56,7 +51,6 @@ void BabaScene::Update()
 	{
 		Load(stage);
 	}
-	//ParticleManager::Get()->Update();
 }
 
 void BabaScene::Render()
@@ -75,6 +69,10 @@ void BabaScene::PostRender()
 
 void BabaScene::Load(int curstage)
 {
+	if (stage < 6)
+		Audio::Get()->Play("BGM", 0.5f);
+	else
+		Audio::Get()->Play("GameClear", 0.5f);
 	GetBackObject::Get()->ClearData();
 
 	string path = "TextData/Stage" + to_string(curstage);
@@ -318,4 +316,15 @@ void BabaScene::RemoveHeightPropertyObject(void* object)
 	{
 		SetAction(object, ActionType::NONE);
 	}
+}
+
+void BabaScene::SetSound()
+{
+	Audio::Get()->Add("BGM", "Sounds/BGM.OGG", true, true);
+	Audio::Get()->Add("Broken", "Sounds/Broken.OGG");
+	Audio::Get()->Add("Clear", "Sounds/Clear.OGG");
+	Audio::Get()->Add("Lobby", "Sounds/map.OGG");
+	Audio::Get()->Add("Move", "Sounds/Move.OGG");
+	Audio::Get()->Add("GameClear", "Sounds/stars.OGG");
+
 }

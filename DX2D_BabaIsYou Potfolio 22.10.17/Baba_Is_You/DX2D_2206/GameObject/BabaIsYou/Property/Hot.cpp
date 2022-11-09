@@ -23,8 +23,12 @@ void Hot::Update()
 	{
 		GetBackObject::Get()->SetPrevData(brokenTarget);
 		brokenTarget->SetActive(false);
-		if(!particles[3]->GetIsPlay())
+		if (!particles[3]->GetIsPlay())
+		{
+			BabaMapManager::Get()->ShakeMap();
+			Audio::Get()->Play("Broken");
 			particles[3]->Play(brokenTarget->GlobalPosition());
+		}
 		GetBackObject::Get()->SetPrevData(brokenTarget);
 	}
 	if (time > PARTICLE_DELAY)

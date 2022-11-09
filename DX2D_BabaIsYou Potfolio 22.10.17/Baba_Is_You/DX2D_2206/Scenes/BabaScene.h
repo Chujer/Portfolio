@@ -29,6 +29,7 @@ public:
 	void RemoveWidthPropertyObject(void* object);
 	void RemoveHeightPropertyObject(void* object);
 
+	void SetSound();
 
 private:
 	map<string, InstanceQuad*> instanceQuads;

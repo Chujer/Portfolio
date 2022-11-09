@@ -81,6 +81,10 @@ typedef function<void(void*)> ObjectEvent;
 
 using namespace Utility;
 
+//FMOD Library
+#include "Libraries/inc/fmod.hpp"
+#pragma comment(lib, "Libraries/Lib/x64/fmod_vc.lib")
+
 #include "Framework/Utilities/Singleton.h"
 #include "Framework/Utilities/Keyboard.h"
 #include "Framework/Utilities/Timer.h"
@@ -88,6 +92,7 @@ using namespace Utility;
 #include "Framework/Utilities/BinaryWriter.h"
 #include "Framework/Utilities/tinyxml2.h"
 #include "Framework/Utilities/Font.h"
+#include "Framework/Utilities/Audio.h"
 
 #include "Framework/Device/Device.h"
 

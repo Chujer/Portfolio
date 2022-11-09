@@ -48,6 +48,8 @@ void GameManager::Update()
     SCENE->Update();
 
     CAM->Update();
+
+    Audio::Get()->Update();
 }
 
 void GameManager::Render()

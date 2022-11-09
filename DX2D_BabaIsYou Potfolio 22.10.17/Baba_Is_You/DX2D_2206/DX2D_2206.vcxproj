@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Framework\Utilities\Audio.h" />
     <ClInclude Include="GameObject\BabaIsYou\Manager\BabaGameManager.h" />
     <ClInclude Include="GameObject\BabaIsYou\Manager\BabaMapManager.h" />
     <ClInclude Include="DX2D_2206.h" />
@@ -241,6 +242,7 @@
     <ClCompile Include="Framework\Shader\PixelShader.cpp" />
     <ClCompile Include="Framework\Shader\Shader.cpp" />
     <ClCompile Include="Framework\Shader\VertexShader.cpp" />
+    <ClCompile Include="Framework\Utilities\Audio.cpp" />
     <ClCompile Include="Framework\Utilities\BinaryReader.cpp" />
     <ClCompile Include="Framework\Utilities\BinaryWriter.cpp" />
     <ClCompile Include="Framework\Utilities\Font.cpp" />

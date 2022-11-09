@@ -2,6 +2,13 @@
 
 class BabaMapManager : public Singleton<BabaMapManager>
 {
+private:
+	const float MAX_SHAKE_POWER = 24.0f;
+	const float SHAKE_TIME = 0.05f;
+	enum Mode
+	{
+		MOVE, REVERSE_MOVE, Stop
+	};
 public:
 	BabaMapManager();
 	~BabaMapManager();
@@ -12,6 +19,9 @@ public:
 	Object* GetPositionAndEffectTile(Vector2 pos, string effect);
 	Object* GetPositionExceptMyself(Vector2 pos, string tag);
 	Object* GetPositionMyself(Transform* transform);
+
+	void ShakeMap();
+	void Update();
 
 	bool& IsClear() { return isClear; }
 
@@ -24,4 +34,16 @@ private:
 	vector<Object*> maps;
 
 	bool isClear = false;
+
+	Vector2 shakePos = { 0.0f,0.0f };
+	Vector2 shakeDirection;
+	Vector2 shakeEndPos;
+	Vector2 shakeStartPos;
+	float shakeTime = 0.0f;
+
+	bool isShacke = false;
+
+	Mode mode;
+
+	BabaTileMap* sample;
 };

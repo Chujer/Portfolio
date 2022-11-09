@@ -64,6 +64,7 @@ void Move::MoveTarget()
 			isMove = true;
 			pushTargets.clear();
 			SetPushObject(endPos);
+			Audio::Get()->Play("Move");
 		}
 		if (KEY_DOWN(VK_LEFT))
 		{
@@ -79,6 +80,7 @@ void Move::MoveTarget()
 			isMove = true;
 			pushTargets.clear();
 			SetPushObject(endPos);
+			Audio::Get()->Play("Move");
 		}
 		if (KEY_DOWN(VK_UP))
 		{
@@ -94,6 +96,7 @@ void Move::MoveTarget()
 			isMove = true;
 			pushTargets.clear();
 			SetPushObject(endPos);
+			Audio::Get()->Play("Move");
 		}
 		if (KEY_DOWN(VK_DOWN))
 		{
@@ -109,6 +112,7 @@ void Move::MoveTarget()
 			isMove = true;
 			pushTargets.clear();
 			SetPushObject(endPos);
+			Audio::Get()->Play("Move");
 		}
 		SetStop();
 	}

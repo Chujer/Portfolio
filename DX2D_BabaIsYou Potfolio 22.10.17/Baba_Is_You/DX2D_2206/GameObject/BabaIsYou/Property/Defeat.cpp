@@ -21,6 +21,8 @@ void Defeat::Update()
 		brokenTarget->SetActive(false);
 		if (!particles[0]->GetIsPlay())
 		{
+			BabaMapManager::Get()->ShakeMap();
+			Audio::Get()->Play("Broken");
 			particles[0]->Play(target->GlobalPosition());
 		}
 		GetBackObject::Get()->SetNextData(brokenTarget);

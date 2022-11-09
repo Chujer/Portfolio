@@ -33,7 +33,9 @@ void Sink::Update()
 		GetBackObject::Get()->SetPrevData(brokenTarget);
 		if (!particles[0]->GetIsPlay())
 		{
-			particles[0]->Play(target->GlobalPosition());
+			Audio::Get()->Play("Broken");
+			particles[0]->Play(target->GlobalPosition()); 
+			BabaMapManager::Get()->ShakeMap();
 		}
 		if (!particles[1]->GetIsPlay())
 		{

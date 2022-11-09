@@ -24,7 +24,11 @@ void Win::Update()
 	else
 	{
 		if (!particles[1]->GetIsPlay())
+		{
 			particles[1]->Play(target->GlobalPosition());
+			Audio::Get()->Play("Clear");
+			Audio::Get()->Stop("BGM");
+		}
 		isClear = true;
 	}
 	particles[0]->Update();
@@ -32,8 +36,10 @@ void Win::Update()
 	if (isClear)
 	{
 		time += DELTA;
-		if(time>1.0f)
+		if (time > 1.0f)
+		{
 			BabaGameManager::Get()->CallLoad() = true;
+		}
 		if (time > 2.0f)
 			BabaMapManager::Get()->IsClear() = true;
 	}
