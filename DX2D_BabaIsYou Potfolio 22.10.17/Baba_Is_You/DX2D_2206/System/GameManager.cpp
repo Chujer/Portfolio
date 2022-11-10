@@ -5,6 +5,7 @@
 #include "Scenes/TestScene.h"
 #include "Scenes/ParticleScene.h"
 #include "Scenes/FadeScene.h"
+#include "Scenes/LobyScene.h"
 
 GameManager::GameManager()
 {
@@ -25,13 +26,17 @@ GameManager::GameManager()
 
     Scene * scene = new BabaScene();
     Scene * fadeScene = new FadeScene();
+    Scene * lobyScene = new LobyScene();
     scene->SetDepth(1);
-    fadeScene->SetDepth(2);
+    lobyScene->SetDepth(2);
+    fadeScene->SetDepth(3);
     SCENE->Create("Start", scene);    
+    SCENE->Create("Lobby", lobyScene);
     SCENE->Create("Fade", fadeScene);
     
     SCENE->Add("Fade");        
     SCENE->Add("Start");        
+    SCENE->Add("Lobby");        
 }
 
 GameManager::~GameManager()

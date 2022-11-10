@@ -17,6 +17,8 @@ public:
     void SetVertexShader(wstring file);
     void SetPixelShader(wstring file);
     void SetPixelShader(PixelShader* shader) { pixelShader = shader; }
+    VertexShader* GetVertexShader() { return vertexShader; }
+    PixelShader* GetPixelShader() { return pixelShader; }
 
     Vector2 Size() { return size; }
     wstring GetFile() { return texture->GetFile(); }

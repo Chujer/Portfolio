@@ -210,6 +210,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scenes\BabaScene.h" />
     <ClInclude Include="Scenes\FadeScene.h" />
+    <ClInclude Include="Scenes\LobyScene.h" />
     <ClInclude Include="Scenes\MapEditerScene.h" />
     <ClInclude Include="Scenes\ParticleScene.h" />
     <ClInclude Include="Scenes\Scene.h" />
@@ -278,6 +279,7 @@
     </ClCompile>
     <ClCompile Include="Scenes\BabaScene.cpp" />
     <ClCompile Include="Scenes\FadeScene.cpp" />
+    <ClCompile Include="Scenes\LobyScene.cpp" />
     <ClCompile Include="Scenes\MapEditerScene.cpp" />
     <ClCompile Include="Scenes\ParticleScene.cpp" />
     <ClCompile Include="Scenes\TestScene.cpp" />

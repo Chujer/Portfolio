@@ -44,7 +44,10 @@ void FadeScene::FadeOut()
 		quads[i]->Position() = LERP(quads[i]->Position(), firstPosition[i], DELTA*10.0f);
 	}
 	if (quads[0]->Position() == firstPosition[0])
+	{
 		mode = NONE;
+		BabaGameManager::Get()->FadeEnd() = false;
+	}
 }
 
 void FadeScene::Stop()
@@ -64,6 +67,7 @@ void FadeScene::Update()
 		FadeIn();
 		break;
 	case FadeScene::FADE_OUT:
+		BabaGameManager::Get()->FadeEnd() = true;
 		FadeOut();
 		break;
 	case FadeScene::NONE:

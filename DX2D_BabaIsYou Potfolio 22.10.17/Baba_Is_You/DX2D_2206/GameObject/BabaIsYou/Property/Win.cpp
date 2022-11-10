@@ -14,6 +14,9 @@ Win::~Win()
 
 void Win::Update()
 {
+	if (!target->Active())
+		return;
+
 	Object* MoveTile = BabaMapManager::Get()->GetPositionAndEffectTile(target->Position(), "MOVE");
 
 	if (MoveTile == nullptr)

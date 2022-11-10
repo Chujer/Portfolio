@@ -43,7 +43,6 @@ private:
 
 	vector<IsObject*> propertyIs;		//IS블럭을 담는 객체
 	
-	int stage = 0;
 
 
 	//map<ActionType, vector<Object*>> propertyObject;

@@ -34,3 +34,16 @@ void Keyboard::Update()
             mapState[i] = NONE;
     }
 }
+
+bool Keyboard::IsAnyKey()
+{
+    for (KeyState state : mapState)
+    {
+        if (state == DOWN)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}

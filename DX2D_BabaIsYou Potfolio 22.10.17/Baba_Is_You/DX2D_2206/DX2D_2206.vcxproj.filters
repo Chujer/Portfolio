@@ -246,6 +246,9 @@
     <ClInclude Include="Framework\Utilities\Audio.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Scenes\LobyScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DX2D_2206.cpp">
@@ -426,6 +429,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Utilities\Audio.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\LobyScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

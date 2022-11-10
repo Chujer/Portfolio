@@ -19,6 +19,8 @@ public:
     bool Down(UINT key) { return mapState[key] == DOWN; }
     bool Up(UINT key) { return mapState[key] == UP; }
     bool Press(UINT key) { return mapState[key] == PRESS; }
+
+    bool IsAnyKey();
 private:
     BYTE curState[KEY_MAX] = {};
     BYTE oldState[KEY_MAX] = {};

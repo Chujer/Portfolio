@@ -5,7 +5,6 @@ BabaScene::BabaScene()
 {
 	SetSound();
 	BabaGameManager::Get()->CallLoad() = false;
-	stage = 0;
 	backGround = new Quad(L"Textures/BackGround.png");
 	backGround->Position() = { CENTER_X,CENTER_Y };
 	backGround->UpdateWorld();
@@ -18,8 +17,7 @@ BabaScene::BabaScene()
 	EventManager::Get()->AddEvent("CheckIs", bind(&BabaScene::CheckIs, this));
 
 
-	Load(stage);
-//	CheckIs();Z
+	Load(BabaGameManager::Get()->Stage());
 }
 
 BabaScene::~BabaScene()
@@ -33,14 +31,18 @@ BabaScene::~BabaScene()
 
 void BabaScene::Update()
 {
+
+	if (BabaGameManager::Get()->IsLobby())	
+		return;
+
 	tileMap->Update();
 	BabaMapManager::Get()->Update();
 
 	if (BabaMapManager::Get()->IsClear())
 	{
 		BabaMapManager::Get()->IsClear() = false;
-		stage++;
-		Load(stage);
+		BabaGameManager::Get()->Stage()++;
+		Load(BabaGameManager::Get()->Stage());
 	}
 
 	if (KEY_DOWN('Q'))
@@ -49,7 +51,7 @@ void BabaScene::Update()
 	}
 	if (KEY_DOWN('E'))
 	{
-		Load(stage);
+		Load(BabaGameManager::Get()->Stage());
 	}
 }
 
@@ -57,10 +59,6 @@ void BabaScene::Render()
 {
 	backGround->Render();
 	tileMap->Render();
-	//ParticleManager::Get()->Render();
-
-	//for (pair<string, InstanceQuad*> instanceQuad : instanceQuads)
-	//	instanceQuad.second->Render();
 }
 
 void BabaScene::PostRender()
@@ -69,7 +67,7 @@ void BabaScene::PostRender()
 
 void BabaScene::Load(int curstage)
 {
-	if (stage < 6)
+	if (BabaGameManager::Get()->Stage() < 6)
 		Audio::Get()->Play("BGM", 0.5f);
 	else
 		Audio::Get()->Play("GameClear", 0.5f);
@@ -78,8 +76,6 @@ void BabaScene::Load(int curstage)
 	string path = "TextData/Stage" + to_string(curstage);
 	path += ".map";
 	SetLoad();
-	//if (tileMap == nullptr)
-	//	tileMap = new BabaTileMap(0, 0);
 	tileMap->Load(path);
 	tileMap->SetColliderOff();
 	objects.clear();
