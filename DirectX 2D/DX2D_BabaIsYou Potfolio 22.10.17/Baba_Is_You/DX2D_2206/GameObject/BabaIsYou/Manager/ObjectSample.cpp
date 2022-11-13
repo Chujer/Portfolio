@@ -7,9 +7,11 @@ ObjectSample::ObjectSample()
 
 ObjectSample::~ObjectSample()
 {
+
 }
 
-ObjectSample::InstanceData ObjectSample::GetInstanceData(string key)
+/*키에따른 데이터 호출*/
+ObjectSample::InstanceData ObjectSample::GetInstanceData(string key)	
 {
 	if (sampleData.count(key) > 0)
 		return sampleData[key];

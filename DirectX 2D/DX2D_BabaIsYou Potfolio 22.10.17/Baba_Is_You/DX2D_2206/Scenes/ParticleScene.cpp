@@ -22,8 +22,6 @@ ParticleScene::~ParticleScene()
 
 void ParticleScene::Update()
 {
-    if (KEY_DOWN(VK_SPACE))
-        quad->SetTexture(Texture::Add(L"Textures/Particle/enemy_particle0001.png"));
     Play();
 }
 

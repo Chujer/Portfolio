@@ -8,6 +8,7 @@ GetBackObject::~GetBackObject()
 {
 }
 
+//변경 이전 데이터 저장
 void GetBackObject::SetPrevData(Object* object)
 {
 	ChangeObjectData tempData;
@@ -19,6 +20,7 @@ void GetBackObject::SetPrevData(Object* object)
 	prevData.push_back(tempData);
 }
 
+//변경 이후 데이터와 이전 데이터를 비교하여 변경된 정보 저장함수 호출
 void GetBackObject::SetNextData(Object* object)
 {
 	ChangeObjectData tempData;
@@ -40,6 +42,7 @@ void GetBackObject::SetNextData(Object* object)
 		SaveData();
 }
 
+//변경 데이터 저장
 void GetBackObject::SaveData()
 {
 	saveDatas.push(datas);
@@ -47,6 +50,7 @@ void GetBackObject::SaveData()
 	prevData.clear();
 }
 
+//되돌리기
 void GetBackObject::GetBack()
 {
 	if (saveDatas.size() == 0)

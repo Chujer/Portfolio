@@ -75,8 +75,8 @@ void GameManager::Render()
 
     EffectManager::Get()->Render();
 
-    string fps = "FPS : " + to_string(Timer::Get()->GetFPS());
-    Font::Get()->RenderText(fps, Vector2(100, WIN_HEIGHT - 20));
+    //string fps = "FPS : " + to_string(Timer::Get()->GetFPS());
+    //Font::Get()->RenderText(fps, Vector2(100, WIN_HEIGHT - 20));
     //ImGui::Text(fps.c_str());
 
     CAM->GUIRender();
