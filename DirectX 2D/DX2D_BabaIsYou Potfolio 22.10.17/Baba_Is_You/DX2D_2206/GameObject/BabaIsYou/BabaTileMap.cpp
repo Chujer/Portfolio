@@ -59,7 +59,8 @@ void BabaTileMap::SetBufferSize(string key, int count)
     instanceQuads[key]->SetBufferSize(count);
 }
 
-void BabaTileMap::ClickTile(Object* selectSample)       // 선택한 타일을 기존BG타일 위치에 생성
+// 선택한 타일을 기존BG타일 위치에 생성
+void BabaTileMap::ClickTile(Object* selectSample)      
 {   
     DeleteObjTile();
     if (KEY_PRESS(VK_LBUTTON))

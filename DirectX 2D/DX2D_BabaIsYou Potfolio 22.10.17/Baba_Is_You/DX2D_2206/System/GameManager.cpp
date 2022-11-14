@@ -24,7 +24,7 @@ GameManager::GameManager()
     //scene = new InstancingScene();
     //scene = new FontScene();
 
-    Scene * scene = new BabaScene();
+    Scene * scene = new ParticleScene();
     Scene * fadeScene = new FadeScene();
     Scene * lobyScene = new LobyScene();
     scene->SetDepth(1);
