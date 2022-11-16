@@ -24,7 +24,7 @@ GameManager::GameManager()
     //scene = new InstancingScene();
     //scene = new FontScene();
 
-    Scene * scene = new ParticleScene();
+    Scene * scene = new BabaScene();
     Scene * fadeScene = new FadeScene();
     Scene * lobyScene = new LobyScene();
     scene->SetDepth(1);
@@ -79,7 +79,7 @@ void GameManager::Render()
     //Font::Get()->RenderText(fps, Vector2(100, WIN_HEIGHT - 20));
     //ImGui::Text(fps.c_str());
 
-    CAM->GUIRender();
+    //CAM->GUIRender();
 
     SCENE->PostRender();
 
