@@ -1,0 +1,10 @@
+,Montage,PlayRate,CanMove,FixedCamera
+1,AnimMontage'/Game/Character/Montages/Katana/Skill/2/Katana_ChargeStart_Montage.Katana_ChargeStart_Montage',1,FALSE,TRUE
+2,AnimMontage'/Game/Character/Montages/Katana/Skill/2/Katana_Charage.Katana_Charage',0.7,FALSE,TRUE
+3,AnimMontage'/Game/Character/Montages/Katana/Skill/2/Katana_End_Skill.Katana_End_Skill',1,FALSE,TRUE
+4,AnimMontage'/Game/Character/Montages/Katana/Skill/NomalSkill_Montage.NomalSkill_Montage',1,TRUE,FALSE
+5,AnimMontage'/Game/Character/Montages/Katana/Skill/MoveAttackSkill_Montage.MoveAttackSkill_Montage',1,FALSE,FALSE
+6,AnimMontage'/Game/Character/Montages/Katana/Skill/KatanaShadowSKill_Montage.KatanaShadowSKill_Montage',1.2,FALSE,FALSE
+7,AnimMontage'/Game/Character/Montages/Spear/Skill/Skill1/Skill1.Skill1',1,FALSE,FALSE
+8,AnimMontage'/Game/Character/Montages/Spear/Skill/Skill2/Spear_Skill02_Montage.Spear_Skill02_Montage',1,FALSE,FALSE
+9,AnimMontage'/Game/Character/Montages/Spear/Skill/Skill3/Spear_Skill3_Start_Montage.Spear_Skill3_Start_Montage',1,FALSE,FALSE

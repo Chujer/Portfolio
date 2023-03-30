@@ -1,0 +1,8 @@
+,Damage,Montage,PlayRate,CanMove,Launch,HitStop,Sound,ShakeClass,Effect,EffectLocation,EffectScale,UpLaunch,WithLuanch
+1,5,,1,FALSE,300,0,SoundWave'/Game/Sounds/S_OneHand_Hit.S_OneHand_Hit',,,"(X=0,Y=0,Z=0)","(X=1,Y=1,Z=1)",0,TRUE
+2,10,,1,FALSE,300,0,SoundWave'/Game/Sounds/S_OneHand_Hit.S_OneHand_Hit',,,"(X=0,Y=0,Z=0)","(X=1,Y=1,Z=1)",0,TRUE
+3,15,,1,FALSE,300,0,SoundWave'/Game/Sounds/S_OneHand_Hit.S_OneHand_Hit',,,"(X=0,Y=0,Z=-100)","(X=1,Y=1,Z=1)",0,TRUE
+4,10,AnimMontage'/Game/Character/Montages/Common/KNockDown1_Montage.KNockDown1_Montage',1,FALSE,500,0,SoundWave'/Game/Sounds/S_OneHand_Hit.S_OneHand_Hit',Blueprint'/Game/Weapons/Sword/CS_Sword.CS_Sword_C',ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Monsters/FX_Monster_Genno/P_Genno_Weapon_Lightning_01.P_Genno_Weapon_Lightning_01',"(X=0,Y=0,Z=0)","(X=1,Y=1,Z=1)",0,FALSE
+5,10,AnimMontage'/Game/Character/Montages/Common/KNockDown1_Montage.KNockDown1_Montage',1,FALSE,300,0,SoundWave'/Game/Sounds/S_OneHand_Hit.S_OneHand_Hit',Blueprint'/Game/Weapons/Sword/CS_Sword.CS_Sword_C',ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Monsters/FX_Monster_Genno/P_Genno_Weapon_Lightning_01.P_Genno_Weapon_Lightning_02',"(X=0,Y=0,Z=1)","(X=1,Y=1,Z=2)",0,TRUE
+6,10,AnimMontage'/Game/Character/Montages/Common/KNockDown1_Montage.KNockDown1_Montage',1,FALSE,300,0,SoundWave'/Game/Sounds/S_OneHand_Hit.S_OneHand_Hit',Blueprint'/Game/Weapons/Sword/CS_Sword.CS_Sword_C',ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Monsters/FX_Monster_Genno/P_Genno_Weapon_Lightning_01.P_Genno_Weapon_Lightning_03',"(X=0,Y=0,Z=2)","(X=1,Y=1,Z=3)",0,TRUE
+7,10,,0.5,FALSE,0,0,SoundWave'/Game/Sounds/S_OneHand_Hit.S_OneHand_Hit',,,"(X=0,Y=0,Z=1)","(X=1,Y=1,Z=2)",1000,TRUE

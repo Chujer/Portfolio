@@ -1,0 +1,6 @@
+,Damage,Montage,PlayRate,CanMove,Launch,HitStop,Sound,ShakeClass,Effect,EffectLocation,EffectScale,UpLaunch,WithLuanch
+1,5,,1,FALSE,100,0,,,ParticleSystem'/Game/Resource/HitParticle/Particles/P_Hit.P_Hit',"(X=0,Y=0,Z=0)","(X=1,Y=1,Z=1)",0,TRUE
+2,5,,1,FALSE,100,0,,,ParticleSystem'/Game/Resource/HitParticle/Particles/P_Hit.P_Hit',"(X=0,Y=0,Z=0)","(X=1,Y=1,Z=1)",0,TRUE
+3,5,,1,FALSE,100,0,,,ParticleSystem'/Game/Resource/HitParticle/Particles/P_Hit.P_Hit',"(X=0,Y=0,Z=0)","(X=1,Y=1,Z=1)",0,TRUE
+4,5,,1,FALSE,100,0,,,ParticleSystem'/Game/Resource/HitParticle/Particles/P_Hit.P_Hit',"(X=0,Y=0,Z=0)","(X=1,Y=1,Z=1)",0,TRUE
+5,5,AnimMontage'/Game/Character/Montages/Common/KNockDown1_Montage.KNockDown1_Montage',1,FALSE,300,0,,Blueprint'/Game/Weapons/Sword/CS_Sword.CS_Sword_C',ParticleSystem'/Game/Resource/HitParticle/Particles/P_Hit.P_Hit',"(X=0,Y=0,Z=0)","(X=2,Y=2,Z=2)",0,FALSE

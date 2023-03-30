@@ -1,0 +1,3 @@
+,Montage,PlayRate,CanMove,FixedCamera
+1,AnimMontage'/Game/Character/Montages/Spear/WeekAttack/Spear_Weak_Attack1_Montage.Spear_Weak_Attack1_Montage',0.8,FALSE,FALSE
+2,AnimMontage'/Game/Character/Montages/Spear/WeekAttack/Spear_Weak_Attack2_Montage.Spear_Weak_Attack2_Montage',0.8,FALSE,FALSE

@@ -1,0 +1,8 @@
+,Damage,Montage,PlayRate,CanMove,Launch,HitStop,Sound,ShakeClass,Effect,EffectLocation,EffectScale,UpLaunch,WithLuanch
+1,5,,1,FALSE,0,0,,,ParticleSystem'/Game/Resource/HitParticle/Particles/P_Hit.P_Hit',"(X=0,Y=0,Z=0)","(X=1,Y=1,Z=1)",0,FALSE
+2,5,AnimMontage'/Game/Character/Montages/Common/KnockDown_Front_Montage.KnockDown_Front_Montage',1,FALSE,0,0,,,ParticleSystem'/Game/Resource/HitParticle/Particles/P_Hit.P_Hit',"(X=0,Y=0,Z=0)","(X=1,Y=1,Z=1)",0,FALSE
+3,5,AnimMontage'/Game/Character/Montages/Common/KNockDown1_Test_Montage.KNockDown1_Test_Montage',1,FALSE,50,0,,,ParticleSystem'/Game/Resource/HitParticle/Particles/P_Hit.P_Hit',"(X=0,Y=0,Z=0)","(X=1,Y=1,Z=1)",300,FALSE
+4,5,,1,FALSE,200,0,,,ParticleSystem'/Game/Resource/HitParticle/Particles/P_Hit.P_Hit',"(X=0,Y=0,Z=0)","(X=1,Y=1,Z=1)",0,FALSE
+5,5,AnimMontage'/Game/Character/Montages/Common/KNockDown1_Montage.KNockDown1_Montage',1,FALSE,0,0,,,ParticleSystem'/Game/Resource/HitParticle/Particles/P_Hit.P_Hit',"(X=0,Y=0,Z=0)","(X=1,Y=1,Z=1)",0,FALSE
+6,5,,1,FALSE,0,0,,,ParticleSystem'/Game/Resource/HitParticle/Particles/P_Hit.P_Hit',"(X=0,Y=0,Z=1)","(X=1,Y=1,Z=2)",0,FALSE
+7,5,AnimMontage'/Game/Character/Montages/Common/IP_KNockDown1_Montage.IP_KNockDown1_Montage',1,FALSE,50,0,,,ParticleSystem'/Game/Resource/HitParticle/Particles/P_Hit.P_Hit',"(X=0,Y=0,Z=1)","(X=1,Y=1,Z=2)",300,FALSE
