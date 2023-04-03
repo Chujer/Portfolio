@@ -6,3 +6,6 @@
 5,5,AnimMontage'/Game/Character/Montages/Common/KNockDown1_Montage.KNockDown1_Montage',1,FALSE,0,0,,,ParticleSystem'/Game/Resource/HitParticle/Particles/P_Hit.P_Hit',"(X=0,Y=0,Z=0)","(X=1,Y=1,Z=1)",0,FALSE
 6,5,,1,FALSE,0,0,,,ParticleSystem'/Game/Resource/HitParticle/Particles/P_Hit.P_Hit',"(X=0,Y=0,Z=1)","(X=1,Y=1,Z=2)",0,FALSE
 7,5,AnimMontage'/Game/Character/Montages/Common/IP_KNockDown1_Montage.IP_KNockDown1_Montage',1,FALSE,50,0,,,ParticleSystem'/Game/Resource/HitParticle/Particles/P_Hit.P_Hit',"(X=0,Y=0,Z=1)","(X=1,Y=1,Z=2)",300,FALSE
+8,5,AnimMontage'/Game/Character/Montages/Common/KNockDown1_Montage.KNockDown1_Montage',1.2,FALSE,50,0,,,ParticleSystem'/Game/Resource/HitParticle/Particles/P_Hit.P_Hit',"(X=0,Y=0,Z=2)","(X=1,Y=1,Z=3)",0,FALSE
+9,5,AnimMontage'/Game/Character/Montages/Common/KNockDown1_Montage.KNockDown1_Montage',1,FALSE,0,0,,Blueprint'/Game/Weapons/Hammer/CS_Hammer.CS_Hammer_C',ParticleSystem'/Game/Resource/HitParticle/Particles/P_Hit.P_Hit',"(X=0,Y=0,Z=3)","(X=1,Y=1,Z=4)",0,FALSE
+10,5,SpearSkill4,1,FALSE,0,0,,,ParticleSystem'/Game/Resource/HitParticle/Particles/P_Hit.P_Hit',"(X=0,Y=0,Z=4)","(X=1,Y=1,Z=5)",0,FALSE
