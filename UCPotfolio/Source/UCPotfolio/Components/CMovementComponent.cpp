@@ -1,7 +1,8 @@
 #include "Components/CMovementComponent.h"
 
 #include "GameFramework/Character.h"
-#include "Utilities/CHelpers.h"
+#include "Global.h"
+#include "Utilities/CLog.h"
 
 UCMovementComponent::UCMovementComponent()
 {
@@ -25,7 +26,6 @@ void UCMovementComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 void UCMovementComponent::OnMoveForward(float InAxis)
 {
 	CheckFalse(bCanMove);
-
 	FVector direction = OwnerCharacter->GetActorForwardVector();
 
 	OwnerCharacter->AddMovementInput(direction, InAxis);

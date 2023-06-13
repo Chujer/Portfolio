@@ -6,15 +6,38 @@
 #include "Components/CMovementComponent.h"
 #include "Components/InputComponent.h"
 #include "Components/CWeaponComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Components/CStateComponent.h"
+#include "Components/CRollComponent.h"
+#include "Utilities/CLog.h"
 
 ACPlayer::ACPlayer()
 {
 	SetMesh("SkeletalMesh'/Game/Resource/CharacterAsset/Meshes/Characters/Combines/SK_Arashi_E.SK_Arashi_E'");
 	CHelpers::CreateComponent<USpringArmComponent>(this, &SpringArm, "SpringArm", GetMesh());
+	CHelpers::CreateComponent<UCameraComponent>(this, &Camera, "Camera", SpringArm);
 
 	CHelpers::CreateActorComponent<UCMovementComponent>(this, &Movement, "Movement");
 	CHelpers::CreateActorComponent<UCWeaponComponent>(this, &WeaponComponent, "WeaponComponent");
-	CHelpers::CreateComponent<UCameraComponent>(this, &Camera, "Camera", SpringArm);
+	CHelpers::CreateActorComponent<UCStateComponent>(this, &StateComponent, "StateComponent");
+	CHelpers::CreateActorComponent<UCRollComponent>(this, &RollComponent, "RollComponent");
+
+	//Ä¡Àå (Çï¸ä, °ËÁý)
+	USkeletalMeshComponent* helmet;
+	USkeletalMesh* helmetMesh;
+	CHelpers::GetAsset(&helmetMesh, "SkeletalMesh'/Game/Resource/CharacterAsset/Meshes/Characters/Separates/Acessories/SK_AHat.SK_AHat'");
+	CHelpers::CreateActorComponent<USkeletalMeshComponent>(this, &helmet, "Helmet");
+
+	helmet->SetSkeletalMesh(helmetMesh);
+	helmet->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, "Helmet");
+
+	USkeletalMeshComponent* holster;
+	USkeletalMesh* holsterMesh;
+	CHelpers::GetAsset(&holsterMesh, "SkeletalMesh'/Game/Resource/CharacterAsset/Meshes/Weapons/SK_L_KatanaCover.SK_L_KatanaCover'");
+	CHelpers::CreateActorComponent<USkeletalMeshComponent>(this, &holster, "Holster");
+
+	holster->SetSkeletalMesh(holsterMesh);
+	holster->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, "Holster_Sword");
 
 	GetMesh()->SetRelativeLocation(FVector(0, 0, -90));
 	GetMesh()->SetRelativeRotation(FRotator(0, -90, 0));
@@ -33,8 +56,9 @@ void ACPlayer::BeginPlay()
 {
 	Super::BeginPlay();
 
-	
+
 }
+
 
 void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -46,4 +70,13 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAxis("VerticalLook", Movement, &UCMovementComponent::OnVerticallLook);
 
 	PlayerInputComponent->BindAction("Sword", EInputEvent::IE_Pressed, WeaponComponent,&UCWeaponComponent::SetSwordMode);
+
+	PlayerInputComponent->BindAction("Action", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoAction);
+}
+
+void ACPlayer::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	if(!!RollComponent)
+		RollComponent->Roll();
 }

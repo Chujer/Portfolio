@@ -6,8 +6,14 @@
 #include "NiagaraFunctionLibrary.h"
 #include "Kismet/GameplayStatics.h"
 
+#define CheckTrue(x) { if(x == true) return; }
 #define CheckFalse(x) {if(x==false) return;}
+
+#define CheckTrueResult(x, y) { if(x == true) return y; }
+#define CheckFalseResult(x, y) { if(x == false) return y;}
+
 #define CheckNull(x) {if(x == nullptr) return;}
+#define CheckNullResult(x, y) { if(x == nullptr) return y;}
 
 class UCPOTFOLIO_API CHelpers
 {
@@ -94,7 +100,7 @@ public:
 	{
 		UParticleSystem* particle = Cast<UParticleSystem>(InEffect);
 		UNiagaraSystem* niagara = Cast<UNiagaraSystem>(InEffect);
-
+		
 		FVector location = InTransform.GetLocation();
 		FRotator rotation = FRotator(InTransform.GetRotation());
 		FVector scale = InTransform.GetScale3D();

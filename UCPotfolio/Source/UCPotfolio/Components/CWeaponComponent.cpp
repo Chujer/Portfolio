@@ -1,12 +1,32 @@
 #include "Components/CWeaponComponent.h"
 
+#include <GameFramework/Character.h>
+
 #include "Utilities/CHelpers.h"
 #include "Weapon/CAttachment.h"
+#include "Weapon/CDoAction.h"
+#include "Weapon/CWeaponAsset.h"
 
 UCWeaponComponent::UCWeaponComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
+}
 
+
+UCDoAction* UCWeaponComponent::GetDoAction()
+{
+	CheckTrueResult(IsUnarmedMode(), nullptr);
+	CheckFalseResult(!!DataAssets[(int32)Type], nullptr);
+
+	return DataAssets[(int32)Type]->GetDoAction();
+}
+
+ACAttachment* UCWeaponComponent::GetAttachment()
+{
+	CheckTrueResult(IsUnarmedMode(), nullptr);
+	CheckFalseResult(!!DataAssets[(int32)Type], nullptr);
+
+	return DataAssets[(int32)Type]->GetAttachment();
 }
 
 void UCWeaponComponent::SetUnarmedMode()
@@ -28,18 +48,41 @@ void UCWeaponComponent::SetSpearMode()
 	SetMode(EWeaponType::Spear);
 }
 
+void UCWeaponComponent::DoAction()
+{
+	if(!!GetDoAction())
+		GetDoAction()->DoAction();
+}
+
 void UCWeaponComponent::SetMode(EWeaponType InType)
 {
-	if(Type == InType)
-	{
-		SetUnarmedMode();
+	ACAttachment* prevAttachment = DataAssets[(int32)Type]->GetAttachment();
+	ACAttachment* newAttachment = DataAssets[(int32)InType]->GetAttachment();
 
-		return;
-	}
-	else if(IsUnarmedMode() == false)
+	if (Type == InType)	//무기 -> 맨손
 	{
+		if (prevAttachment->OnUnEquip.IsBound())
+			prevAttachment->OnUnEquip.Broadcast();
+
+		SetUnarmedMode();
 	}
-	ChangeType(InType);
+	else if (IsUnarmedMode() == true)	//맨손 -> 장착
+	{
+		if(newAttachment->OnEquipAnimPlay.IsBound())
+			newAttachment->OnEquipAnimPlay.Broadcast();
+
+		ChangeType(InType);
+	}
+	else //무기 -> 다른무기
+	{
+		ChangeType(InType);
+
+		if (prevAttachment->OnUnEquip.IsBound())
+			prevAttachment->OnUnEquip.Broadcast();
+
+		if (newAttachment->OnEquip.IsBound())
+			newAttachment->OnEquip.Broadcast();
+	}
 }
 
 void UCWeaponComponent::ChangeType(EWeaponType InType)
@@ -55,9 +98,15 @@ void UCWeaponComponent::ChangeType(EWeaponType InType)
 
 void UCWeaponComponent::BeginPlay()
 {
-	Super::BeginPlay();
+	OwnerCharacter = Cast<ACharacter>(GetOwner());
 
-	
+	for(UCWeaponAsset* Asset : DataAssets)
+	{
+		if (!!Asset)
+			Asset->BeginPlay(OwnerCharacter);
+	}
+
+	Super::BeginPlay();
 }
 
 void UCWeaponComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)

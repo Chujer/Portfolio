@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Weapon/CWeaponAsset.h"
 #include "CWeaponComponent.generated.h"
 
 UENUM(BlueprintType)
@@ -17,17 +18,27 @@ class UCPOTFOLIO_API UCWeaponComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
-	UCWeaponComponent();
+private:
+	UPROPERTY(EditAnywhere, Category = "DataAsset")
+		class UCWeaponAsset* DataAssets[(int32)EWeaponType::Max];
 
 public:
 	FORCEINLINE bool IsUnarmedMode() { return Type == EWeaponType::Max; }
+
+public:	
+	UCWeaponComponent();
+
+
+public:
+	class UCDoAction* GetDoAction();
+	class ACAttachment* GetAttachment();
 
 public:
 	void SetUnarmedMode();
 	void SetSwordMode();
 	void SetSpearMode();
 
+	void DoAction();
 public:
 	void SetMode(EWeaponType InType);
 	void ChangeType(EWeaponType InType);
@@ -45,7 +56,4 @@ private:
 	class ACharacter* OwnerCharacter;
 	EWeaponType Type = EWeaponType::Max;
 
-public:
-	UPROPERTY(EditAnywhere, Category = "DataAsset")
-		TSubclassOf<class ACAttachment> DataAssets[(int32)EWeaponType::Max];
 };

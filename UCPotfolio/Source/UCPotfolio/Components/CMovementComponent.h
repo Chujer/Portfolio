@@ -10,6 +10,16 @@ class UCPOTFOLIO_API UCMovementComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
+public:
+	//이동 가능 여부
+	FORCEINLINE bool CanMove() { return bCanMove; }
+	FORCEINLINE void Move() { bCanMove = true; }
+	FORCEINLINE void Stop() { bCanMove = false; }
+
+	//카메라 이동 가능 여부
+	FORCEINLINE bool GetFixedCamera() { return bFixedCamera; }
+	FORCEINLINE void EnableFixedCamera() { bFixedCamera = true; }
+	FORCEINLINE void DisableFixedCamera() { bFixedCamera = false; }
 public:	
 	UCMovementComponent();
 

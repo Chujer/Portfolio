@@ -12,7 +12,6 @@ ACAttachment::ACAttachment()
 
 void ACAttachment::BeginPlay()
 {
-	Super::BeginPlay();
 
 	OwnerCharacter = Cast<ACharacter>(GetOwner());
 
@@ -26,9 +25,22 @@ void ACAttachment::BeginPlay()
 		if(!!shape)
 		{
 			Collision.Add(shape);
-			CLog::Print(shape->GetName(), -1, 5, FColor::Red);
 		}
 	}
+
+	OnEquipAnimPlay.AddDynamic(this, &ACAttachment::PlayEquipAnim);
+	OnEquip.AddDynamic(this, &ACAttachment::OnBeginEquip);
+	OnUnEquip.AddDynamic(this, &ACAttachment::OnBeginUnEquip);
+
+	Super::BeginPlay();
+}
+
+void ACAttachment::PlayEquipAnim()
+{
+	if (!!OwnerCharacter && !!EquipData.Montage)
+		EquipData.PlayAnim(OwnerCharacter);
+	else
+		OnBeginEquip();
 }
 
 void ACAttachment::AttachTo(FName InSocketName)
