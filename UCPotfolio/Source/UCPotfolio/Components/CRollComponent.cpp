@@ -1,7 +1,12 @@
 #include "Components/CRollComponent.h"
+
+#include "CMovementComponent.h"
+#include "CStateComponent.h"
+#include "Global.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/PlayerInput.h"
 #include "Utilities/CLog.h"
+#include "Kismet/KismetMathLibrary.h"
 
 UCRollComponent::UCRollComponent()
 {
@@ -17,21 +22,47 @@ void UCRollComponent::BeginPlay()
 
 void UCRollComponent::Roll()
 {
-	FVector2D direction;
+	FVector direction = FVector::ZeroVector;
+
 	direction.X = OwnerCharacter->GetInputAxisValue("MoveForward");
 	direction.Y = OwnerCharacter->GetInputAxisValue("MoveRight");
-	
-	CLog::Print(FVector(direction.X, direction.Y, 0), 1);
 
-	if (direction.Y > direction.X)
-		RollDirection = ERollDirection::Right;
-	else if (direction.Y < direction.X)
-		RollDirection = ERollDirection::Left;
-	else if (direction.X > direction.Y)
-		RollDirection = ERollDirection::Front;
-	else if (direction.X < direction.Y)
-		RollDirection = ERollDirection::Back;
-	CLog::Print((int32)RollDirection, 2);
+	FRotator rotate = UKismetMathLibrary::FindLookAtRotation(FVector::ZeroVector, direction);
+
+	UCMovementComponent* movement = CHelpers::GetComponent<UCMovementComponent>(OwnerCharacter);
+	UCStateComponent* state = CHelpers::GetComponent<UCStateComponent>(OwnerCharacter);
+
+	CheckNull(movement);
+	CheckNull(state);
+
+	CheckTrue(state->IsRollMode());
+
+	movement->Stop();
+
+	if (rotate.Yaw == -90.0f) // аб
+	{
+		EDirection = ERollDirection::Left;
+	}
+	else if (rotate.Yaw == 90.0f) // ©Л
+	{
+		EDirection = ERollDirection::Right;
+	}
+	else if (abs(rotate.Yaw) < 90.0f) // ╬у
+	{
+		EDirection = ERollDirection::Front;
+		movement->SetUseControllYaw(false);
+	}
+	else if (abs(rotate.Yaw) > 90.0f) // ╣з
+	{
+		EDirection = ERollDirection::Back;
+		movement->SetUseControllYaw(false);
+		rotate.Yaw += 180;
+	}
+
+	OwnerCharacter->SetActorRotation(OwnerCharacter->GetActorRotation() + rotate);
+
+	OwnerCharacter->PlayAnimMontage(RollMontage[(int32)EDirection], 1.0f);
+	state->SetRollMode();
 }
 
 

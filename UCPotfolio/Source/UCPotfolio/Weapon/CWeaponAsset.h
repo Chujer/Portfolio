@@ -29,10 +29,10 @@ private:
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<class UCDoAction> DoActionClass;
+
 	UPROPERTY(EditAnywhere)
 		TArray<FDoActionData> DoActionDatas;
 
-		
 private:
 	UPROPERTY()
 		class ACAttachment* Attachment;

@@ -2,7 +2,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Weapon/CHitDataAsset.h"
 #include "CCharacter_Base.generated.h"
+
+
 
 UCLASS(Abstract)
 class UCPOTFOLIO_API ACCharacter_Base : public ACharacter
@@ -22,12 +25,26 @@ public:
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	//원본 머테리얼
+	void SetOriginMaterials(USkeletalMesh* InSkeletaMesh);
+	void SetMaterialToOrigin();
+
 protected:
 	UPROPERTY(VisibleDefaultsOnly)
 		class USpringArmComponent* SpringArm;
 
-
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCameraComponent* Camera;
 
+	UPROPERTY(EditAnywhere)
+		float MaxHealth;
+
+	UPROPERTY(EditAnywhere)
+		float CurHealth;
+
+	UPROPERTY(VisibleAnywhere)
+		TArray<FSkeletalMaterial> OriginMaterials;
+
+	UPROPERTY(EditAnywhere)
+		class UCHitDataAsset* HitDataAssets;
 };

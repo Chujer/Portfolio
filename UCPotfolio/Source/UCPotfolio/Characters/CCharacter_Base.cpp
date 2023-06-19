@@ -1,6 +1,7 @@
 #include "CCharacter_Base.h"
 #include "Global.h"
 #include "Utilities/CHelpers.h"
+#include "Utilities/CLog.h"
 //#include "GameFramework/SpringArmComponent.h"
 //#include "GameFramework/CharacterMovementComponent.h"
 //#include "Camera/CameraComponent.h"
@@ -22,6 +23,7 @@ void ACCharacter_Base::SetMesh(FString InPath)
 	USkeletalMesh* mesh;
 	CHelpers::GetAsset<USkeletalMesh>(&mesh, InPath);
 	GetMesh()->SetSkeletalMesh(mesh);
+	SetOriginMaterials(mesh);
 }
 
 void ACCharacter_Base::Tick(float DeltaTime)
@@ -34,4 +36,22 @@ void ACCharacter_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
+
+void ACCharacter_Base::SetOriginMaterials(USkeletalMesh* InSkeletaMesh)
+{
+	
+	for(int i =0; i< InSkeletaMesh->Materials.Num(); i++)
+	{
+		OriginMaterials.Add(InSkeletaMesh->Materials[i]);
+	}
+}
+
+void ACCharacter_Base::SetMaterialToOrigin()
+{
+	for(int i = 0; i < OriginMaterials.Num(); i++)
+	{
+		GetMesh()->SkeletalMesh->Materials[i] = OriginMaterials[i];
+	}
+}
+
 

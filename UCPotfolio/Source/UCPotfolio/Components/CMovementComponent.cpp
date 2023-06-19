@@ -2,6 +2,7 @@
 
 #include "GameFramework/Character.h"
 #include "Global.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Utilities/CLog.h"
 
 UCMovementComponent::UCMovementComponent()
@@ -42,15 +43,21 @@ void UCMovementComponent::OnMoveRight(float InAxis)
 
 void UCMovementComponent::OnHorizontalLook(float InAxis)
 {
-	CheckFalse(bFixedCamera);
+	CheckTrue(bFixedCamera);
 
 	OwnerCharacter->AddControllerYawInput(InAxis * HorizontalLook * GetWorld()->GetDeltaSeconds());
 }
 
 void UCMovementComponent::OnVerticallLook(float InAxis)
 {
-	CheckFalse(bFixedCamera);
+	CheckTrue(bFixedCamera);
 
 	OwnerCharacter->AddControllerPitchInput(InAxis * VerticalLook * GetWorld()->GetDeltaSeconds());
+}
+
+void UCMovementComponent::SetUseControllYaw(bool InBool)
+{
+	OwnerCharacter->bUseControllerRotationYaw = InBool;
+	OwnerCharacter->GetCharacterMovement()->bOrientRotationToMovement = !InBool;
 }
 

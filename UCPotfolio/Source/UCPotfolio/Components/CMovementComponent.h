@@ -35,6 +35,8 @@ public:
 	void OnHorizontalLook(float InAxis);
 	void OnVerticallLook(float InAxis);
 
+	void SetUseControllYaw(bool InBool);
+
 private:
 	class ACharacter* OwnerCharacter;
 
@@ -46,6 +48,6 @@ private:
 		float VerticalLook = 45;
 private:
 	bool bCanMove = true;
-	bool bFixedCamera = true;
+	bool bFixedCamera;
 	bool bTopViewCamera;
 };

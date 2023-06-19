@@ -7,7 +7,7 @@
 UENUM(BlueprintType)
 enum class EStateType : uint8
 {
-	Idle = 0, Equip, Hitted, Dead, Action, Max,
+	Idle = 0, Equip, Hitted, Dead, Action, Roll, Max,
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FStateTypeChanged, EStateType, InPrevType, EStateType, InNewType);
@@ -23,6 +23,7 @@ public:
 	FORCEINLINE bool IsHittedMode() { return Type == EStateType::Hitted; }
 	FORCEINLINE bool IsDeadMode() { return Type == EStateType::Dead; }
 	FORCEINLINE bool IsActionMode() { return Type == EStateType::Idle; }
+	FORCEINLINE bool IsRollMode() { return Type == EStateType::Roll; }
 
 	FORCEINLINE bool IsDoCancel() { return bDoCancel; }
 
@@ -35,6 +36,7 @@ public:
 	void SetHittedMode();
 	void SetDeadMode();
 	void SetActionMode();
+	void SetRollMode();
 
 	void OnDoCancelMode();
 	void OffDoCancelMode();

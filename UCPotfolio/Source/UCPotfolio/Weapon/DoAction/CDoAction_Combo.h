@@ -20,11 +20,16 @@ public:
 	virtual void DoAction() override;
 	virtual void Begin_DoAction() override;
 	virtual void End_DoAction() override;
-	
 
+public:
+	virtual void OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* InAttackCuaser, ACharacter* InOther) override;
+	virtual void OnAttachmentEndCollision() override;
 private:
 	int32 Index;
 
 	bool bEnable;
 	bool bExist;
+
+private:
+	TArray<class ACharacter*> Hitted;
 };

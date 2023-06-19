@@ -30,6 +30,7 @@ ACPlayer::ACPlayer()
 
 	helmet->SetSkeletalMesh(helmetMesh);
 	helmet->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, "Helmet");
+	helmet->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	USkeletalMeshComponent* holster;
 	USkeletalMesh* holsterMesh;
@@ -38,6 +39,7 @@ ACPlayer::ACPlayer()
 
 	holster->SetSkeletalMesh(holsterMesh);
 	holster->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, "Holster_Sword");
+	holster->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	GetMesh()->SetRelativeLocation(FVector(0, 0, -90));
 	GetMesh()->SetRelativeRotation(FRotator(0, -90, 0));
@@ -48,6 +50,7 @@ ACPlayer::ACPlayer()
 	SpringArm->bDoCollisionTest = false;
 	SpringArm->bUsePawnControlRotation = true;
 	SpringArm->bEnableCameraRotationLag = true;
+
 
 	Camera->SetRelativeLocation(FVector(0, 0, 80));
 }
@@ -72,11 +75,12 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("Sword", EInputEvent::IE_Pressed, WeaponComponent,&UCWeaponComponent::SetSwordMode);
 
 	PlayerInputComponent->BindAction("Action", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoAction);
+
+	PlayerInputComponent->BindAction("Roll", EInputEvent::IE_Pressed, RollComponent, &UCRollComponent::Roll);
+
 }
 
 void ACPlayer::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-	if(!!RollComponent)
-		RollComponent->Roll();
 }

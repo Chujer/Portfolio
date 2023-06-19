@@ -26,9 +26,9 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere)
-		class UAnimMontage* Montage[(int32)ERollDirection::MAX];
+		class UAnimMontage* RollMontage[ERollDirection::MAX];
 
 private:
 	class ACharacter* OwnerCharacter;
-	ERollDirection RollDirection = ERollDirection::MAX;
+	ERollDirection EDirection;
 };

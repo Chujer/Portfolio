@@ -36,6 +36,11 @@ void UCStateComponent::SetActionMode()
 	ChangeType(EStateType::Action);
 }
 
+void UCStateComponent::SetRollMode()
+{
+	ChangeType(EStateType::Roll);
+}
+
 void UCStateComponent::OnDoCancelMode()
 {
 	bDoCancel = true;
