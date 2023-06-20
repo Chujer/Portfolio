@@ -48,7 +48,7 @@ void FDoActionData::PlayDoAction(ACharacter* InCharacter)
 	if (!!movement && bFixedCamera)
 		movement->EnableFixedCamera();
 
-	movement->SetUseControllYaw()
+	movement->SetUseControllYaw(bUseControlRotation);
 }
 
 void FDoActionData::LaunchCharacter(class ACharacter* InSelf, class ACharacter* LaunchCharacter)

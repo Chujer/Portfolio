@@ -106,6 +106,46 @@ public:
 	void LaunchCharacter(class ACharacter* InSelf, class ACharacter* LaunchCharacter);
 };
 
+USTRUCT()
+struct FSkillData
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere)
+		class UAnimMontage* Montage;
+
+	UPROPERTY(EditAnywhere)
+		float PlayRate = 1.0f;
+
+	UPROPERTY(EditAnywhere)
+		bool bCanMove = true;
+
+	UPROPERTY(EditAnywhere)
+		bool bUseControlRotation = true;
+
+	UPROPERTY(EditAnywhere)
+		bool bFixedCamera;
+
+public:
+	UPROPERTY(EditAnywhere)
+		float Power;
+
+	UPROPERTY(EditAnywhere)
+		FVector2D Launch = FVector2D(100.0f, 0);
+
+	UPROPERTY(EditAnywhere)
+		float StopTime;
+
+	UPROPERTY(EditAnywhere)
+		EDamageType DamageType = EDamageType::MAX;
+
+public:
+	void PlayDoAction(class ACharacter* InCharacter);
+
+	void LaunchCharacter(class ACharacter* InSelf, class ACharacter* LaunchCharacter);
+};
+
 //UCLASS()
 //class UCPOTFOLIO_API UCWeaponStructures : public UObject
 //{
