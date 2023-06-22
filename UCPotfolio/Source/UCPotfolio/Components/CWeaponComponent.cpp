@@ -2,6 +2,7 @@
 
 #include <GameFramework/Character.h>
 
+#include "Skill/CSkill.h"
 #include "Utilities/CHelpers.h"
 #include "Weapon/CAttachment.h"
 #include "Weapon/CDoAction.h"
@@ -29,6 +30,11 @@ ACAttachment* UCWeaponComponent::GetAttachment()
 	return DataAssets[(int32)Type]->GetAttachment();
 }
 
+UCSkill* UCWeaponComponent::GetCurrentSkill()
+{
+	return GetAttachment()->GetCurrentSKill();
+}
+
 void UCWeaponComponent::SetUnarmedMode()
 {
 	ChangeType(EWeaponType::Max);
@@ -52,6 +58,17 @@ void UCWeaponComponent::DoAction()
 {
 	if(!!GetDoAction())
 		GetDoAction()->DoAction();
+}
+
+void UCWeaponComponent::DoSkill()
+{
+	if (!!GetAttachment())
+	{
+		GetAttachment()->SetCurrentSKill(0);
+		ACAttachment * da = GetAttachment();
+		UCSkill* aass = GetCurrentSkill();
+		GetCurrentSkill()->Pressed();
+	}
 }
 
 void UCWeaponComponent::SetMode(EWeaponType InType)

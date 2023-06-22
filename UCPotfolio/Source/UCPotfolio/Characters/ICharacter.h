@@ -22,4 +22,5 @@ public:
 
 public:
 	void Change_Color(class ACharacter* InCharacter, FLinearColor InColor);
+	void LaunchTarget(ACharacter* InTarget, FVector InLaunchVelocity);
 };

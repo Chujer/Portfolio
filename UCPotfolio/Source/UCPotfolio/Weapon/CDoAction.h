@@ -28,14 +28,14 @@ public:
 		virtual void OnAttachmentBeginCollision() { }
 
 	UFUNCTION()
-		virtual void OnAttachmentEndCollision() { }
+		virtual void OnAttachmentEndCollision();
 
 	//무기에 오버렙 됐을때, 빠져나갈때 사용 (CAttachment_델리게이트)
 	UFUNCTION()
-		virtual void OnAttachmentBeginOverlap(class ACharacter* InAttacker, AActor* InAttackCuaser, class ACharacter* InOther) { }
+		virtual void OnAttachmentBeginOverlap(class ACharacter* InAttacker, AActor* InAttackCuaser, class ACharacter* InOther);
 
 	UFUNCTION()
-		virtual void OnAttachmentEndOverlap(class ACharacter* InAttacker, class ACharacter* InOther) { }
+		virtual void OnAttachmentEndOverlap(class ACharacter* InAttacker, class ACharacter* InOther){};
 
 protected:
 	bool bInAction;

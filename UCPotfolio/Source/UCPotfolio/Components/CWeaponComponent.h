@@ -32,6 +32,7 @@ public:
 public:
 	class UCDoAction* GetDoAction();
 	class ACAttachment* GetAttachment();
+	class UCSkill* GetCurrentSkill();
 
 public:
 	void SetUnarmedMode();
@@ -39,6 +40,8 @@ public:
 	void SetSpearMode();
 
 	void DoAction();
+
+	void DoSkill();
 public:
 	void SetMode(EWeaponType InType);
 	void ChangeType(EWeaponType InType);

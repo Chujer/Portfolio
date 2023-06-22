@@ -1,5 +1,6 @@
 #include "Characters/ICharacter.h"
 #include "GameFramework/Character.h"
+#include "Global.h"
 
 void IICharacter::Change_Color(ACharacter* InCharacter, FLinearColor InColor)
 {
@@ -9,4 +10,11 @@ void IICharacter::Change_Color(ACharacter* InCharacter, FLinearColor InColor)
 		if (!!instance)
 			instance->SetVectorParameterValue("BodyColor", InColor);
 	}
+}
+
+void IICharacter::LaunchTarget(ACharacter* InTarget, FVector InLaunchVelocity)
+{
+	CheckNull(InTarget);
+
+	InTarget->LaunchCharacter(InLaunchVelocity, false, false);
 }

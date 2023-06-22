@@ -1,25 +1,48 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
+#include "Weapon/CWeaponStructures.h"
 #include "CSkill.generated.h"
 
-UCLASS()
+UCLASS(Abstract)
 class UCPOTFOLIO_API UCSkill : public UObject
 {
 	GENERATED_BODY()
 
 public:
-	virtual void Play() {};
+	virtual void BeginPlay(class ACPlayer* InCharacter, class ACAttachment* InAttachment);
 
-private:
-	UPROPERTY(EditAnywhere)
-		UAnimMontage* Montage;
+public:
+	UCSkill();
 
-	UPROPERTY(EditAnywhere)
-		float PlayRate = 1.0f;
+public:
+	void PlayMontage();
 
-	UPROPERTY(EditAnywhere)
-		float Power;
-		
+public:
+	virtual void OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* InAttackCuaser, ACharacter* InOther){};
+	virtual void OnAttachmentEndCollision(){};
+
+
+	virtual void Pressed();
+	virtual void Released();
+
+	UFUNCTION(BlueprintNativeEvent)
+		void Begin_Skill();
+	virtual void Begin_Skill_Implementation() {};
+
+	UFUNCTION(BlueprintNativeEvent)
+		void End_Skill();
+	virtual void End_Skill_Implementation() {};
+
+
+protected:
+	class ACPlayer* Character;
+	class ACAttachment* Attachment;
+	class UCStateComponent* StateComponent;
+	class UCMovementComponent* MovementComponent;
+
+	UPROPERTY(EditAnywhere, Category = "SkillData")
+		FSkillData SkillData;
+
+	bool bPressed = false;	
 };

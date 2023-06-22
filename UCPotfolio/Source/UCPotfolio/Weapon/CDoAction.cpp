@@ -38,3 +38,13 @@ void UCDoAction::End_DoAction()
 	Movement->Move();
 	Movement->DisableFixedCamera();
 }
+
+void UCDoAction::OnAttachmentEndCollision()
+{
+	CheckTrue(State->IsSkillMode());
+}
+
+void UCDoAction::OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* InAttackCuaser, ACharacter* InOther)
+{
+	CheckTrue(State->IsSkillMode());
+}

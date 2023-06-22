@@ -1,12 +1,16 @@
 #include "Weapon/CAttachment.h"
 #include "Global.h"
+#include "Characters/CPlayer.h"
 #include "Components/ShapeComponent.h"
 #include "GameFramework/Character.h"
-#include "Components/ShapeComponent.h"
+#include "Skill/CSkill.h"
+#include "Skill/CSkill_Sword01.h"
 
 ACAttachment::ACAttachment()
 {
 	CHelpers::CreateComponent(this, &Root, "Root");
+
+	//TODO :: TArray로 만든 Skill을 가져다가 사용하는 법
 }
 
 void ACAttachment::BeginPlay()
@@ -34,7 +38,13 @@ void ACAttachment::BeginPlay()
 	OnEquip.AddDynamic(this, &ACAttachment::OnBeginEquip);
 	OnUnEquip.AddDynamic(this, &ACAttachment::OnBeginUnEquip);
 
+	
+
 	Super::BeginPlay();
+}
+
+void ACAttachment::SetCurrentSKill(int Index)
+{
 }
 
 void ACAttachment::PlayEquipAnim()

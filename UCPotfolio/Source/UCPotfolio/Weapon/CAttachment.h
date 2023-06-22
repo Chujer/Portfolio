@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "CWeaponStructures.h"
+#include "Skill/CSkill.h"
 #include "CAttachment.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FEquipBeginAnimPlay);
@@ -33,6 +34,11 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
+	void SetCurrentSKill(int Index);
+	FORCEINLINE void RemoveCurrentSKill() { CurrentSkill = nullptr; }
+	FORCEINLINE UCSkill* GetCurrentSKill() { return CurrentSkill; }
+
+public:
 	UFUNCTION(BlueprintImplementableEvent)
 		void OnBeginEquip();
 
@@ -54,6 +60,21 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Attach")
 		void AttachToCollision(FName InSocketName);
 
+protected:
+	UPROPERTY(EditAnywhere, Category = "Skill")
+		TArray<TSubclassOf<UCSkill>> SkillsClass;
+
+	TArray<UCSkill*> Skills;
+
+	class UCSkill* CurrentSkill;
+
+protected:
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+		class USceneComponent* Root;
+
+protected:
+	UPROPERTY(BlueprintReadOnly)
+		class ACharacter* OwnerCharacter;
 private:
 	UFUNCTION()
 		void OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -64,14 +85,6 @@ private:
 public:
 	void OnCollisions();
 	void OffCollisions();
-
-protected:
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
-		class USceneComponent* Root;
-
-protected:
-	UPROPERTY(BlueprintReadOnly)
-		class ACharacter* OwnerCharacter;
 
 public:
 	//¹«±âÀåÂø
@@ -87,5 +100,7 @@ public:
 
 protected:
 	TArray<class UShapeComponent*> Collisions;
+
+
 };
 

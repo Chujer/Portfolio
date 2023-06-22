@@ -122,17 +122,13 @@ public:
 		bool bCanMove = true;
 
 	UPROPERTY(EditAnywhere)
-		bool bUseControlRotation = true;
-
-	UPROPERTY(EditAnywhere)
 		bool bFixedCamera;
 
-public:
 	UPROPERTY(EditAnywhere)
 		float Power;
 
 	UPROPERTY(EditAnywhere)
-		FVector2D Launch = FVector2D(100.0f, 0);
+		FVector Launch = FVector::ZeroVector;
 
 	UPROPERTY(EditAnywhere)
 		float StopTime;
@@ -140,11 +136,8 @@ public:
 	UPROPERTY(EditAnywhere)
 		EDamageType DamageType = EDamageType::MAX;
 
-public:
-	void PlayDoAction(class ACharacter* InCharacter);
-
-	void LaunchCharacter(class ACharacter* InSelf, class ACharacter* LaunchCharacter);
 };
+
 
 //UCLASS()
 //class UCPOTFOLIO_API UCWeaponStructures : public UObject

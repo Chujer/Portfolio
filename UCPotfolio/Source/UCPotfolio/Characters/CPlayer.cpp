@@ -78,6 +78,8 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	PlayerInputComponent->BindAction("Roll", EInputEvent::IE_Pressed, RollComponent, &UCRollComponent::Roll);
 
+
+	PlayerInputComponent->BindAction("SkillF", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkill);
 }
 
 void ACPlayer::Tick(float DeltaSeconds)
