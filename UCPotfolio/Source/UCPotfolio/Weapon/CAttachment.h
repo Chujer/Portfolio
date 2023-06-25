@@ -34,9 +34,10 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	void SetCurrentSKill(int Index);
-	FORCEINLINE void RemoveCurrentSKill() { CurrentSkill = nullptr; }
-	FORCEINLINE UCSkill* GetCurrentSKill() { return CurrentSkill; }
+	FORCEINLINE void SetCurrentSKill(UCSkill* InSkill) { CurrentSkill = InSkill; };
+	FORCEINLINE void CurrentSkillClear() { CurrentSkill = nullptr; };
+	FORCEINLINE UCSkill* GetSkill(int32 Index) { return Skills[Index]; }
+	FORCEINLINE UCSkill* GetCurrentSkill() { return CurrentSkill; }
 
 public:
 	UFUNCTION(BlueprintImplementableEvent)
@@ -62,12 +63,10 @@ protected:
 
 protected:
 	UPROPERTY(EditAnywhere, Category = "Skill")
-		TArray<TSubclassOf<UCSkill>> SkillsClass;
+	TSubclassOf<UCSkill> SkillsClass[(int32)ESkillIndex::MAX];
 
-	TArray<UCSkill*> Skills;
-
+	class UCSkill* Skills[(int32)ESkillIndex::MAX];
 	class UCSkill* CurrentSkill;
-
 protected:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 		class USceneComponent* Root;

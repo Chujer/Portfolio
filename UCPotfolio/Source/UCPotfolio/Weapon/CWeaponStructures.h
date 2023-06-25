@@ -106,6 +106,12 @@ public:
 	void LaunchCharacter(class ACharacter* InSelf, class ACharacter* LaunchCharacter);
 };
 
+UENUM()
+enum class ESkillIndex : uint8
+{
+	F= 0, E, V, R, Q, MAX
+};
+
 USTRUCT()
 struct FSkillData
 {

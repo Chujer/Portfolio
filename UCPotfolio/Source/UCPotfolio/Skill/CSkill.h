@@ -22,7 +22,6 @@ public:
 	virtual void OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* InAttackCuaser, ACharacter* InOther){};
 	virtual void OnAttachmentEndCollision(){};
 
-
 	virtual void Pressed();
 	virtual void Released();
 

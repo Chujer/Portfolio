@@ -22,8 +22,9 @@ void UCSkill::PlayMontage()
 	CheckNull(SkillData.Montage);
 
 	Character->PlayAnimMontage(SkillData.Montage, SkillData.PlayRate);
-	MovementComponent->EnableFixedCamera();
 
+	if(SkillData.bFixedCamera == true)
+		MovementComponent->EnableFixedCamera();
 }
 
 void UCSkill::Pressed()

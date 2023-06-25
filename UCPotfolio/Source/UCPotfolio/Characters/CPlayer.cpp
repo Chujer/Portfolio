@@ -3,6 +3,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Components/CMovementComponent.h"
 #include "Components/InputComponent.h"
 #include "Components/CWeaponComponent.h"
@@ -51,6 +52,8 @@ ACPlayer::ACPlayer()
 	SpringArm->bUsePawnControlRotation = true;
 	SpringArm->bEnableCameraRotationLag = true;
 
+	GetCapsuleComponent()->SetCollisionProfileName("Player");
+	GetMesh()->SetCollisionProfileName("OverlapAll");
 
 	Camera->SetRelativeLocation(FVector(0, 0, 80));
 }
@@ -79,7 +82,8 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("Roll", EInputEvent::IE_Pressed, RollComponent, &UCRollComponent::Roll);
 
 
-	PlayerInputComponent->BindAction("SkillF", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkill);
+	PlayerInputComponent->BindAction("SkillF", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillF);
+	PlayerInputComponent->BindAction("SkillR", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillR);
 }
 
 void ACPlayer::Tick(float DeltaSeconds)

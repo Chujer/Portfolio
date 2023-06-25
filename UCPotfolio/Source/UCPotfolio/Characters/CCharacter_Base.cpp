@@ -1,5 +1,6 @@
 #include "CCharacter_Base.h"
 #include "Global.h"
+#include "Components/CapsuleComponent.h"
 #include "Utilities/CHelpers.h"
 #include "Utilities/CLog.h"
 //#include "GameFramework/SpringArmComponent.h"
@@ -24,6 +25,9 @@ void ACCharacter_Base::SetMesh(FString InPath)
 	CHelpers::GetAsset<USkeletalMesh>(&mesh, InPath);
 	GetMesh()->SetSkeletalMesh(mesh);
 	SetOriginMaterials(mesh);
+
+	GetCapsuleComponent()->SetCollisionProfileName("Enemy");
+	GetMesh()->SetCollisionProfileName("OverlapAll");
 }
 
 void ACCharacter_Base::Tick(float DeltaTime)

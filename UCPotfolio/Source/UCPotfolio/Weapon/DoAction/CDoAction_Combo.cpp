@@ -46,6 +46,7 @@ void UCDoAction_Combo::End_DoAction()
 void UCDoAction_Combo::OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* InAttackCuaser, ACharacter* InOther)
 {
 	Super::OnAttachmentBeginOverlap(InAttacker, InAttackCuaser, InOther);
+	CheckTrue(State->IsSkillMode());
 	CheckNull(InOther);
 	CheckTrue(DoActionDatas.Num() < 1)
 

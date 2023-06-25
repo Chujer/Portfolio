@@ -41,7 +41,11 @@ public:
 
 	void DoAction();
 
-	void DoSkill();
+	void DoSkillF();
+	void DoSkillE();
+	void DoSkillV();
+	void DoSkillR();
+	void DoSkillQ();
 public:
 	void SetMode(EWeaponType InType);
 	void ChangeType(EWeaponType InType);

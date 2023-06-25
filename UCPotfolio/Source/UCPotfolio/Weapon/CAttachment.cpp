@@ -4,13 +4,13 @@
 #include "Components/ShapeComponent.h"
 #include "GameFramework/Character.h"
 #include "Skill/CSkill.h"
-#include "Skill/CSkill_Sword01.h"
+#include "Skill/CSkill_Nomal.h"
+#include "Utilities/CLog.h"
 
 ACAttachment::ACAttachment()
 {
 	CHelpers::CreateComponent(this, &Root, "Root");
 
-	//TODO :: TArray로 만든 Skill을 가져다가 사용하는 법
 }
 
 void ACAttachment::BeginPlay()
@@ -38,14 +38,20 @@ void ACAttachment::BeginPlay()
 	OnEquip.AddDynamic(this, &ACAttachment::OnBeginEquip);
 	OnUnEquip.AddDynamic(this, &ACAttachment::OnBeginUnEquip);
 
-	
+
+	for (int32 i = 0; i < (int32)ESkillIndex::MAX; i++)
+	{
+		if (!!SkillsClass[i])
+		{
+			UCSkill* tempSkill = NewObject<UCSkill>(this, SkillsClass[i]);
+			tempSkill->BeginPlay(Cast<ACPlayer>(OwnerCharacter), this);
+			Skills[i] = tempSkill;
+		}
+	}
 
 	Super::BeginPlay();
 }
 
-void ACAttachment::SetCurrentSKill(int Index)
-{
-}
 
 void ACAttachment::PlayEquipAnim()
 {

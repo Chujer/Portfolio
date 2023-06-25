@@ -32,8 +32,9 @@ ACAttachment* UCWeaponComponent::GetAttachment()
 
 UCSkill* UCWeaponComponent::GetCurrentSkill()
 {
-	return GetAttachment()->GetCurrentSKill();
+	return GetAttachment()->GetCurrentSkill();
 }
+
 
 void UCWeaponComponent::SetUnarmedMode()
 {
@@ -60,16 +61,46 @@ void UCWeaponComponent::DoAction()
 		GetDoAction()->DoAction();
 }
 
-void UCWeaponComponent::DoSkill()
+void UCWeaponComponent::DoSkillF()
 {
-	if (!!GetAttachment())
-	{
-		GetAttachment()->SetCurrentSKill(0);
-		ACAttachment * da = GetAttachment();
-		UCSkill* aass = GetCurrentSkill();
-		GetCurrentSkill()->Pressed();
-	}
+	CheckNull(GetAttachment());
+	GetAttachment()->SetCurrentSKill(GetAttachment()->GetSkill((int32)ESkillIndex::F));	//현재 스킬 설정
+	CheckNull(GetCurrentSkill());
+	GetCurrentSkill()->Pressed();		
 }
+
+void UCWeaponComponent::DoSkillE()
+{
+	CheckNull(GetAttachment());
+	GetAttachment()->SetCurrentSKill(GetAttachment()->GetSkill((int32)ESkillIndex::E));	//현재 스킬 설정
+	CheckNull(GetCurrentSkill());
+	GetCurrentSkill()->Pressed();
+}
+
+void UCWeaponComponent::DoSkillV()
+{
+	CheckNull(GetAttachment());
+	GetAttachment()->SetCurrentSKill(GetAttachment()->GetSkill((int32)ESkillIndex::V));	//현재 스킬 설정
+	CheckNull(GetCurrentSkill());
+	GetCurrentSkill()->Pressed();
+}
+
+void UCWeaponComponent::DoSkillR()
+{
+	CheckNull(GetAttachment());
+	GetAttachment()->SetCurrentSKill(GetAttachment()->GetSkill((int32)ESkillIndex::R));	//현재 스킬 설정
+	CheckNull(GetCurrentSkill());
+	GetCurrentSkill()->Pressed();
+}
+
+void UCWeaponComponent::DoSkillQ()
+{
+	CheckNull(GetAttachment());
+	GetAttachment()->SetCurrentSKill(GetAttachment()->GetSkill((int32)ESkillIndex::Q));	//현재 스킬 설정
+	CheckNull(GetCurrentSkill());
+	GetCurrentSkill()->Pressed();
+}
+
 
 void UCWeaponComponent::SetMode(EWeaponType InType)
 {

@@ -34,4 +34,6 @@ private:
 
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCStatusComponent* StatusComponent;
+
+	//Todo 몬스터 이동 컴포넌트 만들지 말지 그로인해 히트중 이동 불가능 하도록
 };
