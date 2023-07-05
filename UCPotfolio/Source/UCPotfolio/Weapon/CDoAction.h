@@ -40,9 +40,9 @@ public:
 protected:
 	bool bInAction;
 
-	class UCMovementComponent* Movement;
-	class UCStateComponent* State;
+	TWeakObjectPtr<class UCMovementComponent> Movement;
+	TWeakObjectPtr<class UCStateComponent> State;
 
-	class ACharacter* OwnerCharacter;
+	TWeakObjectPtr<ACharacter> OwnerCharacter;
 	TArray<FDoActionData> DoActionDatas;
 };

@@ -4,7 +4,10 @@
 #include "Particles/ParticleSystem.h"
 #include "NiagaraSystem.h"
 #include "NiagaraFunctionLibrary.h"
+#include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Skill/AddOns/CGhostTrail.h"
+#include "GameFramework/Character.h"
 
 #define CheckTrue(x) { if(x == true) return; }
 #define CheckFalse(x) {if(x==false) return;}
@@ -22,7 +25,6 @@ public:
 	static void CreateComponent(AActor* InActor, T** OutComponent, FName InName, USceneComponent* InParent = nullptr, FName InSocketName = NAME_None)
 	{
 		*OutComponent = InActor->CreateDefaultSubobject <T>(InName);
-
 		if(!!InParent)
 		{
 			(*OutComponent)->SetupAttachment(InParent, InSocketName);
@@ -75,6 +77,18 @@ public:
 	static T* GetComponent(AActor* InActor)
 	{
 		return Cast<T>(InActor->GetComponentByClass(T::StaticClass()));
+	}
+
+	template<typename T>
+	static  TArray<T*> GetComponents(AActor* InActor)
+	{
+		TArray<T*> temp;
+		for(UActorComponent* component : InActor->GetComponentsByClass(T::StaticClass()))
+		{
+			temp.Add(Cast<T>(component));
+		}
+
+		return temp;
 	}
 
 	template<typename T>
@@ -138,5 +152,21 @@ public:
 		}
 	}
 
+	static ACGhostTrail* Play_GhostTrial(TSubclassOf<ACGhostTrail>& InClass, class ACharacter* InOwner)
+	{
+		CheckNullResult(InClass, nullptr);
+		CheckNullResult(InOwner, nullptr);
 
+		FActorSpawnParameters params;
+		params.Owner = InOwner;
+		params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+		FVector vector = InOwner->GetActorLocation();
+		vector.Z = InOwner->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
+
+		FTransform transform;
+		transform.SetTranslation(vector);
+
+		return InOwner->GetWorld()->SpawnActor<ACGhostTrail>(InClass, transform, params);
+	}
 };

@@ -38,7 +38,7 @@ public:
 	void SetUseControllYaw(bool InBool);
 
 private:
-	class ACharacter* OwnerCharacter;
+	TWeakObjectPtr<ACharacter> OwnerCharacter;
 
 private:
 	UPROPERTY(EditAnywhere, Category = "CameraSpeed")

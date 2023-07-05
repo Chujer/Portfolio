@@ -55,8 +55,8 @@ void ACAttachment::BeginPlay()
 
 void ACAttachment::PlayEquipAnim()
 {
-	if (!!OwnerCharacter && !!EquipData.Montage)
-		EquipData.PlayAnim(OwnerCharacter);
+	if (!!OwnerCharacter.Get() && !!EquipData.Montage)
+		EquipData.PlayAnim(OwnerCharacter.Get());
 	else
 		OnBeginEquip();
 }
@@ -85,7 +85,7 @@ void ACAttachment::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedCompon
 	CheckTrue(OwnerCharacter->GetClass() == OtherActor->GetClass());
 
 	if (OnAttachmentBeginOverlap.IsBound())
-		OnAttachmentBeginOverlap.Broadcast(OwnerCharacter, this, Cast<ACharacter>(OtherActor));
+		OnAttachmentBeginOverlap.Broadcast(OwnerCharacter.Get(), this, Cast<ACharacter>(OtherActor));
 }
 
 void ACAttachment::OnComponentEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
@@ -95,7 +95,7 @@ void ACAttachment::OnComponentEndOverlap(UPrimitiveComponent* OverlappedComponen
 	CheckTrue(OwnerCharacter->GetClass() == OtherActor->GetClass());
 
 	if (OnAttachmentEndOverlap.IsBound())
-		OnAttachmentEndOverlap.Broadcast(OwnerCharacter, Cast<ACharacter>(OtherActor));
+		OnAttachmentEndOverlap.Broadcast(OwnerCharacter.Get(), Cast<ACharacter>(OtherActor));
 }
 
 void ACAttachment::OnCollisions()

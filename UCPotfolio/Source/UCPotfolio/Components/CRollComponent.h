@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "GameFramework/Character.h"
 #include "CRollComponent.generated.h"
 
 UENUM()
@@ -29,6 +30,6 @@ private:
 		class UAnimMontage* RollMontage[ERollDirection::MAX];
 
 private:
-	class ACharacter* OwnerCharacter;
+	TWeakObjectPtr<class ACharacter> OwnerCharacter;
 	ERollDirection EDirection;
 };

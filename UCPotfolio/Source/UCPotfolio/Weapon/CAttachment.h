@@ -39,6 +39,8 @@ public:
 	FORCEINLINE UCSkill* GetSkill(int32 Index) { return Skills[Index]; }
 	FORCEINLINE UCSkill* GetCurrentSkill() { return CurrentSkill; }
 
+	FORCEINLINE EDamageType* GetDamageType() { return &DamageType; }
+
 public:
 	UFUNCTION(BlueprintImplementableEvent)
 		void OnBeginEquip();
@@ -69,11 +71,11 @@ protected:
 	class UCSkill* CurrentSkill;
 protected:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
-		class USceneComponent* Root;
+		 class USceneComponent* Root;
 
 protected:
 	UPROPERTY(BlueprintReadOnly)
-		class ACharacter* OwnerCharacter;
+		TWeakObjectPtr<class ACharacter> OwnerCharacter;
 private:
 	UFUNCTION()
 		void OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -99,7 +101,7 @@ public:
 
 protected:
 	TArray<class UShapeComponent*> Collisions;
-
+	EDamageType DamageType = EDamageType::NORMAL;
 
 };
 

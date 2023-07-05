@@ -93,9 +93,6 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		class USoundWave* Sound;
-		
-	UPROPERTY(EditAnywhere)
-		EDamageType DamageType = EDamageType::MAX;
 
 	UPROPERTY(EditAnywhere)
 		bool bWithLaunch;
@@ -138,10 +135,6 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		float StopTime;
-
-	UPROPERTY(EditAnywhere)
-		EDamageType DamageType = EDamageType::MAX;
-
 };
 
 

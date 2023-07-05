@@ -21,6 +21,7 @@ void UCAnimNotifyState_Collision::NotifyBegin(USkeletalMeshComponent* MeshComp, 
 	CheckNull(weaponComponent);
 	CheckNull(weaponComponent->GetAttachment());
 
+	*(weaponComponent->GetAttachment()->GetDamageType()) = DamageType;
 	weaponComponent->GetAttachment()->OnCollisions();
 }
 

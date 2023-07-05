@@ -11,6 +11,7 @@
 UCRollComponent::UCRollComponent()
 {
 	OwnerCharacter = Cast<ACharacter>(GetOwner());
+
 }
 
 
@@ -29,8 +30,8 @@ void UCRollComponent::Roll()
 
 	FRotator rotate = UKismetMathLibrary::FindLookAtRotation(FVector::ZeroVector, direction);
 
-	UCMovementComponent* movement = CHelpers::GetComponent<UCMovementComponent>(OwnerCharacter);
-	UCStateComponent* state = CHelpers::GetComponent<UCStateComponent>(OwnerCharacter);
+	UCMovementComponent* movement = CHelpers::GetComponent<UCMovementComponent>(OwnerCharacter.Get());
+	UCStateComponent* state = CHelpers::GetComponent<UCStateComponent>(OwnerCharacter.Get());
 
 	CheckNull(movement);
 	CheckNull(state);

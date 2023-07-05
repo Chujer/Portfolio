@@ -41,12 +41,12 @@ void ACEnemy_Minion::ApplyDamage(ACharacter* InAttacker, AActor* InAttackCauser,
 	CheckNull(HitDataAssets);
 
 	StatusComponent->Damage(Power);
-
+	CLog::Print("CEnemy_Minion :" + (int32)InDamageType);
 
 	if (StatusComponent->GetHealth() <= 0.0f)
 	{
 		StateComponent->SetDeadMode();
-		CLog::Print("Death");
+		CLog::Print("CEnemy_Minion : Death");
 		return;
 	}
 

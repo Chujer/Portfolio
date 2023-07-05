@@ -12,8 +12,8 @@ void UCDoAction::BeginPlay(ACharacter* InOwner, const TArray<FDoActionData>& InD
 {
 	OwnerCharacter = InOwner;
 
-	State = CHelpers::GetComponent<UCStateComponent>(OwnerCharacter);
-	Movement = CHelpers::GetComponent<UCMovementComponent>(OwnerCharacter);
+	State = CHelpers::GetComponent<UCStateComponent>(OwnerCharacter.Get());
+	Movement = CHelpers::GetComponent<UCMovementComponent>(OwnerCharacter.Get());
 
 	DoActionDatas = InDoActionDatas;
 }

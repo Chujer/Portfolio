@@ -4,6 +4,7 @@
 #include "Weapon/CAttachment.h"
 #include "Components/CMovementComponent.h"
 #include "Components/CStateComponent.h"
+#include "Utilities/CLog.h"
 
 UCSkill::UCSkill()
 {
@@ -15,6 +16,7 @@ void UCSkill::BeginPlay(ACPlayer* InCharacter, ACAttachment* InAttachment)
 	StateComponent = CHelpers::GetComponent<UCStateComponent>(InCharacter);
 	MovementComponent = CHelpers::GetComponent<UCMovementComponent>(InCharacter);
 	Attachment = InAttachment;
+	DamageType = Attachment->GetDamageType();
 }
 
 void UCSkill::PlayMontage()
@@ -36,5 +38,6 @@ void UCSkill::Pressed()
 void UCSkill::Released()
 {
 	bPressed = false;
+	Attachment->CurrentSkillClear();
 }
 

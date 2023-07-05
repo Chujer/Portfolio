@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Weapon/CWeaponAsset.h"
+#include "GameFramework/Character.h"
 #include "CWeaponComponent.generated.h"
 
 UENUM(BlueprintType)
@@ -46,6 +47,7 @@ public:
 	void DoSkillV();
 	void DoSkillR();
 	void DoSkillQ();
+	void Released();
 public:
 	void SetMode(EWeaponType InType);
 	void ChangeType(EWeaponType InType);
@@ -60,7 +62,7 @@ public:
 	FWeaponTypeChanged OnWeaponTypeChange;
 
 private:
-	class ACharacter* OwnerCharacter;
+	TWeakObjectPtr<class ACharacter> OwnerCharacter;
 	EWeaponType Type = EWeaponType::Max;
 
 };

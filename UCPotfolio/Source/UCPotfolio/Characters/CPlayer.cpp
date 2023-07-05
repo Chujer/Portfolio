@@ -10,10 +10,13 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/CStateComponent.h"
 #include "Components/CRollComponent.h"
+#include "Skill/CSkill.h"
 #include "Utilities/CLog.h"
 
 ACPlayer::ACPlayer()
 {
+	PrimaryActorTick.bCanEverTick = true;
+
 	SetMesh("SkeletalMesh'/Game/Resource/CharacterAsset/Meshes/Characters/Combines/SK_Arashi_E.SK_Arashi_E'");
 	CHelpers::CreateComponent<USpringArmComponent>(this, &SpringArm, "SpringArm", GetMesh());
 	CHelpers::CreateComponent<UCameraComponent>(this, &Camera, "Camera", SpringArm);
@@ -76,6 +79,7 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAxis("VerticalLook", Movement, &UCMovementComponent::OnVerticallLook);
 
 	PlayerInputComponent->BindAction("Sword", EInputEvent::IE_Pressed, WeaponComponent,&UCWeaponComponent::SetSwordMode);
+	PlayerInputComponent->BindAction("Sword", EInputEvent::IE_Pressed, WeaponComponent,&UCWeaponComponent::Released);
 
 	PlayerInputComponent->BindAction("Action", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoAction);
 
@@ -84,9 +88,22 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	PlayerInputComponent->BindAction("SkillF", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillF);
 	PlayerInputComponent->BindAction("SkillR", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillR);
+	PlayerInputComponent->BindAction("SkillV", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillV);
+	PlayerInputComponent->BindAction("SkillE", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillE);
+
+	PlayerInputComponent->BindAction("SkillF", EInputEvent::IE_Released, WeaponComponent, &UCWeaponComponent::Released);
+	PlayerInputComponent->BindAction("SkillR", EInputEvent::IE_Released, WeaponComponent, &UCWeaponComponent::Released);
+	PlayerInputComponent->BindAction("SkillV", EInputEvent::IE_Released, WeaponComponent, &UCWeaponComponent::Released);
+	PlayerInputComponent->BindAction("SkillE", EInputEvent::IE_Released, WeaponComponent, &UCWeaponComponent::Released);
 }
 
 void ACPlayer::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+
+	CheckNull(WeaponComponent);
+	CheckNull(WeaponComponent->GetAttachment());
+	CheckNull(WeaponComponent->GetCurrentSkill());
+
+	WeaponComponent->GetCurrentSkill()->Tick(DeltaSeconds);
 }

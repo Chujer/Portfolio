@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "GameFramework/Character.h"
 #include "CStatusComponent.generated.h"
 
 
@@ -27,7 +28,7 @@ public:
 	void Damage(float InAmount);
 
 private:
-	class ACharacter* OwnerCharacter;
+	TWeakObjectPtr<class ACharacter> OwnerCharacter;
 
 private:
 	float Health;

@@ -14,32 +14,37 @@ public:
 
 public:
 	UCSkill();
+	virtual void Tick(float DeltaSeconds) {}
 
 public:
 	void PlayMontage();
 
 public:
 	virtual void OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* InAttackCuaser, ACharacter* InOther){};
-	virtual void OnAttachmentEndCollision(){};
+	virtual void OnAttachmentEndCollision(){}
 
 	virtual void Pressed();
 	virtual void Released();
 
 	UFUNCTION(BlueprintNativeEvent)
 		void Begin_Skill();
-	virtual void Begin_Skill_Implementation() {};
+	virtual void Begin_Skill_Implementation() {}
 
 	UFUNCTION(BlueprintNativeEvent)
 		void End_Skill();
-	virtual void End_Skill_Implementation() {};
+	virtual void End_Skill_Implementation() {}
 
 
-protected:
-	class ACPlayer* Character;
-	class ACAttachment* Attachment;
-	class UCStateComponent* StateComponent;
-	class UCMovementComponent* MovementComponent;
+protected:	//component
+	TWeakObjectPtr<class ACPlayer> Character;
+	TWeakObjectPtr<class ACAttachment> Attachment;
+	TWeakObjectPtr<class UCStateComponent> StateComponent;
+	TWeakObjectPtr<class UCMovementComponent> MovementComponent;
 
+protected:	//damage 어테치먼트에서 받아옴
+	EDamageType* DamageType;
+
+protected:	//skill
 	UPROPERTY(EditAnywhere, Category = "SkillData")
 		FSkillData SkillData;
 

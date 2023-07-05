@@ -4,6 +4,7 @@
 #include "Components/CStateComponent.h"
 #include "GameFramework/Character.h"
 #include "Utilities/CLog.h"
+#include "Weapon/CAttachment.h"
 
 UCDoAction_Combo::UCDoAction_Combo()
 {
@@ -24,7 +25,7 @@ void UCDoAction_Combo::DoAction()
 	CheckFalse(State->IsIdleMode());
 	
 	Super::DoAction();
-	DoActionDatas[Index].PlayDoAction(OwnerCharacter);
+	DoActionDatas[Index].PlayDoAction(OwnerCharacter.Get());
 }
 
 void UCDoAction_Combo::Begin_DoAction()
@@ -33,7 +34,7 @@ void UCDoAction_Combo::Begin_DoAction()
 	CheckFalse(bExist);
 
 	bExist = false;
-	DoActionDatas[++Index].PlayDoAction(OwnerCharacter);
+	DoActionDatas[++Index].PlayDoAction(OwnerCharacter.Get());
 }
 
 void UCDoAction_Combo::End_DoAction()
@@ -49,7 +50,7 @@ void UCDoAction_Combo::OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* 
 	CheckTrue(State->IsSkillMode());
 	CheckNull(InOther);
 	CheckTrue(DoActionDatas.Num() < 1)
-
+	ACAttachment* attachment = Cast<ACAttachment>(InAttackCuaser);
 	for (ACharacter* hitted : Hitted)
 	{
 		CheckTrue(hitted == InOther);
@@ -57,7 +58,7 @@ void UCDoAction_Combo::OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* 
 
 	Hitted.AddUnique(InOther);
 	//공격 판정
-	Cast<IICharacter>(InOther)->ApplyDamage(InAttacker, InAttackCuaser, DoActionDatas[Index].DamageType, DoActionDatas[Index].Power);
+	Cast<IICharacter>(InOther)->ApplyDamage(InAttacker, InAttackCuaser, *(attachment->GetDamageType()), DoActionDatas[Index].Power);
 	DoActionDatas[Index].LaunchCharacter(InAttacker, InOther);
 }
 

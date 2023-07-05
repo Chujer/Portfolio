@@ -29,7 +29,7 @@ void UCSkill_Nomal::OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* InA
 	//공격 판정
 	IICharacter* HitActor;
 	HitActor = Cast<IICharacter>(InOther);
-	HitActor->ApplyDamage(InAttacker, InAttackCuaser, SkillData.DamageType, SkillData.Power);
+	HitActor->ApplyDamage(InAttacker, InAttackCuaser, *DamageType, SkillData.Power);
 	HitActor->LaunchTarget(InOther, SkillData.Launch);
 }
 
@@ -49,9 +49,8 @@ void UCSkill_Nomal::Pressed()
 	Super::Pressed();
 
 	PlayMontage();
-	Attachment->OnAttachmentBeginOverlap.AddDynamic(this, &UCSkill_Nomal::OnAttachmentBeginOverlap);
-	Attachment->OnAttachmentEndCollision.AddDynamic(this, &UCSkill_Nomal::OnAttachmentEndCollision);
-
+	Attachment->OnAttachmentEndCollision.AddUniqueDynamic(this, &UCSkill_Nomal::OnAttachmentEndCollision);
+	Attachment->OnAttachmentBeginOverlap.AddUniqueDynamic(this, &UCSkill_Nomal::OnAttachmentBeginOverlap);
 }
 
 void UCSkill_Nomal::Released()

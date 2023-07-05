@@ -1,12 +1,11 @@
 #include "Components/CWeaponComponent.h"
 
-#include <GameFramework/Character.h>
-
 #include "Skill/CSkill.h"
 #include "Utilities/CHelpers.h"
 #include "Weapon/CAttachment.h"
 #include "Weapon/CDoAction.h"
 #include "Weapon/CWeaponAsset.h"
+#include "GameFramework/Character.h"
 
 UCWeaponComponent::UCWeaponComponent()
 {
@@ -101,6 +100,13 @@ void UCWeaponComponent::DoSkillQ()
 	GetCurrentSkill()->Pressed();
 }
 
+void UCWeaponComponent::Released()
+{
+	CheckNull(GetAttachment());
+	CheckNull(GetCurrentSkill());
+	GetCurrentSkill()->Released();
+}
+
 
 void UCWeaponComponent::SetMode(EWeaponType InType)
 {
@@ -151,7 +157,7 @@ void UCWeaponComponent::BeginPlay()
 	for(UCWeaponAsset* Asset : DataAssets)
 	{
 		if (!!Asset)
-			Asset->BeginPlay(OwnerCharacter);
+			Asset->BeginPlay(OwnerCharacter.Get());
 	}
 
 	Super::BeginPlay();
