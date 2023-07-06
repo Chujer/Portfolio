@@ -1,7 +1,12 @@
 #include "Skill/Sword/CHaveAction_SwordFlashSlash.h"
+
+#include <string>
+
 #include "Global.h"
 #include "Characters/ICharacter.h"
 #include "Characters/CPlayer.h"
+#include "Components/CMovementComponent.h"
+#include "Components/CWeaponComponent.h"
 #include "Utilities/CLog.h"
 
 void UCHaveAction_SwordFlashSlash::Begin_Skill_Implementation()
@@ -19,15 +24,32 @@ void UCHaveAction_SwordFlashSlash::SkillAction1()
 void UCHaveAction_SwordFlashSlash::Pressed()
 {
 	Super::Pressed();
-	CLog::Print("SwordFlashSlash : Pressed : " + IsChargeEnd,1);
+	//CLog::Print("SwordFlashSlash : Pressed : " + IsChargeEnd,1);
 	PlayMontage();
 }
 
 void UCHaveAction_SwordFlashSlash::Released()
 {
-	ChargeTime = false;
-	IsChargeEnd = false;
-	CLog::Print("SwordFlashSlash : Released : " + IsChargeEnd,2);
+	if(ChargeTime > MaxChargeTime)
+	{
+		UCMovementComponent* movementComponent = CHelpers::GetComponent<UCMovementComponent>(Character.Get());
+
+		FRotator rotator = Character->GetActorRotation();
+		rotator.Yaw = rotator.Yaw - 180;
+
+		CLog::Print(Character->GetActorRotation(), 4,10, FColor::Blue);
+		movementComponent->SetUseControllYaw(false);
+		Character->SetActorRotation(rotator);
+		CLog::Print(Character->GetActorRotation(), 5,10, FColor::Blue);
+
+
+		Character->PlayAnimMontage(LeadMontage);
+	}
+	ChargeTime = 0;
+	//IsChargeEnd = false;
+	CLog::Print("SwordFlashSlash : Released : " ,2);
+
+
 	Super::Released();
 }
 
@@ -40,8 +62,7 @@ void UCHaveAction_SwordFlashSlash::Tick(float DeltaSeconds)
 
 	if (ChargeTime > MaxChargeTime)
 	{
-		IsChargeEnd = true;
-		CLog::Print("SwordFlashSlash : Tick : " + IsChargeEnd,3);
+		CLog::Print("SwordFlashSlash : Tick :  EndCharge",3);
 	}
 
 }

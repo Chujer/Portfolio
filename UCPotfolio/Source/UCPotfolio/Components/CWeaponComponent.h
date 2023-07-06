@@ -34,7 +34,6 @@ public:
 	class UCDoAction* GetDoAction();
 	class ACAttachment* GetAttachment();
 	class UCSkill* GetCurrentSkill();
-
 public:
 	void SetUnarmedMode();
 	void SetSwordMode();
@@ -60,7 +59,6 @@ public:
 
 public:
 	FWeaponTypeChanged OnWeaponTypeChange;
-
 private:
 	TWeakObjectPtr<class ACharacter> OwnerCharacter;
 	EWeaponType Type = EWeaponType::Max;

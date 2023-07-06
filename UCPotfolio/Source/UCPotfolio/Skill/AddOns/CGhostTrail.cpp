@@ -54,7 +54,7 @@ void ACGhostTrail::BeginPlay()
 		UPoseableMeshComponent* mesh = NewObject<UPoseableMeshComponent>(this, UPoseableMeshComponent::StaticClass(),FName(Skeletals[i]->GetName()));
 		CheckNull(mesh);
 		mesh->RegisterComponent();
-		mesh->AttachTo(scene);
+		mesh->AttachToComponent(scene, FAttachmentTransformRules::KeepRelativeTransform);
 		
 		mesh->SetVisibility(false);
 		mesh->SetSkeletalMesh(Skeletals[i]->SkeletalMesh);

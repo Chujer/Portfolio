@@ -19,8 +19,12 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 
+
 private:
-	bool IsChargeEnd = false;
+	UPROPERTY(EditAnywhere, Category = "NextMontage")
+		class UAnimMontage* LeadMontage;
+private:
+	//bool IsChargeEnd = false;
 	float MaxChargeTime = 2.0f;
 	float ChargeTime = 0.0f;
 };

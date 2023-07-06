@@ -27,7 +27,9 @@ void UCMovementComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 void UCMovementComponent::OnMoveForward(float InAxis)
 {
 	CheckFalse(bCanMove);
-	FVector direction = OwnerCharacter->GetActorForwardVector();
+	
+	
+	FVector direction = UKismetMathLibrary::GetForwardVector(FRotator(0, OwnerCharacter->GetControlRotation().Yaw, 0));
 
 	OwnerCharacter->AddMovementInput(direction, InAxis);
 }
@@ -36,7 +38,7 @@ void UCMovementComponent::OnMoveRight(float InAxis)
 {
 	CheckFalse(bCanMove);
 
-	FVector direction = OwnerCharacter->GetActorRightVector();
+	FVector direction = UKismetMathLibrary::GetRightVector(FRotator(0, OwnerCharacter->GetControlRotation().Yaw, 0));
 
 	OwnerCharacter->AddMovementInput(direction, InAxis);
 }

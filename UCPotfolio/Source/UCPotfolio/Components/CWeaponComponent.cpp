@@ -1,5 +1,6 @@
 #include "Components/CWeaponComponent.h"
 
+#include "CMovementComponent.h"
 #include "Skill/CSkill.h"
 #include "Utilities/CHelpers.h"
 #include "Weapon/CAttachment.h"
@@ -144,9 +145,21 @@ void UCWeaponComponent::ChangeType(EWeaponType InType)
 	EWeaponType prevType = Type;
 	Type = InType;
 
+
 	if (OnWeaponTypeChange.IsBound())
 		OnWeaponTypeChange.Broadcast(prevType, InType);
-	
+
+	UCMovementComponent* movementComponent = CHelpers::GetComponent<UCMovementComponent>(OwnerCharacter.Get());
+	CheckNull(movementComponent);
+
+	if (Type == EWeaponType::Max)
+	{
+		movementComponent->SetUseControllYaw(false);
+	}
+	else
+	{
+		movementComponent->SetUseControllYaw(true);
+	}
 }
 
 
