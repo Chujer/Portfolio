@@ -68,7 +68,7 @@ void ACGhostTrail::BeginPlay()
 			mesh->SetMaterial(j, Material);
 
 		if (Meshs.Num() > 0)
-			mesh->AttachTo(Meshs[0], Skeletals[i]->GetAttachSocketName());
+			mesh->AttachToComponent(Meshs[0],FAttachmentTransformRules::KeepRelativeTransform ,Skeletals[i]->GetAttachSocketName());
 
 		Meshs.Add(mesh);
 	}

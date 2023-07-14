@@ -50,19 +50,49 @@ void ACEnemy_Minion::ApplyDamage(ACharacter* InAttacker, AActor* InAttackCauser,
 		return;
 	}
 
-	//공격자 방향 보기
-	FVector start = GetActorLocation();
-	FVector target = InAttacker->GetActorLocation();
+	if (!!InAttacker)
+	{
+		//공격자 방향 보기
+		FVector start = GetActorLocation();
+		FVector target = InAttacker->GetActorLocation();
 
-	FRotator rotate = FRotator::ZeroRotator;
-	rotate.Yaw = UKismetMathLibrary::FindLookAtRotation(start, target).Yaw;
-	
-	SetActorRotation(rotate);
+		FRotator rotate = FRotator::ZeroRotator;
+		rotate.Yaw = UKismetMathLibrary::FindLookAtRotation(start, target).Yaw;
 
+		SetActorRotation(rotate);
+	}
 	HitDataAssets->PlayHitMontage(this, InDamageType);
 	StateComponent->SetHittedMode();
 
 	GetCapsuleComponent()->SetCollisionProfileName("HitEnemy");
+}
+
+void ACEnemy_Minion::ApplyDamageTimer(ACharacter* InAttacker, AActor* InAttackCauser, EDamageType InNormalDamageType,
+	EDamageType InLastDamageType, float InNormalPower, float InLastPower, float Interval, float EndTime)
+{
+	IICharacter::ApplyDamageTimer(InAttacker, InAttackCauser, InNormalDamageType, InLastDamageType, InNormalPower,
+	                              InLastPower, Interval, EndTime);
+	
+	// TODO : 수정 요망 람다라그런지 적용이 안됨
+	FTimerDelegate timerDelegate;
+	FTimerDelegate timerDelegate2;
+
+	timerDelegate.BindLambda([&]()
+	{
+		ApplyDamage(nullptr, nullptr, EDamageType::NORMAL, 2.5f);
+	});
+
+	timerDelegate.BindLambda([&]()
+	{
+		ApplyDamage(nullptr, nullptr, EDamageType::NORMAL, 5.0f);
+
+		GetWorld()->GetTimerManager().ClearTimer(timer);
+		GetWorld()->GetTimerManager().ClearTimer(timer2);
+	});
+
+	GetWorld()->GetTimerManager().SetTimer(timer, timerDelegate, Interval, true);
+	GetWorld()->GetTimerManager().SetTimer(timer2, timerDelegate2, EndTime, true);
+
 }
 
 

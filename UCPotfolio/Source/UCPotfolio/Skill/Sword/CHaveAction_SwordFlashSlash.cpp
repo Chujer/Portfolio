@@ -8,6 +8,7 @@
 #include "Components/CMovementComponent.h"
 #include "Components/CWeaponComponent.h"
 #include "Utilities/CLog.h"
+#include "Skill/AddOns/CSlowArea.h"
 
 void UCHaveAction_SwordFlashSlash::Begin_Skill_Implementation()
 {
@@ -18,7 +19,20 @@ void UCHaveAction_SwordFlashSlash::SkillAction1()
 {
 	Super::SkillAction1();
 
+	FVector vector = Character->GetActorLocation();
 
+	FActorSpawnParameters params;
+	params.Owner = Character.Get();
+	params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+	FTransform transform;
+	transform.SetTranslation(vector);
+
+	CheckNull(SlowArealClass);
+	SlowArea = GetWorld()->SpawnActor<ACSlowArea>(SlowArealClass, transform, params);
+
+	CheckNull(SlowArea);
+	SlowArea->BeginPlay(Cast<ACharacter>(Character));
 }
 
 void UCHaveAction_SwordFlashSlash::Pressed()
@@ -43,11 +57,12 @@ void UCHaveAction_SwordFlashSlash::Released()
 		CLog::Print(Character->GetActorRotation(), 5,10, FColor::Blue);
 
 
+		SlowArea->RemoveArea(ChargeTime > MaxChargeTime);
 		Character->PlayAnimMontage(LeadMontage);
 	}
 	ChargeTime = 0;
 	//IsChargeEnd = false;
-	CLog::Print("SwordFlashSlash : Released : " ,2);
+	//CLog::Print("SwordFlashSlash : Released : " ,2);
 
 
 	Super::Released();
@@ -62,7 +77,9 @@ void UCHaveAction_SwordFlashSlash::Tick(float DeltaSeconds)
 
 	if (ChargeTime > MaxChargeTime)
 	{
-		CLog::Print("SwordFlashSlash : Tick :  EndCharge",3);
+		//CLog::Print("SwordFlashSlash : Tick :  EndCharge",3);
 	}
 
+	CheckNull(SlowArea);
+	SlowArea->Tick(DeltaSeconds);
 }

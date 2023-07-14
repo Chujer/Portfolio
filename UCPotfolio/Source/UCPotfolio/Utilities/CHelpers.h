@@ -169,4 +169,5 @@ public:
 
 		return InOwner->GetWorld()->SpawnActor<ACGhostTrail>(InClass, transform, params);
 	}
+
 };

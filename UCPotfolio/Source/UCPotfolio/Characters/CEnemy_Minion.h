@@ -20,6 +20,7 @@ public:
 
 public:
 	virtual void ApplyDamage(ACharacter* InAttacker, AActor* InAttackCauser, EDamageType InDamageType, float Power) override;
+	virtual void ApplyDamageTimer(ACharacter* InAttacker, AActor* InAttackCauser, EDamageType InNormalDamageType, EDamageType InLastDamageType, float InNormalPower, float InLastPower, float Interval, float EndTime) override;
 	virtual void End_Hitted();
 	virtual void End_Dead();
 
@@ -35,5 +36,8 @@ private:
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCStatusComponent* StatusComponent;
 
+protected:
+	FTimerHandle timer;
+	FTimerHandle timer2;
 	//Todo 몬스터 이동 컴포넌트 만들지 말지 그로인해 히트중 이동 불가능 하도록
 };

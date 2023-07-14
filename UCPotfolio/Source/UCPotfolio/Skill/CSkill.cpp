@@ -38,6 +38,5 @@ void UCSkill::Pressed()
 void UCSkill::Released()
 {
 	bPressed = false;
-	Attachment->CurrentSkillClear();
 }
 

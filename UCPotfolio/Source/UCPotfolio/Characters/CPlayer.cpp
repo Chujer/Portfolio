@@ -85,7 +85,6 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	PlayerInputComponent->BindAction("Roll", EInputEvent::IE_Pressed, RollComponent, &UCRollComponent::Roll);
 
-
 	PlayerInputComponent->BindAction("SkillF", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillF);
 	PlayerInputComponent->BindAction("SkillR", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillR);
 	PlayerInputComponent->BindAction("SkillV", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillV);

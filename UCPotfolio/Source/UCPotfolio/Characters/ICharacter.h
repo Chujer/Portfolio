@@ -17,6 +17,7 @@ class UCPOTFOLIO_API IICharacter
 
 public:
 	virtual void ApplyDamage(ACharacter* InAttacker, AActor* InAttackCauser, EDamageType InDamageType, float Power) {};
+	virtual void ApplyDamageTimer(ACharacter* InAttacker, AActor* InAttackCauser, EDamageType InNormalDamageType, EDamageType InLastDamageType, float InNormalPower, float InLastPower, float Interval, float EndTime){}
 	virtual void End_Hitted() { };
 	virtual void End_Dead() = 0;
 
