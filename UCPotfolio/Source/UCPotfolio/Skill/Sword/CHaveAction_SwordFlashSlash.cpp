@@ -9,6 +9,8 @@
 #include "Components/CWeaponComponent.h"
 #include "Utilities/CLog.h"
 #include "Skill/AddOns/CSlowArea.h"
+#include "Weapon/CAttachment.h"
+#include "Weapon/CDoAction.h"
 
 void UCHaveAction_SwordFlashSlash::Begin_Skill_Implementation()
 {
@@ -35,15 +37,29 @@ void UCHaveAction_SwordFlashSlash::SkillAction1()
 	SlowArea->BeginPlay(Cast<ACharacter>(Character));
 }
 
+void UCHaveAction_SwordFlashSlash::EndSkillAction1()
+{
+	ChargeTime = 0;
+	Super::EndSkillAction1();
+	UCWeaponComponent* weaponComponent = CHelpers::GetComponent<UCWeaponComponent>(Character.Get());
+	
+	weaponComponent->GetAttachment()->ClearCurrentSkill();
+	weaponComponent->SetSwordMode();
+
+}
+
+
 void UCHaveAction_SwordFlashSlash::Pressed()
 {
 	Super::Pressed();
-	//CLog::Print("SwordFlashSlash : Pressed : " + IsChargeEnd,1);
+
 	PlayMontage();
 }
 
 void UCHaveAction_SwordFlashSlash::Released()
 {
+	if (SlowArea.IsValid())
+		SlowArea->RemoveArea(ChargeTime > MaxChargeTime);
 	if(ChargeTime > MaxChargeTime)
 	{
 		UCMovementComponent* movementComponent = CHelpers::GetComponent<UCMovementComponent>(Character.Get());
@@ -51,16 +67,19 @@ void UCHaveAction_SwordFlashSlash::Released()
 		FRotator rotator = Character->GetActorRotation();
 		rotator.Yaw = rotator.Yaw - 180;
 
-		CLog::Print(Character->GetActorRotation(), 4,10, FColor::Blue);
 		movementComponent->SetUseControllYaw(false);
 		Character->SetActorRotation(rotator);
-		CLog::Print(Character->GetActorRotation(), 5,10, FColor::Blue);
 
 
-		SlowArea->RemoveArea(ChargeTime > MaxChargeTime);
 		Character->PlayAnimMontage(LeadMontage);
+		Super::Released();
+		ChargeTime = 0;
+		return;
 	}
+
 	ChargeTime = 0;
+	Character->StopAnimMontage(Character->GetCurrentMontage());
+	CHelpers::GetComponent<UCWeaponComponent>(Character.Get())->GetDoAction()->End_DoAction();
 	//IsChargeEnd = false;
 	//CLog::Print("SwordFlashSlash : Released : " ,2);
 
@@ -72,12 +91,10 @@ void UCHaveAction_SwordFlashSlash::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	//Tick은 CurrentSkill만 사용하지만 Released에 들어가면 실행하지 않음
 	ChargeTime += DeltaSeconds;
 
 	if (ChargeTime > MaxChargeTime)
 	{
-		//CLog::Print("SwordFlashSlash : Tick :  EndCharge",3);
 	}
 
 	CheckNull(SlowArea);

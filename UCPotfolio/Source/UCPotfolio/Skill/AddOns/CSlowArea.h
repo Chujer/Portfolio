@@ -19,7 +19,8 @@ public:
 	virtual void BeginPlay() override;
 	void BeginPlay(class ACharacter* InCharacter);
 
-	virtual void Destroyed() override;
+	UFUNCTION()
+		void Destroyed() override;
 
 public:	
 	virtual void Tick(float DeltaTime) override;
@@ -33,6 +34,7 @@ public:
 private:
 	UFUNCTION()
 		void OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 private:
 	UPROPERTY(EditAnywhere,Category = "Setting")
 		FVector AddScale;
@@ -48,13 +50,14 @@ private:
 
 private:
 	class ACharacter* Character;
-
+	UPROPERTY(EditAnywhere)
 	class USphereComponent* Sphere;
 	class UTimelineComponent* Timeline;
+	class ACAttachment* Attachment;
 
 	TArray<AActor*> TargetActors;
-
 	FVector FirstScale;
+	TArray<AActor*> Ignores;
 
-
+	FOnTimelineEvent EndTimeLine;
 };

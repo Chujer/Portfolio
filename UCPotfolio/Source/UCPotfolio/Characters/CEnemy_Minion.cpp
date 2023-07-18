@@ -70,6 +70,8 @@ void ACEnemy_Minion::ApplyDamage(ACharacter* InAttacker, AActor* InAttackCauser,
 void ACEnemy_Minion::ApplyDamageTimer(ACharacter* InAttacker, AActor* InAttackCauser, EDamageType InNormalDamageType,
 	EDamageType InLastDamageType, float InNormalPower, float InLastPower, float Interval, float EndTime)
 {
+	Attacker = InAttacker;
+	AttackCauser = InAttackCauser;
 	IICharacter::ApplyDamageTimer(InAttacker, InAttackCauser, InNormalDamageType, InLastDamageType, InNormalPower,
 	                              InLastPower, Interval, EndTime);
 	
@@ -79,15 +81,21 @@ void ACEnemy_Minion::ApplyDamageTimer(ACharacter* InAttacker, AActor* InAttackCa
 
 	timerDelegate.BindLambda([&]()
 	{
-		ApplyDamage(nullptr, nullptr, EDamageType::NORMAL, 2.5f);
+		if(!!Attacker && InAttackCauser)
+			ApplyDamage(Attacker, AttackCauser, EDamageType::NORMAL, 2.5f);
 	});
 
-	timerDelegate.BindLambda([&]()
+	timerDelegate2.BindLambda([&]()
 	{
-		ApplyDamage(nullptr, nullptr, EDamageType::NORMAL, 5.0f);
-
+		if (!!Attacker && InAttackCauser)
+		{
+			ApplyDamage(Attacker, AttackCauser, EDamageType::NORMAL, 5.0f);
+		}
 		GetWorld()->GetTimerManager().ClearTimer(timer);
 		GetWorld()->GetTimerManager().ClearTimer(timer2);
+
+		Attacker = nullptr;
+		AttackCauser = nullptr;
 	});
 
 	GetWorld()->GetTimerManager().SetTimer(timer, timerDelegate, Interval, true);

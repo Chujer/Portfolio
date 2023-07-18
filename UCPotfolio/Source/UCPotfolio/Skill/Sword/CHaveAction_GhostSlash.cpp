@@ -23,6 +23,11 @@ void UCHaveAction_GhostSlash::Pressed()
 	
 }
 
+void UCHaveAction_GhostSlash::Released()
+{
+	bPressed = false;
+}
+
 void UCHaveAction_GhostSlash::End_Skill_Implementation()
 {
 	Super::End_Skill_Implementation();

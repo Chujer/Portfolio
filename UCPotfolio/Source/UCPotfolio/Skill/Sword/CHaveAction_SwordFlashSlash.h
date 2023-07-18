@@ -21,6 +21,7 @@ public:
 
 public:
 	virtual void SkillAction1() override;
+	virtual void EndSkillAction1() override;
 
 private:
 	UPROPERTY(EditAnywhere, Category = "NextMontage")

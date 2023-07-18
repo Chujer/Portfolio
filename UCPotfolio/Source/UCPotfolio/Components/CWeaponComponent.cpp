@@ -7,6 +7,8 @@
 #include "Weapon/CDoAction.h"
 #include "Weapon/CWeaponAsset.h"
 #include "GameFramework/Character.h"
+#include "Components/CStateComponent.h"
+#include "Utilities/CLog.h"
 
 UCWeaponComponent::UCWeaponComponent()
 {
@@ -43,14 +45,15 @@ void UCWeaponComponent::SetUnarmedMode()
 
 void UCWeaponComponent::SetSwordMode()
 {
-	//CheckFalse(IsIdleMode);
+	//CLog::Print(StateComponent->IsIdleMode());
+	//CheckFalse(StateComponent->IsIdleMode());
 
 	SetMode(EWeaponType::Sword);
 }
 
 void UCWeaponComponent::SetSpearMode()
 {
-	//CheckFalse(IsIdleMode);
+	CheckFalse(StateComponent->IsIdleMode());
 
 	SetMode(EWeaponType::Spear);
 }
@@ -64,6 +67,7 @@ void UCWeaponComponent::DoAction()
 void UCWeaponComponent::DoSkillF()
 {
 	CheckNull(GetAttachment());
+	CheckFalse(StateComponent->IsIdleMode());
 	GetAttachment()->SetCurrentSKill(GetAttachment()->GetSkill((int32)ESkillIndex::F));	//현재 스킬 설정
 	CheckNull(GetCurrentSkill());
 	GetCurrentSkill()->Pressed();		
@@ -72,6 +76,7 @@ void UCWeaponComponent::DoSkillF()
 void UCWeaponComponent::DoSkillE()
 {
 	CheckNull(GetAttachment());
+	CheckFalse(StateComponent->IsIdleMode());
 	GetAttachment()->SetCurrentSKill(GetAttachment()->GetSkill((int32)ESkillIndex::E));	//현재 스킬 설정
 	CheckNull(GetCurrentSkill());
 	GetCurrentSkill()->Pressed();
@@ -80,6 +85,7 @@ void UCWeaponComponent::DoSkillE()
 void UCWeaponComponent::DoSkillV()
 {
 	CheckNull(GetAttachment());
+	CheckFalse(StateComponent->IsIdleMode());
 	GetAttachment()->SetCurrentSKill(GetAttachment()->GetSkill((int32)ESkillIndex::V));	//현재 스킬 설정
 	CheckNull(GetCurrentSkill());
 	GetCurrentSkill()->Pressed();
@@ -88,6 +94,7 @@ void UCWeaponComponent::DoSkillV()
 void UCWeaponComponent::DoSkillR()
 {
 	CheckNull(GetAttachment());
+	CheckFalse(StateComponent->IsIdleMode());
 	GetAttachment()->SetCurrentSKill(GetAttachment()->GetSkill((int32)ESkillIndex::R));	//현재 스킬 설정
 	CheckNull(GetCurrentSkill());
 	GetCurrentSkill()->Pressed();
@@ -96,6 +103,7 @@ void UCWeaponComponent::DoSkillR()
 void UCWeaponComponent::DoSkillQ()
 {
 	CheckNull(GetAttachment());
+	CheckFalse(StateComponent->IsIdleMode());
 	GetAttachment()->SetCurrentSKill(GetAttachment()->GetSkill((int32)ESkillIndex::Q));	//현재 스킬 설정
 	CheckNull(GetCurrentSkill());
 	GetCurrentSkill()->Pressed();
@@ -173,6 +181,7 @@ void UCWeaponComponent::BeginPlay()
 			Asset->BeginPlay(OwnerCharacter.Get());
 	}
 
+	StateComponent = CHelpers::GetComponent<UCStateComponent>(OwnerCharacter.Get());
 	Super::BeginPlay();
 }
 
@@ -180,5 +189,9 @@ void UCWeaponComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	CheckNull(GetAttachment());
+	CheckNull(GetCurrentSkill());
+
+	GetCurrentSkill()->Tick(DeltaTime);
 }
 

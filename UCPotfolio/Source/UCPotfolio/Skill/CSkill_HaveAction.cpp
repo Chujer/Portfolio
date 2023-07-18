@@ -1,5 +1,7 @@
 #include "Skill/CSkill_HaveAction.h"
 #include "Global.h"
+#include "Components/CMovementComponent.h"
+#include "Components/CStateComponent.h"
 #include "Utilities/CLog.h"
 #include "Weapon/CAttachment.h"
 

@@ -2,6 +2,7 @@
 #include "Components/CWeaponComponent.h"
 #include "Skill/CSkill_HaveAction.h"
 #include "Global.h"
+#include "Weapon/CAttachment.h"
 
 FString UCAnimNotify_SkillActionEnd::GetNotifyName_Implementation() const
 {
@@ -22,4 +23,7 @@ void UCAnimNotify_SkillActionEnd::Notify(USkeletalMeshComponent* MeshComp, UAnim
 	CheckNull(skill);
 
 	skill->EndSkillAction(Index);
+
+	CheckNull(weaponComponent->GetAttachment());
+		weaponComponent->GetAttachment()->ClearCurrentSkill();
 }

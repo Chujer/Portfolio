@@ -34,8 +34,8 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	FORCEINLINE void SetCurrentSKill(UCSkill* InSkill) { CurrentSkill = InSkill; };
-	FORCEINLINE void CurrentSkillClear() { CurrentSkill = nullptr; };
+	FORCEINLINE void SetCurrentSKill(UCSkill* InSkill) {  CurrentSkill = InSkill; };
+	FORCEINLINE void ClearCurrentSkill() {CurrentSkill = nullptr; };
 	FORCEINLINE UCSkill* GetSkill(int32 Index) { return Skills[Index]; }
 	FORCEINLINE UCSkill* GetCurrentSkill() { return CurrentSkill; }
 

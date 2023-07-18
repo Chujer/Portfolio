@@ -2,6 +2,7 @@
 #include "Global.h"
 #include "Components/CWeaponComponent.h"
 #include "Skill/CSkill_HaveAction.h"
+#include "Weapon/CAttachment.h"
 
 FString UCAnimNotify_SkillAction::GetNotifyName_Implementation() const
 {
@@ -22,4 +23,5 @@ void UCAnimNotify_SkillAction::Notify(USkeletalMeshComponent* MeshComp, UAnimSeq
 	CheckNull(skill);
 
 	skill->SelectSkillAction(Index);
+
 }

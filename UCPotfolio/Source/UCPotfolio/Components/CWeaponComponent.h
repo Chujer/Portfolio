@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CStateComponent.h"
 #include "Components/ActorComponent.h"
 #include "Weapon/CWeaponAsset.h"
 #include "GameFramework/Character.h"
@@ -28,7 +29,6 @@ public:
 
 public:	
 	UCWeaponComponent();
-
 
 public:
 	class UCDoAction* GetDoAction();
@@ -62,5 +62,5 @@ public:
 private:
 	TWeakObjectPtr<class ACharacter> OwnerCharacter;
 	EWeaponType Type = EWeaponType::Max;
-
+	class UCStateComponent* StateComponent;
 };

@@ -6,6 +6,11 @@
 #include "Characters/ICharacter.h"
 #include "Weapon/CAttachment.h"
 
+void UCSkill_Nomal::BeginPlay(ACPlayer* InCharacter, ACAttachment* InAttachment)
+{
+	Super::BeginPlay(InCharacter, InAttachment);
+}
+
 void UCSkill_Nomal::OnAttachmentEndCollision()
 {
 	Super::OnAttachmentEndCollision();

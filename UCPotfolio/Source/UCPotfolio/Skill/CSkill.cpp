@@ -32,6 +32,8 @@ void UCSkill::PlayMontage()
 void UCSkill::Pressed()
 {
 	bPressed = true;
+	if (!SkillData.bCanMove)
+		MovementComponent->Stop();
 	StateComponent->SetSkillMode();
 }
 

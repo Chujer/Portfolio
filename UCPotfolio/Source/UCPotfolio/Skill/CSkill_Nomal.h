@@ -10,6 +10,7 @@ class UCPOTFOLIO_API UCSkill_Nomal : public UCSkill
 	GENERATED_BODY()
 
 public:
+	virtual void BeginPlay(ACPlayer* InCharacter, ACAttachment* InAttachment) override;
 	UFUNCTION()
 		virtual void OnAttachmentEndCollision() override;
 

@@ -99,10 +99,9 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void ACPlayer::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+	if (Movement->CanMove())
+		CLog::Print("true", 20);
+	else
+		CLog::Print("false", 20);
 
-	CheckNull(WeaponComponent);
-	CheckNull(WeaponComponent->GetAttachment());
-	CheckNull(WeaponComponent->GetCurrentSkill());
-
-	WeaponComponent->GetCurrentSkill()->Tick(DeltaSeconds);
 }

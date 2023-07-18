@@ -11,6 +11,7 @@ class UCPOTFOLIO_API UCHaveAction_GhostSlash : public UCSkill_HaveAction
 
 public:
 	virtual void Pressed() override;
+	virtual void Released() override;
 
 public:
 	virtual void End_Skill_Implementation() override;
