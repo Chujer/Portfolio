@@ -10,11 +10,8 @@ ACAreaDamage::ACAreaDamage()
 void ACAreaDamage::BeginPlay()
 {
 	Super::BeginPlay();
-}
-
-void ACAreaDamage::BeginPlay(ACharacter* InCharacter)
-{
-	Character = InCharacter;
+	CheckNull(GetOwner());
+	Character = Cast<ACharacter>(GetOwner());
 	Attachment = CHelpers::GetComponent<UCWeaponComponent>(Character)->GetAttachment();
 	Ignores.Add(Character);
 	Ignores.Add(Attachment);

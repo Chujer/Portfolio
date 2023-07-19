@@ -8,6 +8,7 @@ ACAreaDamage_FlashSkill::ACAreaDamage_FlashSkill()
 {
 	UBoxComponent* boxComponent;
 	CHelpers::CreateActorComponent<UBoxComponent>(this, &boxComponent, "BoxCollision");
+//	boxComponent->SetRelativeLocation(FVector(0, 0, 20));
 	MainCollision = boxComponent;
 }
 
@@ -16,37 +17,49 @@ void ACAreaDamage_FlashSkill::BeginPlay()
 	Super::BeginPlay();
 
 	MainCollision->OnComponentBeginOverlap.AddDynamic(this, &ACAreaDamage_FlashSkill::OnComponentBeginOverlap);
-	StartTrasnform.SetScale3D(GetActorScale());
-	StartTrasnform.SetLocation(GetActorLocation());
-	EndLocation = GetActorLocation() + GetActorForwardVector() * UpScale;
-	MainCollision->SetRelativeScale3D(FVector(1, 1, 14));
-}
+	MainCollision->SetRelativeScale3D(FVector(1, 10, 14));
+	MainCollision->SetHiddenInGame(bHide);
 
-void ACAreaDamage_FlashSkill::BeginPlay(ACharacter* InCharacter)
-{
-	Super::BeginPlay(InCharacter);
+	StartTrasnform.SetScale3D(GetActorScale());
+	StartTrasnform.SetLocation(GetActorLocation() + FVector(0,0,100));
+	EndLocation = GetActorLocation() + (GetActorForwardVector() * UpScale) + FVector(0, 0, 100);
+
+
+	FOnTimelineFloat timeline;
+	timeline.BindUFunction(this, "ScaleUp");
+
+	TimeLine.AddInterpFloat(Curve, timeline);
+	TimeLine.PlayFromStart();
 }
 
 void ACAreaDamage_FlashSkill::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	float setScale = UKismetMathLibrary::Lerp(StartTrasnform.GetScale3D().X, UpScale, DeltaSeconds);
-	FVector setLocation = UKismetMathLibrary::VLerp(StartTrasnform.GetLocation(), EndLocation, DeltaSeconds);
+	TimeLine.TickTimeline(DeltaSeconds);
+}
 
-	SetActorScale3D(FVector(setScale, 15, 15));
+
+void ACAreaDamage_FlashSkill::ScaleUp(float time)
+{
+	float setScale = UKismetMathLibrary::Lerp(StartTrasnform.GetScale3D().X, UpScale,time);
+	FVector setLocation = UKismetMathLibrary::VLerp(StartTrasnform.GetLocation(),EndLocation, time);
+	CLog::Print(time, 2);
+	CLog::Print(setScale,3);
+
+	UBoxComponent* Box = Cast<UBoxComponent>(MainCollision);
+
+	Box->SetBoxExtent(FVector(setScale, 15, 15));
+
 	SetActorLocation(setLocation);
 }
 
-void ACAreaDamage_FlashSkill::Destroyed()
+void ACAreaDamage_FlashSkill::EndChargeDestroy()
 {
-	Super::Destroyed();
-
-	for (AActor* target : TargetActors)
+	for (ACharacter* target : Targets)
 	{
-		target->CustomTimeDilation = 1.0f;
 		IICharacter* iCharacter = Cast<IICharacter>(target);
-		iCharacter->ApplyDamageTimer(Character, Attachment, EDamageType::NORMAL, EDamageType::NORMAL, 10, 50, 0.2f, 0.7);
+		iCharacter->ApplyDamageTimer(Character, Cast<AActor>(Attachment), EDamageType::NORMAL, EDamageType::NORMAL, 10, 50, 0.2f, 0.7);
 	}
 }
 
@@ -56,6 +69,7 @@ void ACAreaDamage_FlashSkill::OnComponentBeginOverlap(UPrimitiveComponent* Overl
 	Super::OnComponentBeginOverlap(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);
 
 	CheckFalse(Ignores.Find(OtherActor) == -1);
-	
-	TargetActors.AddUnique(OtherActor);
+	CheckNull(Cast<ACharacter>(OtherActor));
+
+	Targets.AddUnique(Cast<ACharacter>(OtherActor));
 }

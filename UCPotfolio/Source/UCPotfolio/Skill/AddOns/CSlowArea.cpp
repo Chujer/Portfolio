@@ -19,11 +19,9 @@ ACSlowArea::ACSlowArea()
 void ACSlowArea::BeginPlay()
 {
 	Super::BeginPlay();
-}
+	CheckNull(GetOwner());
 
-void ACSlowArea::BeginPlay(ACharacter* InCharacter)
-{
-	Character = InCharacter;
+	Character = Cast<ACharacter>(GetOwner());
 	Attachment = CHelpers::GetComponent<UCWeaponComponent>(Character)->GetAttachment();
 	Sphere->SetHiddenInGame(false);
 	Ignores.Add(Character);
@@ -44,7 +42,7 @@ void ACSlowArea::BeginPlay(ACharacter* InCharacter)
 		FirstScale = GetActorScale3D();
 	}
 
-	if(!!Sphere)
+	if (!!Sphere)
 		Sphere->OnComponentBeginOverlap.AddDynamic(this, &ACSlowArea::OnComponentBeginOverlap);
 
 	if (!Sphere->OnComponentBeginOverlap.IsBound())
@@ -60,7 +58,10 @@ void ACSlowArea::Destroyed()
 void ACSlowArea::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	for (AActor* target : TargetActors)
+	{
+		target->CustomTimeDilation = 1.0f;
+	}
 }
 
 void ACSlowArea::ScaleSettingSphere(float Output)

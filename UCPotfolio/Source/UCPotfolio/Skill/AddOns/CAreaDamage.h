@@ -15,7 +15,6 @@ public:
 
 public:
 	virtual void BeginPlay() override;
-	virtual void BeginPlay(class ACharacter* InCharacter);
 
 	virtual void Tick(float DeltaSeconds) override;
 
@@ -28,6 +27,5 @@ protected:
 	class ACharacter* Character;
 	class ACAttachment* Attachment;
 	TArray<AActor*> Ignores;
-	UPROPERTY(EditAnywhere)
-		UShapeComponent* MainCollision;
+	UShapeComponent* MainCollision;
 };

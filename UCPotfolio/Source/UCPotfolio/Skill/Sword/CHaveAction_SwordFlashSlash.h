@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Skill/CSkill_HaveAction.h"
+#include "Skill/AddOns/CAreaDamage_FlashSkill.h"
 #include "Skill/AddOns/CSlowArea.h"
 #include "CHaveAction_SwordFlashSlash.generated.h"
 
@@ -30,9 +31,18 @@ private:
 	UPROPERTY(EditAnywhere, Category = "SlowArea")
 		TSubclassOf<ACSlowArea> SlowArealClass;
 
+	UPROPERTY(EditAnywhere, Category = "SlowArea")
+		TSubclassOf<ACAreaDamage> AttackCollisionClass;
+
+	UPROPERTY(EditAnywhere, Category = "ChargeTime")
+		float MaxChargeTime = 2.0f;
+
+private:
 	TWeakObjectPtr<ACSlowArea> SlowArea;
+	ACAreaDamage_FlashSkill* AttackCollision;
+
 private:
 	bool IsChargeEnd = false;
-	float MaxChargeTime = 2.0f;
 	float ChargeTime = 0.0f;
+
 };

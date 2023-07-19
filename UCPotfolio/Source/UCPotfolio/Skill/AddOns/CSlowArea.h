@@ -17,7 +17,6 @@ public:
 
 public:
 	virtual void BeginPlay() override;
-	void BeginPlay(class ACharacter* InCharacter);
 
 	UFUNCTION()
 		void Destroyed() override;
