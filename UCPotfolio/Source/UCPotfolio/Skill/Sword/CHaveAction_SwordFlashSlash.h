@@ -37,6 +37,13 @@ private:
 	UPROPERTY(EditAnywhere, Category = "ChargeTime")
 		float MaxChargeTime = 2.0f;
 
+	UPROPERTY(EditAnywhere)
+		class UNiagaraComponent* ScrewEffect;
+
+	UPROPERTY(EditAnywhere)
+		class UNiagaraSystem* FlowerEffect;
+
+	//class UNiagaraSystem* 
 private:
 	TWeakObjectPtr<ACSlowArea> SlowArea;
 	ACAreaDamage_FlashSkill* AttackCollision;
@@ -44,5 +51,7 @@ private:
 private:
 	bool IsChargeEnd = false;
 	float ChargeTime = 0.0f;
+
+	FTransform StartTransfsorm;
 
 };

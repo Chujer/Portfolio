@@ -1,5 +1,6 @@
 #include "Notifies/CAnimNotify_EndDoAction.h"
 #include "Global.h"
+#include "Components/CMovementComponent.h"
 #include "Components/CWeaponComponent.h"
 #include "Skill/CSkill.h"
 #include "Weapon/CAttachment.h"
@@ -18,14 +19,7 @@ void UCAnimNotify_EndDoAction::Notify(USkeletalMeshComponent* MeshComp, UAnimSeq
 
 	UCWeaponComponent* weaponComponent = CHelpers::GetComponent<UCWeaponComponent>(MeshComp->GetOwner());
 	CheckNull(weaponComponent);
-	bool test = weaponComponent->GetDoAction();
-	CheckNull(weaponComponent->GetDoAction());
-
-	if (!!weaponComponent->GetCurrentSkill())
-	{
-		weaponComponent->GetCurrentSkill()->End_Skill_Implementation();
-		weaponComponent->GetAttachment()->ClearCurrentSkill();
-	}
 
 	weaponComponent->GetDoAction()->End_DoAction();
+
 }

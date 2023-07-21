@@ -83,7 +83,9 @@ public:
 	static  TArray<T*> GetComponents(AActor* InActor)
 	{
 		TArray<T*> temp;
-		for(UActorComponent* component : InActor->GetComponentsByClass(T::StaticClass()))
+		TArray<UActorComponent*> components;
+		InActor->GetComponents(T::StaticClass(), components);
+		for(UActorComponent* component : components)
 		{
 			temp.Add(Cast<T>(component));
 		}

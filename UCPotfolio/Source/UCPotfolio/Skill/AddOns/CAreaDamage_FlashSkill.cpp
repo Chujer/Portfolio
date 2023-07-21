@@ -61,6 +61,7 @@ void ACAreaDamage_FlashSkill::EndChargeDestroy()
 		IICharacter* iCharacter = Cast<IICharacter>(target);
 		iCharacter->ApplyDamageTimer(Character, Cast<AActor>(Attachment), EDamageType::NORMAL, EDamageType::NORMAL, 10, 50, 0.2f, 0.7);
 	}
+	Destroy();
 }
 
 void ACAreaDamage_FlashSkill::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,

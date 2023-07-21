@@ -9,12 +9,14 @@
 #include "Components/CMovementComponent.h"
 #include "Components/CWeaponComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "NiagaraComponent.h"
 #include "GameFramework/DefaultPhysicsVolume.h"
 #include "Skill/AddOns/CAreaDamage_FlashSkill.h"
 #include "Utilities/CLog.h"
 #include "Skill/AddOns/CSlowArea.h"
 #include "Weapon/CAttachment.h"
 #include "Weapon/CDoAction.h"
+#include "NiagaraSystem.h"
 
 void UCHaveAction_SwordFlashSlash::Begin_Skill_Implementation()
 {
@@ -36,8 +38,14 @@ void UCHaveAction_SwordFlashSlash::SkillAction1()
 
 	CheckNull(SlowArealClass);
 	SlowArea = GetWorld()->SpawnActor<ACSlowArea>(SlowArealClass, Character->GetTransform(), params);
+
 	CheckNull(AttackCollisionClass);
 	AttackCollision = GetWorld()->SpawnActor<ACAreaDamage_FlashSkill>(AttackCollisionClass, Character->GetTransform(), params);
+
+	CheckNull(ScrewEffect);
+	ScrewEffect = UNiagaraFunctionLibrary::SpawnSystemAttached( ScrewEffect->GetAsset(),Character->GetMesh(),"Root",FVector(0,0,0), FRotator(0,0,0),EAttachLocation::Type::KeepRelativeOffset,false);
+	//ScrewEffect->BeginPlay();
+
 
 }
 
@@ -47,10 +55,16 @@ void UCHaveAction_SwordFlashSlash::EndSkillAction1()
 	Super::EndSkillAction1();
 	UCWeaponComponent* weaponComponent = CHelpers::GetComponent<UCWeaponComponent>(Character.Get());
 	AttackCollision->EndChargeDestroy();
-	
+
+	if(!!ScrewEffect)
+		ScrewEffect->SetActive(false);
+
+
+	if (!!FlowerEffect)
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), FlowerEffect, StartTransfsorm.GetLocation(), StartTransfsorm.GetRotation().Rotator());
+
 	weaponComponent->GetAttachment()->ClearCurrentSkill();
 	weaponComponent->SetSwordMode();
-
 }
 
 
@@ -59,6 +73,7 @@ void UCHaveAction_SwordFlashSlash::Pressed()
 	Super::Pressed();
 
 	PlayMontage();
+	StartTransfsorm = Character->GetActorTransform();
 }
 
 void UCHaveAction_SwordFlashSlash::Released()
@@ -95,10 +110,11 @@ void UCHaveAction_SwordFlashSlash::Released()
 	//차지 실패
 	ChargeTime = 0;
 	Character->StopAnimMontage(Character->GetCurrentMontage());
-	CHelpers::GetComponent<UCWeaponComponent>(Character.Get())->GetDoAction()->End_DoAction();
+	
+	UCWeaponComponent* weaponComponent = CHelpers::GetComponent<UCWeaponComponent>(Character.Get());
 	AttackCollision->Destroy();
-
-
+	weaponComponent->GetAttachment()->ClearCurrentSkill();
+	weaponComponent->GetDoAction()->End_DoAction();
 	Super::Released();
 }
 

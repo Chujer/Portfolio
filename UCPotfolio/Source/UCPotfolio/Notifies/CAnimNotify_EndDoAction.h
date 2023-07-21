@@ -13,4 +13,7 @@ private:
 	virtual FString GetNotifyName_Implementation() const override;
 
 	virtual void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation) override;
+
+public:
+	TWeakObjectPtr<ACharacter> character;
 };

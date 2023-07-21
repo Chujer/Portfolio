@@ -2,6 +2,7 @@
 #include "Global.h"
 #include "Components/CMovementComponent.h"
 #include "Components/CStateComponent.h"
+#include "Components/CWeaponComponent.h"
 
 FString UCAnimNotifyEndAction::GetNotifyName_Implementation() const
 {
@@ -25,4 +26,13 @@ void UCAnimNotifyEndAction::Notify(USkeletalMeshComponent* MeshComp, UAnimSequen
 
 	movementComponent->Move();
 	movementComponent->DisableFixedCamera();
+
+	UCWeaponComponent* weaponComponent = CHelpers::GetComponent<UCWeaponComponent>(MeshComp->GetOwner());
+	CheckNull(weaponComponent);
+	//CheckNull(weaponComponent->GetAttachment());
+
+	CheckNull(weaponComponent->GetCurrentSkill());
+
+	weaponComponent->GetCurrentSkill()->End_Skill_Implementation();
+	weaponComponent->GetAttachment()->ClearCurrentSkill();
 }

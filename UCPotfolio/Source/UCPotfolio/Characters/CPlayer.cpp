@@ -53,7 +53,7 @@ ACPlayer::ACPlayer()
 	SpringArm->TargetArmLength = 400;
 	SpringArm->bDoCollisionTest = false;
 	SpringArm->bUsePawnControlRotation = true;
-	SpringArm->bEnableCameraRotationLag = true;
+	SpringArm->bEnableCameraLag = true;
 
 	GetCapsuleComponent()->SetCollisionProfileName("Player");
 	GetMesh()->SetCollisionProfileName("OverlapAll");

@@ -34,6 +34,8 @@ ACAttachment* UCWeaponComponent::GetAttachment()
 
 UCSkill* UCWeaponComponent::GetCurrentSkill()
 {
+	CheckNullResult(GetAttachment(), nullptr);
+
 	return GetAttachment()->GetCurrentSkill();
 }
 
@@ -190,8 +192,13 @@ void UCWeaponComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	CheckNull(GetAttachment());
-	CheckNull(GetCurrentSkill());
 
-	GetCurrentSkill()->Tick(DeltaTime);
+	if (!!GetCurrentSkill())
+	{
+		CLog::Print(GetCurrentSkill()->GetName(), 3);
+		GetCurrentSkill()->Tick(DeltaTime);
+	}
+	else
+		CLog::Print("NullSkill", 3);
 }
 

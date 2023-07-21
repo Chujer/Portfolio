@@ -37,7 +37,7 @@ public:
 	FORCEINLINE void SetCurrentSKill(UCSkill* InSkill) {  CurrentSkill = InSkill; };
 	FORCEINLINE void ClearCurrentSkill() {CurrentSkill = nullptr; };
 	FORCEINLINE UCSkill* GetSkill(int32 Index) { return Skills[Index]; }
-	FORCEINLINE UCSkill* GetCurrentSkill() { return CurrentSkill; }
+	FORCEINLINE UCSkill* GetCurrentSkill() { return CurrentSkill.Get(); }
 
 	FORCEINLINE EDamageType* GetDamageType() { return &DamageType; }
 
@@ -68,7 +68,7 @@ protected:
 	TSubclassOf<UCSkill> SkillsClass[(int32)ESkillIndex::MAX];
 
 	class UCSkill* Skills[(int32)ESkillIndex::MAX];
-	class UCSkill* CurrentSkill;
+	TWeakObjectPtr<UCSkill> CurrentSkill;
 protected:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 		 class USceneComponent* Root;
