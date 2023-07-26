@@ -40,7 +40,14 @@ protected:
 	FTimerHandle timer;
 	FTimerHandle timer2;
 
+
+private:
 	ACharacter* Attacker;
 	AActor* AttackCauser;
+	EDamageType NormalDamageType;
+	EDamageType LastDamageType;
+	float NormalDamagePower;
+	float LastDamagePower;
+
 	//Todo 몬스터 이동 컴포넌트 만들지 말지 그로인해 히트중 이동 불가능 하도록
 };

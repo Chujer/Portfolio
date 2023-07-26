@@ -1,6 +1,7 @@
 #include "CCharacter_Base.h"
 #include "Global.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/CGravityComponent.h"
 #include "Utilities/CHelpers.h"
 #include "Utilities/CLog.h"
 //#include "GameFramework/SpringArmComponent.h"
@@ -10,7 +11,7 @@
 ACCharacter_Base::ACCharacter_Base()
 {
 	PrimaryActorTick.bCanEverTick = true;
-
+	CHelpers::CreateActorComponent<UCGravityComponent>(this, &GravityComponent, "GravityComponent");
 }
 
 void ACCharacter_Base::BeginPlay()

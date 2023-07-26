@@ -59,7 +59,7 @@ void ACAreaDamage_FlashSkill::EndChargeDestroy()
 	for (ACharacter* target : Targets)
 	{
 		IICharacter* iCharacter = Cast<IICharacter>(target);
-		iCharacter->ApplyDamageTimer(Character, Cast<AActor>(Attachment), EDamageType::NORMAL, EDamageType::NORMAL, 10, 50, 0.2f, 0.7);
+		iCharacter->ApplyDamageTimer(Character, Cast<AActor>(Attachment), EDamageType::NORMAL, EDamageType::FRONT_NOCKDOWN, 10, 50, 0.2f, 0.7);
 	}
 	Destroy();
 }

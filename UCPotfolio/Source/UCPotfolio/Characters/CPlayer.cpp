@@ -21,7 +21,7 @@ ACPlayer::ACPlayer()
 	CHelpers::CreateComponent<USpringArmComponent>(this, &SpringArm, "SpringArm", GetMesh());
 	CHelpers::CreateComponent<UCameraComponent>(this, &Camera, "Camera", SpringArm);
 
-	CHelpers::CreateActorComponent<UCMovementComponent>(this, &Movement, "Movement");
+	CHelpers::CreateActorComponent<UCMovementComponent>(this, &MovementComponent, "Movement");
 	CHelpers::CreateActorComponent<UCWeaponComponent>(this, &WeaponComponent, "WeaponComponent");
 	CHelpers::CreateActorComponent<UCStateComponent>(this, &StateComponent, "StateComponent");
 	CHelpers::CreateActorComponent<UCRollComponent>(this, &RollComponent, "RollComponent");
@@ -59,12 +59,17 @@ ACPlayer::ACPlayer()
 	GetMesh()->SetCollisionProfileName("OverlapAll");
 
 	Camera->SetRelativeLocation(FVector(0, 0, 80));
+
+	CheckNull(MovementComponent);
+
+	MovementComponent->OffSprint();
 }
 
 void ACPlayer::BeginPlay()
 {
 	Super::BeginPlay();
 
+	MovementComponent->SetUseControllYaw(false);
 
 }
 
@@ -73,10 +78,10 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	PlayerInputComponent->BindAxis("MoveForward", Movement, &UCMovementComponent::OnMoveForward);
-	PlayerInputComponent->BindAxis("MoveRight", Movement, &UCMovementComponent::OnMoveRight);
-	PlayerInputComponent->BindAxis("HorizontalLook", Movement, &UCMovementComponent::OnHorizontalLook);
-	PlayerInputComponent->BindAxis("VerticalLook", Movement, &UCMovementComponent::OnVerticallLook);
+	PlayerInputComponent->BindAxis("MoveForward", MovementComponent, &UCMovementComponent::OnMoveForward);
+	PlayerInputComponent->BindAxis("MoveRight", MovementComponent, &UCMovementComponent::OnMoveRight);
+	PlayerInputComponent->BindAxis("HorizontalLook", MovementComponent, &UCMovementComponent::OnHorizontalLook);
+	PlayerInputComponent->BindAxis("VerticalLook", MovementComponent, &UCMovementComponent::OnVerticallLook);
 
 	PlayerInputComponent->BindAction("Sword", EInputEvent::IE_Pressed, WeaponComponent,&UCWeaponComponent::SetSwordMode);
 	PlayerInputComponent->BindAction("Sword", EInputEvent::IE_Pressed, WeaponComponent,&UCWeaponComponent::Released);
@@ -85,10 +90,14 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	PlayerInputComponent->BindAction("Roll", EInputEvent::IE_Pressed, RollComponent, &UCRollComponent::Roll);
 
+	PlayerInputComponent->BindAction("Sprint", EInputEvent::IE_Pressed, MovementComponent, &UCMovementComponent::OnSprint);
+	PlayerInputComponent->BindAction("Sprint", EInputEvent::IE_Released, MovementComponent, &UCMovementComponent::OffSprint);
+
 	PlayerInputComponent->BindAction("SkillF", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillF);
 	PlayerInputComponent->BindAction("SkillR", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillR);
 	PlayerInputComponent->BindAction("SkillV", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillV);
 	PlayerInputComponent->BindAction("SkillE", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillE);
+	PlayerInputComponent->BindAction("SkillQ", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillQ);
 
 	PlayerInputComponent->BindAction("SkillF", EInputEvent::IE_Released, WeaponComponent, &UCWeaponComponent::Released);
 	PlayerInputComponent->BindAction("SkillR", EInputEvent::IE_Released, WeaponComponent, &UCWeaponComponent::Released);
@@ -99,7 +108,7 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void ACPlayer::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-	if (Movement->CanMove())
+	if (MovementComponent->CanMove())
 		CLog::Print("true", 20);
 	else
 		CLog::Print("false", 20);

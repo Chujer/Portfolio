@@ -56,10 +56,6 @@ void UCHaveAction_SwordFlashSlash::EndSkillAction1()
 	UCWeaponComponent* weaponComponent = CHelpers::GetComponent<UCWeaponComponent>(Character.Get());
 	AttackCollision->EndChargeDestroy();
 
-	if(!!ScrewEffect)
-		ScrewEffect->SetActive(false);
-
-
 	if (!!FlowerEffect)
 		UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), FlowerEffect, StartTransfsorm.GetLocation(), StartTransfsorm.GetRotation().Rotator());
 
@@ -80,6 +76,9 @@ void UCHaveAction_SwordFlashSlash::Released()
 {
 	if (SlowArea.IsValid())
 		SlowArea->RemoveArea(ChargeTime > MaxChargeTime);
+
+	if (!!ScrewEffect)
+		ScrewEffect->SetActive(false);
 
 	if(ChargeTime > MaxChargeTime)	//차지 완료
 	{
@@ -110,11 +109,23 @@ void UCHaveAction_SwordFlashSlash::Released()
 	//차지 실패
 	ChargeTime = 0;
 	Character->StopAnimMontage(Character->GetCurrentMontage());
+	for(USceneComponent* p : Character->GetMesh()->GetAttachChildren())
+	{
+		UParticleSystemComponent* temp = Cast< UParticleSystemComponent>(p);
+		if (!!temp)
+		{
+			temp->SetVisibility(false);
+			temp->SetActive(false,true);
+		}
+	}
 	
 	UCWeaponComponent* weaponComponent = CHelpers::GetComponent<UCWeaponComponent>(Character.Get());
-	AttackCollision->Destroy();
+	CheckNull(weaponComponent);
+	CheckNull(weaponComponent->GetAttachment());
 	weaponComponent->GetAttachment()->ClearCurrentSkill();
 	weaponComponent->GetDoAction()->End_DoAction();
+	CheckNull(AttackCollision);
+	AttackCollision->Destroy();
 	Super::Released();
 }
 

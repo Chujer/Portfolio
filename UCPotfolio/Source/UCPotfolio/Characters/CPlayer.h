@@ -24,7 +24,7 @@ public:
 
 private:
 	UPROPERTY(VisibleDefaultsOnly)
-		class UCMovementComponent* Movement;
+		class UCMovementComponent* MovementComponent;
 
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCWeaponComponent* WeaponComponent;

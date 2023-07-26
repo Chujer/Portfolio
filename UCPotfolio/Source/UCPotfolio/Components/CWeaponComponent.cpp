@@ -1,5 +1,6 @@
 #include "Components/CWeaponComponent.h"
 
+#include "CGravityComponent.h"
 #include "CMovementComponent.h"
 #include "Skill/CSkill.h"
 #include "Utilities/CHelpers.h"
@@ -118,6 +119,15 @@ void UCWeaponComponent::Released()
 	GetCurrentSkill()->Released();
 }
 
+void UCWeaponComponent::Cansle()
+{
+	if (GetCurrentSkill())
+		GetCurrentSkill()->Cansle();
+
+	if (GetDoAction())
+		GetDoAction()->End_DoAction();
+}
+
 
 void UCWeaponComponent::SetMode(EWeaponType InType)
 {
@@ -176,14 +186,19 @@ void UCWeaponComponent::ChangeType(EWeaponType InType)
 void UCWeaponComponent::BeginPlay()
 {
 	OwnerCharacter = Cast<ACharacter>(GetOwner());
+	StateComponent = CHelpers::GetComponent<UCStateComponent>(OwnerCharacter);
+	GravityComponent = CHelpers::GetComponent<UCGravityComponent>(OwnerCharacter);
 
 	for(UCWeaponAsset* Asset : DataAssets)
 	{
 		if (!!Asset)
+		{
 			Asset->BeginPlay(OwnerCharacter.Get());
+			GravityComponent->OnStartGravity.AddDynamic(Asset, &UCWeaponAsset::SwapDoAction);
+			GravityComponent->OnEndGravity.AddDynamic(Asset, &UCWeaponAsset::SwapDoAction);
+		}
 	}
 
-	StateComponent = CHelpers::GetComponent<UCStateComponent>(OwnerCharacter.Get());
 	Super::BeginPlay();
 }
 

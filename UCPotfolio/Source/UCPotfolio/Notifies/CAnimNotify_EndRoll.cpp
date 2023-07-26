@@ -1,6 +1,7 @@
 #include "Notifies/CAnimNotify_EndRoll.h"
 #include "Global.h"
 #include "Components/CMovementComponent.h"
+#include "Components/CRollComponent.h"
 #include "Components/CStateComponent.h"
 
 FString UCAnimNotify_EndRoll::GetNotifyName_Implementation() const
@@ -29,4 +30,5 @@ void UCAnimNotify_EndRoll::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenc
 	CheckNull(state);
 
 	state->SetIdleMode();
+
 }

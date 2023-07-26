@@ -47,6 +47,9 @@ public:
 	void DoSkillR();
 	void DoSkillQ();
 	void Released();
+
+public:
+	void Cansle();
 public:
 	void SetMode(EWeaponType InType);
 	void ChangeType(EWeaponType InType);
@@ -63,4 +66,5 @@ private:
 	TWeakObjectPtr<class ACharacter> OwnerCharacter;
 	EWeaponType Type = EWeaponType::Max;
 	class UCStateComponent* StateComponent;
+	class UCGravityComponent* GravityComponent;
 };

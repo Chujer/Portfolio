@@ -34,6 +34,8 @@ public:
 		void End_Skill();
 	virtual void End_Skill_Implementation() {}
 
+public:
+	virtual void Cansle() {}
 
 protected:	//component
 	TWeakObjectPtr<class ACPlayer> Character;

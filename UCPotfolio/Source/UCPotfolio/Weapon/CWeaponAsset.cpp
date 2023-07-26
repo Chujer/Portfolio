@@ -23,6 +23,7 @@ void UCWeaponAsset::BeginPlay(ACharacter* InOwner)
 	if(!!DoActionClass)
 	{
 		DoAction = NewObject<UCDoAction>(this, DoActionClass);
+		NormalDoAction = DoAction;
 		DoAction->BeginPlay(InOwner, DoActionDatas);
 		if (!!Attachment)
 		{
@@ -32,6 +33,21 @@ void UCWeaponAsset::BeginPlay(ACharacter* InOwner)
 			Attachment->OnAttachmentBeginOverlap.AddDynamic(DoAction, &UCDoAction::OnAttachmentBeginOverlap);
 			Attachment->OnAttachmentEndOverlap.AddDynamic(DoAction, &UCDoAction::OnAttachmentEndOverlap);
 		}
-
 	}
+
+	if (!!DoAirActionClass)
+	{
+		AirDoAction = NewObject<UCDoAction>(this, DoAirActionClass);
+		AirDoAction->BeginPlay(InOwner, DoActionDatas);
+	}
+}
+
+void UCWeaponAsset::SwapDoAction()
+{
+	if (DoAction == AirDoAction)
+		DoAction = NormalDoAction;
+
+	if (DoAction == NormalDoAction)
+		DoAction = AirDoAction;
+	
 }

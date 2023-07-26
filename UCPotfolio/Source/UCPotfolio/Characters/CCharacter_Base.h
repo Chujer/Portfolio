@@ -36,6 +36,9 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCameraComponent* Camera;
 
+	UPROPERTY(VisibleAnywhere)
+		class UCGravityComponent* GravityComponent;
+
 	UPROPERTY(EditAnywhere)
 		float MaxHealth;
 
@@ -47,4 +50,5 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 		class UCHitDataAsset* HitDataAssets;
+
 };

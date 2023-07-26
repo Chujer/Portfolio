@@ -12,6 +12,7 @@ class UCPOTFOLIO_API UCHitDataAsset : public UDataAsset
 
 public:
 	void PlayHitMontage(ACharacter* InCharacter, EDamageType InDamageType);
+	void PlayHitEffect(ACharacter* InCharacter,EDamageType InDamageType);
 
 private:
 	UPROPERTY(EditAnywhere)

@@ -18,8 +18,8 @@ void UCAnimNotify_EndDoAction::Notify(USkeletalMeshComponent* MeshComp, UAnimSeq
 	CheckNull(MeshComp->GetOwner());
 
 	UCWeaponComponent* weaponComponent = CHelpers::GetComponent<UCWeaponComponent>(MeshComp->GetOwner());
-	CheckNull(weaponComponent);
-
-	weaponComponent->GetDoAction()->End_DoAction();
+	
+	if(!!weaponComponent)
+		weaponComponent->GetDoAction()->End_DoAction();
 
 }

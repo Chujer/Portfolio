@@ -25,6 +25,6 @@ public:
 
 
 
-private:
+protected:
 	TArray<class ACharacter*> Hitted;
 };

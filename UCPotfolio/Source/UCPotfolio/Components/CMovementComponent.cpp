@@ -32,6 +32,9 @@ void UCMovementComponent::OnMoveForward(float InAxis)
 	FVector direction = UKismetMathLibrary::GetForwardVector(FRotator(0, OwnerCharacter->GetControlRotation().Yaw, 0));
 
 	OwnerCharacter->AddMovementInput(direction, InAxis);
+
+	if(InAxis < 0)	
+		OffSprint();
 }
 
 void UCMovementComponent::OnMoveRight(float InAxis)
@@ -59,7 +62,20 @@ void UCMovementComponent::OnVerticallLook(float InAxis)
 
 void UCMovementComponent::SetUseControllYaw(bool InBool)
 {
+	CheckNull(OwnerCharacter);
 	OwnerCharacter->bUseControllerRotationYaw = InBool;
 	OwnerCharacter->GetCharacterMovement()->bOrientRotationToMovement = !InBool;
+}
+
+void UCMovementComponent::OnSprint()
+{
+	CheckNull(OwnerCharacter);
+	OwnerCharacter->GetCharacterMovement()->MaxWalkSpeed = 1000;
+}
+
+void UCMovementComponent::OffSprint()
+{
+	CheckNull(OwnerCharacter);
+	OwnerCharacter->GetCharacterMovement()->MaxWalkSpeed = 600;
 }
 

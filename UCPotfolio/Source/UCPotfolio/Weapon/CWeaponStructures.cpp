@@ -12,7 +12,7 @@ void FHitData::PlayHitMontage(ACharacter* InCharacter)
 	CheckNull(InCharacter);
 	
 
-	int32 Index = UKismetMathLibrary::RandomInteger((int32)EDamageType::MAX -1);
+	int32 Index = UKismetMathLibrary::RandomInteger(Montage.Num() - 1);
 	CheckNull(Montage[Index]);
 
 	InCharacter->PlayAnimMontage(Montage[Index], PlayRate);
@@ -56,8 +56,12 @@ void FDoActionData::LaunchCharacter(class ACharacter* InSelf, class ACharacter* 
 	CheckNull(LaunchCharacter);
 	CheckNull(InSelf);
 
+
+
 	FVector launchVelocity = InSelf->GetActorForwardVector() * Launch.X;
-	launchVelocity.Z = Launch.Y;
+	
+	launchVelocity.Y = Launch.Y;
+	launchVelocity.Z = Launch.Z;
 
 
 	LaunchCharacter->LaunchCharacter(launchVelocity, false, false);

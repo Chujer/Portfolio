@@ -2,27 +2,38 @@
 
 #include "CMovementComponent.h"
 #include "CStateComponent.h"
+#include "CWeaponComponent.h"
 #include "Global.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/PlayerInput.h"
 #include "Utilities/CLog.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Skill/CSkill.h"
+#include "Weapon/CDoAction.h"
 
 UCRollComponent::UCRollComponent()
 {
 	OwnerCharacter = Cast<ACharacter>(GetOwner());
-
+	PrimaryComponentTick.bCanEverTick = true;
 }
 
 
 void UCRollComponent::BeginPlay()
 {
 	Super::BeginPlay();
+	
+}
 
+void UCRollComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	
 }
 
 void UCRollComponent::Roll()
 {
+
 	FVector direction = FVector::ZeroVector;
 
 	direction.X = OwnerCharacter->GetInputAxisValue("MoveForward");
@@ -30,15 +41,19 @@ void UCRollComponent::Roll()
 
 	FRotator rotate = UKismetMathLibrary::FindLookAtRotation(FVector::ZeroVector, direction);
 
+	UCWeaponComponent* weapon = CHelpers::GetComponent<UCWeaponComponent>(OwnerCharacter.Get());
 	UCMovementComponent* movement = CHelpers::GetComponent<UCMovementComponent>(OwnerCharacter.Get());
 	UCStateComponent* state = CHelpers::GetComponent<UCStateComponent>(OwnerCharacter.Get());
 
+	CheckNull(weapon);
 	CheckNull(movement);
 	CheckNull(state);
-
 	CheckTrue(state->IsRollMode());
 
 	movement->Stop();
+
+	weapon->Cansle();
+
 
 	if (rotate.Yaw == -90.0f) // аб
 	{

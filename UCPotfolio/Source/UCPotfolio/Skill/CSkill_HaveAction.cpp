@@ -49,3 +49,11 @@ void UCSkill_HaveAction::EndSkillAction(int Index)
 		break;
 	}
 }
+
+void UCSkill_HaveAction::Cansle()
+{
+	EndSkillAction1();
+	EndSkillAction2();
+	EndSkillAction3();
+	EndSkillAction4();
+}

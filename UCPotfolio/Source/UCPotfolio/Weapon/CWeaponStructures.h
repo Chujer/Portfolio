@@ -28,14 +28,17 @@ public:
 	UPROPERTY(EditAnywhere)
 		bool bCanMove = true;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Effect")
 		class UFXSystemAsset* Effect;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Effect")
 		FVector EffectLocation = FVector::ZeroVector;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Effect")
 		FVector EffectScale = FVector::OneVector;
+
+	UPROPERTY(EditAnywhere, Category = "Effect")
+		FName SocketName = FName("");
 };
 
 USTRUCT()
@@ -86,7 +89,7 @@ public:
 		float Power;
 
 	UPROPERTY(EditAnywhere)
-		FVector2D Launch = FVector2D(100.0f, 0);
+		FVector Launch = FVector(100.0f, 0,0);
 	
 	UPROPERTY(EditAnywhere)
 		float StopTime;

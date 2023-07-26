@@ -21,7 +21,7 @@ public:
 
 	void BeginPlay(class ACharacter* InOwner);
 
-
+	void SwapDoAction();
 
 private:
 	UPROPERTY(EditAnywhere)
@@ -29,6 +29,9 @@ private:
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<class UCDoAction> DoActionClass;
+
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<class UCDoAction> DoAirActionClass;
 
 	UPROPERTY(EditAnywhere)
 		TArray<FDoActionData> DoActionDatas;
@@ -39,4 +42,9 @@ private:
 
 	UPROPERTY()
 		class UCDoAction* DoAction;
+	UPROPERTY()
+		class UCDoAction* NormalDoAction;
+
+	UPROPERTY()
+		class UCDoAction* AirDoAction;
 };

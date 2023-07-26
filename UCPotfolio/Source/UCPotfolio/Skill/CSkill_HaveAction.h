@@ -25,5 +25,6 @@ public:
 
 public:
 	virtual void EndSkillAction(int Index);
+	virtual void Cansle();
 
 };

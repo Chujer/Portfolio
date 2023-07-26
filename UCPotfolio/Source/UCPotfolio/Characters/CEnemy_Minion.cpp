@@ -61,6 +61,7 @@ void ACEnemy_Minion::ApplyDamage(ACharacter* InAttacker, AActor* InAttackCauser,
 
 		SetActorRotation(rotate);
 	}
+	HitDataAssets->PlayHitEffect(this, InDamageType);
 	HitDataAssets->PlayHitMontage(this, InDamageType);
 	StateComponent->SetHittedMode();
 
@@ -72,6 +73,10 @@ void ACEnemy_Minion::ApplyDamageTimer(ACharacter* InAttacker, AActor* InAttackCa
 {
 	Attacker = InAttacker;
 	AttackCauser = InAttackCauser;
+	NormalDamageType = InNormalDamageType;
+	LastDamageType = InLastDamageType;
+	NormalDamagePower = InNormalPower;
+	LastDamagePower = InLastPower;
 	IICharacter::ApplyDamageTimer(InAttacker, InAttackCauser, InNormalDamageType, InLastDamageType, InNormalPower,
 	                              InLastPower, Interval, EndTime);
 	
@@ -82,14 +87,14 @@ void ACEnemy_Minion::ApplyDamageTimer(ACharacter* InAttacker, AActor* InAttackCa
 	timerDelegate.BindLambda([&]()
 	{
 		if(!!Attacker && InAttackCauser)
-			ApplyDamage(Attacker, AttackCauser, EDamageType::NORMAL, 2.5f);
+			ApplyDamage(Attacker, AttackCauser, NormalDamageType, NormalDamagePower);
 	});
 
 	timerDelegate2.BindLambda([&]()
 	{
 		if (!!Attacker && InAttackCauser)
 		{
-			ApplyDamage(Attacker, AttackCauser, EDamageType::NORMAL, 5.0f);
+			ApplyDamage(Attacker, AttackCauser, LastDamageType, LastDamagePower);
 		}
 		GetWorld()->GetTimerManager().ClearTimer(timer);
 		GetWorld()->GetTimerManager().ClearTimer(timer2);

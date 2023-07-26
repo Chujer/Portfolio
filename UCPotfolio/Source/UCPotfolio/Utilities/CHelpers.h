@@ -80,6 +80,12 @@ public:
 	}
 
 	template<typename T>
+	static T* GetComponent(TWeakObjectPtr<AActor> InActor)
+	{
+		return Cast<T>(InActor->GetComponentByClass(T::StaticClass()));
+	}
+
+	template<typename T>
 	static  TArray<T*> GetComponents(AActor* InActor)
 	{
 		TArray<T*> temp;

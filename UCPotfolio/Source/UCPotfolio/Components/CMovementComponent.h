@@ -37,6 +37,9 @@ public:
 
 	void SetUseControllYaw(bool InBool);
 
+	void OnSprint();
+	void OffSprint();
+
 private:
 	TWeakObjectPtr<ACharacter> OwnerCharacter;
 
