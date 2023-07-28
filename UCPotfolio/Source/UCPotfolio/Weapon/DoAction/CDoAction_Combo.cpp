@@ -1,6 +1,7 @@
 #include "Weapon/DoAction/CDoAction_Combo.h"
 #include "Global.h"
 #include "Characters/ICharacter.h"
+#include "Components/CGravityComponent.h"
 #include "Components/CStateComponent.h"
 #include "GameFramework/Character.h"
 #include "Utilities/CLog.h"
@@ -14,6 +15,7 @@ void UCDoAction_Combo::DoAction()
 {
 	CheckTrue(DoActionDatas.Num() < 1)
 
+
 	if(bEnable)
 	{
 		bEnable = false;
@@ -25,6 +27,7 @@ void UCDoAction_Combo::DoAction()
 	CheckFalse(State->IsIdleMode());
 	
 	Super::DoAction();
+
 	DoActionDatas[Index].PlayDoAction(OwnerCharacter.Get());
 }
 
@@ -59,6 +62,7 @@ void UCDoAction_Combo::OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* 
 	Hitted.AddUnique(InOther);
 	//공격 판정
 	Cast<IICharacter>(InOther)->ApplyDamage(InAttacker, InAttackCuaser, *(attachment->GetDamageType()), DoActionDatas[Index].Power);
+
 	DoActionDatas[Index].LaunchCharacter(InAttacker, InOther);
 }
 

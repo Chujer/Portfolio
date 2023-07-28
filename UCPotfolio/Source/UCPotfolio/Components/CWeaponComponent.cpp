@@ -16,6 +16,32 @@ UCWeaponComponent::UCWeaponComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
+void UCWeaponComponent::OnStartAirCombo()
+{
+	for(UCWeaponAsset* asset : DataAssets)
+	{
+		if(!!asset)
+		{
+			if(asset->GetDoAction() != asset->GetDoAirAction())
+				asset->SetDoAirAction();
+		}
+	}
+}
+
+void UCWeaponComponent::OnEndAirCombo()
+{
+	for (UCWeaponAsset* asset : DataAssets)
+	{
+		if (!!asset)
+		{
+			if (asset->GetDoAction() != asset->GetDoNormalAction())
+			{
+				asset->SetDoNormalAction();
+			}
+		}
+	}
+}
+
 
 UCDoAction* UCWeaponComponent::GetDoAction()
 {
@@ -63,8 +89,10 @@ void UCWeaponComponent::SetSpearMode()
 
 void UCWeaponComponent::DoAction()
 {
-	if(!!GetDoAction())
+	if (!!GetDoAction())
+	{
 		GetDoAction()->DoAction();
+	}
 }
 
 void UCWeaponComponent::DoSkillF()
@@ -194,10 +222,13 @@ void UCWeaponComponent::BeginPlay()
 		if (!!Asset)
 		{
 			Asset->BeginPlay(OwnerCharacter.Get());
-			GravityComponent->OnStartGravity.AddDynamic(Asset, &UCWeaponAsset::SwapDoAction);
-			GravityComponent->OnEndGravity.AddDynamic(Asset, &UCWeaponAsset::SwapDoAction);
 		}
 	}
+
+	CheckNull(GravityComponent);
+
+	GravityComponent->OnStartZeroGravity.AddDynamic(this, &UCWeaponComponent::OnStartAirCombo);
+	GravityComponent->OnEndZeroGravity.AddDynamic(this, &UCWeaponComponent::OnEndAirCombo);
 
 	Super::BeginPlay();
 }

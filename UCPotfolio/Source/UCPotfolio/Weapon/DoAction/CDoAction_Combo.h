@@ -14,6 +14,7 @@ public:
 
 public:
 	FORCEINLINE void EnableCombo() { bEnable = true; }
+	FORCEINLINE bool GetEnableCombo() { return bEnable; }
 	FORCEINLINE void DisableCombo() { bEnable = false; }
 
 public:
@@ -24,7 +25,7 @@ public:
 public:
 	virtual void OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* InAttackCuaser, ACharacter* InOther) override;
 	virtual void OnAttachmentEndCollision() override;
-private:
+protected:
 	int32 Index;
 
 	bool bEnable;

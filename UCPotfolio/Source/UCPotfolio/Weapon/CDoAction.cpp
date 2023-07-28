@@ -21,7 +21,9 @@ void UCDoAction::BeginPlay(ACharacter* InOwner, const TArray<FDoActionData>& InD
 void UCDoAction::DoAction()
 {
 	bInAction = true;
+	CLog::Print(State->IsIdleMode(), 3);
 	State->SetActionMode();
+
 }
 
 void UCDoAction::Begin_DoAction()

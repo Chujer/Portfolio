@@ -60,6 +60,14 @@ void CLog::Print(int32 InValue, int32 InKey, float InDuration, FColor InColor)
 	GEngine->AddOnScreenDebugMessage(InKey, InDuration, InColor, FString::FromInt(InValue));
 }
 
+void CLog::Print(bool InValue, int32 InKey, float InDuration, FColor InColor)
+{
+	if(InValue)
+		GEngine->AddOnScreenDebugMessage(InKey, InDuration, InColor, "true");
+	else
+		GEngine->AddOnScreenDebugMessage(InKey, InDuration, InColor, "false");
+}
+
 void CLog::Print(float InValue, int32 InKey, float InDuration, FColor InColor)
 {
 	GEngine->AddOnScreenDebugMessage(InKey, InDuration, InColor, FString::SanitizeFloat(InValue));

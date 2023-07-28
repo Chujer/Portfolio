@@ -46,6 +46,16 @@ void UCStateComponent::SetSkillMode()
 	ChangeType(EStateType::Skill);
 }
 
+void UCStateComponent::OnAirComboMode()
+{
+	bAirCombo = true;
+}
+
+void UCStateComponent::OffAirComboMode()
+{
+	bAirCombo = false;
+}
+
 void UCStateComponent::OnDoCancelMode()
 {
 	bDoCancel = true;

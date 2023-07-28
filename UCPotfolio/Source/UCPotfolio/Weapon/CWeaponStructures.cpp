@@ -53,14 +53,14 @@ void FDoActionData::PlayDoAction(ACharacter* InCharacter)
 
 void FDoActionData::LaunchCharacter(class ACharacter* InSelf, class ACharacter* LaunchCharacter)
 {
+
 	CheckNull(LaunchCharacter);
 	CheckNull(InSelf);
-
-
 
 	FVector launchVelocity = InSelf->GetActorForwardVector() * Launch.X;
 	
 	launchVelocity.Y = Launch.Y;
+
 	launchVelocity.Z = Launch.Z;
 
 

@@ -10,7 +10,7 @@
 #include "GameFramework/Character.h"
 
 #define CheckTrue(x) { if(x == true) return; }
-#define CheckFalse(x) {if(x==false) return;}
+#define CheckFalse(x) {if(x == false) return;}
 
 #define CheckTrueResult(x, y) { if(x == true) return y; }
 #define CheckFalseResult(x, y) { if(x == false) return y;}

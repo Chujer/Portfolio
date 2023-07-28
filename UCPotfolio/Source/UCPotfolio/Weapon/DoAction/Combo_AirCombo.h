@@ -10,6 +10,7 @@ class UCPOTFOLIO_API UCombo_AirCombo : public UCDoAction_Combo
 	GENERATED_BODY()
 
 public:
+	virtual void BeginPlay(ACharacter* InOwner, const TArray<FDoActionData>& InDoActionDatas) override;
 	virtual void DoAction() override;
 	virtual void OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* InAttackCuaser, ACharacter* InOther) override;
 };

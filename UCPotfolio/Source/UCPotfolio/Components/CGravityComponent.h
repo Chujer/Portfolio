@@ -4,8 +4,8 @@
 #include "Components/ActorComponent.h"
 #include "CGravityComponent.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnStartGravity);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEndGravity);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnStartZeroGravity);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEndZeroGravity);
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class UCPOTFOLIO_API UCGravityComponent : public UActorComponent
 {
@@ -20,16 +20,21 @@ protected:
 public:
 	void StartZeroGravity();
 	void EndZeroGravity();
+	void ResetGravityTime();
 
 public:
-	FORCEINLINE void ResetGravityTime() { GravityTime = 0; }
+	UFUNCTION()
+	void OnLanded(const FHitResult& Hit);
+
+public:
+	FORCEINLINE bool IsZeroGravity() { return bZeroGravity; }
 
 public:	
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 public:
-	FOnStartGravity OnStartGravity;
-	FOnEndGravity OnEndGravity;
+	FOnStartZeroGravity OnStartZeroGravity;
+	FOnEndZeroGravity OnEndZeroGravity;
 
 private:
 	class ACharacter* Character;

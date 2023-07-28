@@ -4,6 +4,27 @@
 #include "CDoAction.h"
 #include "GameFramework/Character.h"
 
+
+void UCWeaponAsset::SetDoAirAction()
+{
+	if (!!Attachment)
+	{
+		Attachment->OnAttachmentBeginOverlap.RemoveDynamic(DoAction, &UCDoAction::OnAttachmentBeginOverlap);
+		DoAction = DoAirAction;
+		Attachment->OnAttachmentBeginOverlap.AddDynamic(DoAction, &UCDoAction::OnAttachmentBeginOverlap);
+	}
+}
+
+void UCWeaponAsset::SetDoNormalAction()
+{ 
+	if (!!Attachment)
+	{
+		Attachment->OnAttachmentBeginOverlap.RemoveDynamic(DoAction, &UCDoAction::OnAttachmentBeginOverlap);
+		DoAction = DoNormalAction;
+		Attachment->OnAttachmentBeginOverlap.AddDynamic(DoAction, &UCDoAction::OnAttachmentBeginOverlap);
+	}
+}
+
 UCWeaponAsset::UCWeaponAsset()
 {
 	AttachmentClass = ACAttachment::StaticClass();
@@ -22,9 +43,9 @@ void UCWeaponAsset::BeginPlay(ACharacter* InOwner)
 
 	if(!!DoActionClass)
 	{
-		DoAction = NewObject<UCDoAction>(this, DoActionClass);
-		NormalDoAction = DoAction;
-		DoAction->BeginPlay(InOwner, DoActionDatas);
+		DoNormalAction = NewObject<UCDoAction>(this, DoActionClass);
+		DoNormalAction->BeginPlay(InOwner, DoActionDatas);
+		DoAction = DoNormalAction;
 		if (!!Attachment)
 		{
 			Attachment->OnAttachmentBeginCollision.AddDynamic(DoAction, &UCDoAction::OnAttachmentBeginCollision);
@@ -33,21 +54,13 @@ void UCWeaponAsset::BeginPlay(ACharacter* InOwner)
 			Attachment->OnAttachmentBeginOverlap.AddDynamic(DoAction, &UCDoAction::OnAttachmentBeginOverlap);
 			Attachment->OnAttachmentEndOverlap.AddDynamic(DoAction, &UCDoAction::OnAttachmentEndOverlap);
 		}
+
 	}
 
 	if (!!DoAirActionClass)
 	{
-		AirDoAction = NewObject<UCDoAction>(this, DoAirActionClass);
-		AirDoAction->BeginPlay(InOwner, DoActionDatas);
+		DoAirAction = NewObject<UCDoAction>(this, DoAirActionClass);
+		DoAirAction->BeginPlay(InOwner, DoAirActionDatas);
+		Attachment->OnAttachmentEndCollision.AddDynamic(DoAirAction, &UCDoAction::OnAttachmentEndCollision);
 	}
-}
-
-void UCWeaponAsset::SwapDoAction()
-{
-	if (DoAction == AirDoAction)
-		DoAction = NormalDoAction;
-
-	if (DoAction == NormalDoAction)
-		DoAction = AirDoAction;
-	
 }

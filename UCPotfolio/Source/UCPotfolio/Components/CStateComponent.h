@@ -26,6 +26,8 @@ public:
 	FORCEINLINE bool IsRollMode() { return Type == EStateType::Roll; }
 	FORCEINLINE bool IsSkillMode() { return Type == EStateType::Skill; }
 
+	FORCEINLINE bool IsAirComboMode() { return bAirCombo; }
+
 	FORCEINLINE bool IsDoCancel() { return bDoCancel; }
 
 public:	
@@ -39,6 +41,9 @@ public:
 	void SetActionMode();
 	void SetRollMode();
 	void SetSkillMode();
+
+	void OnAirComboMode();
+	void OffAirComboMode();
 
 	void OnDoCancelMode();
 	void OffDoCancelMode();
@@ -59,4 +64,5 @@ private:
 
 private:
 	bool bDoCancel;
+	bool bAirCombo = false;
 };

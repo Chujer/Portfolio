@@ -26,9 +26,14 @@ private:
 
 public:
 	FORCEINLINE bool IsUnarmedMode() { return Type == EWeaponType::Max; }
-
 public:	
 	UCWeaponComponent();
+
+public:
+	UFUNCTION()
+		void OnStartAirCombo();
+	UFUNCTION()
+		void OnEndAirCombo();
 
 public:
 	class UCDoAction* GetDoAction();

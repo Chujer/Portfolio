@@ -98,7 +98,7 @@ public:
 		class USoundWave* Sound;
 
 	UPROPERTY(EditAnywhere)
-		bool bWithLaunch;
+		bool bWithLaunch = false;
 
 public:
 	void PlayDoAction(class ACharacter* InCharacter);
