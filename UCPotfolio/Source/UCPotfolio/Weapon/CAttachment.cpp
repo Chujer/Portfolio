@@ -28,7 +28,7 @@ void ACAttachment::BeginPlay()
 		{
 			shape->OnComponentBeginOverlap.AddDynamic(this, &ACAttachment::OnComponentBeginOverlap);
 			shape->OnComponentEndOverlap.AddDynamic(this, &ACAttachment::OnComponentEndOverlap);
-
+			shape->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 			Collisions.Add(shape);
 		}
 	}

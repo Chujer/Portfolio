@@ -63,3 +63,11 @@ void UCSkill_Nomal::Released()
 	Super::Released();
 
 }
+
+void UCSkill_Nomal::Cansle()
+{
+	Super::Cansle();
+
+	End_Skill_Implementation();
+	Attachment->ClearCurrentSkill();
+}

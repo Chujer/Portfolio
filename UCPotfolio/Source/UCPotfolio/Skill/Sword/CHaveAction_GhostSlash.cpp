@@ -63,8 +63,10 @@ void UCHaveAction_GhostSlash::EndSkillAction1()
 
 	for(int i = GhostTrails.Num()-1; i >=0;i--)
 	{
-		GhostTrails[i]->Destroy();
+		if(!!GhostTrails[i])
+			GhostTrails[i]->Destroy();
 	}
+	GhostTrails.Empty();
 }
 
 void UCHaveAction_GhostSlash::OnAttachmentEndCollision()

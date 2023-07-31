@@ -22,7 +22,7 @@ public:
 public:
 	virtual void Pressed() override;
 	virtual void Released() override;
-
+	virtual void Cansle() override;
 
 
 protected:

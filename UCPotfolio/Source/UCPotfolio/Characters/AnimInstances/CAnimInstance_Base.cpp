@@ -25,4 +25,39 @@ void UCAnimInstance_Base::NativeUpdateAnimation(float DeltaSeconds)
 	Direction = PrevRotation.Yaw;
 
 	Pitch = UKismetMathLibrary::FInterpTo(Pitch, OwnerCharacter->GetBaseAimRotation().Pitch, DeltaSeconds, 25);
+
+	//다운상태
+	if(bDown)
+	{
+		DownTime += DeltaSeconds;
+		if(DownTime > MaxDownTime)
+		{
+			bDown = false;
+			DownTime = 0;
+
+			//기상 애니메이션 재생
+			if (DownDirection > 0)
+			{
+				OwnerCharacter->PlayAnimMontage(BackWakeupMontage);
+			}
+			else
+				OwnerCharacter->PlayAnimMontage(FrontWakeupMontage);
+		}
+	}
+}
+
+void UCAnimInstance_Base::SetFrontWakeupMontage(UAnimMontage* Montage)
+{
+	FrontWakeupMontage = Montage;
+}
+
+void UCAnimInstance_Base::SetBackWakeupMontage(UAnimMontage* Montage)
+{
+	BackWakeupMontage = Montage;
+}
+
+void UCAnimInstance_Base::SetAnimDown(float InDownDirection)
+{
+	this->MaxDownTime = InDownDirection;
+	bDown = true;
 }

@@ -1,6 +1,7 @@
 #include "Characters/CEnemy_Minion.h"
 #include "Global.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/CGravityComponent.h"
 #include "Components/CStateComponent.h"
 #include "Components/CStatusComponent.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -27,6 +28,7 @@ ACEnemy_Minion::ACEnemy_Minion()
 void ACEnemy_Minion::BeginPlay()
 {
 	Super::BeginPlay();
+	CHelpers::GetComponent<UCGravityComponent>(this)->OnEndZeroGravity.AddDynamic(this, &ACEnemy_Minion::OnEndZeroGravity);
 }
 
 void ACEnemy_Minion::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -113,6 +115,7 @@ void ACEnemy_Minion::ApplyDamageTimer(ACharacter* InAttacker, AActor* InAttackCa
 void ACEnemy_Minion::End_Hitted()
 {
 	StateComponent->SetIdleMode();
+	CheckTrue(StateComponent->IsAirComboMode());
 	GetCapsuleComponent()->SetCollisionProfileName("Enemy");
 
 }
@@ -124,4 +127,10 @@ void ACEnemy_Minion::End_Dead()
 void ACEnemy_Minion::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+	CLog::Print((GetCapsuleComponent()->GetCollisionProfileName()).ToString(),2); 
+}
+
+void ACEnemy_Minion::OnEndZeroGravity()
+{
+	GetCapsuleComponent()->SetCollisionProfileName("Enemy");
 }

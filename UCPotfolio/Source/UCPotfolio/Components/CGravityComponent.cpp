@@ -37,11 +37,24 @@ void UCGravityComponent::StartZeroGravity()
 		OnStartZeroGravity.Broadcast();
 }
 
+void UCGravityComponent::ResetGravityTime()
+{
+	GravityTime = 0;
+	bZeroGravity = true;
+	CharacterMovementComponent->Velocity.Z = 0;
+	CharacterMovementComponent->GravityScale = 0;
+
+
+	UCStateComponent* state = CHelpers::GetComponent<UCStateComponent>(Character);
+	CheckNull(state);
+	state->OnAirComboMode();
+}
+
 void UCGravityComponent::EndZeroGravity()
 {
 	bZeroGravity = false;
 	GravityTime = 0;
-	CharacterMovementComponent->GravityScale = 2;
+	CharacterMovementComponent->GravityScale = 1;
 }
 
 void UCGravityComponent::OnLanded(const FHitResult& Hit)
@@ -55,19 +68,6 @@ void UCGravityComponent::OnLanded(const FHitResult& Hit)
 
 	if (OnEndZeroGravity.IsBound())
 		OnEndZeroGravity.Broadcast();
-}
-
-void UCGravityComponent::ResetGravityTime()
-{
-	CharacterMovementComponent->Velocity.Z = 0;
-	CharacterMovementComponent->GravityScale = 0;
-	bZeroGravity = true;
-
-	GravityTime = 0;
-
-	UCStateComponent* state = CHelpers::GetComponent<UCStateComponent>(Character);
-	CheckNull(state);
-	state->OnAirComboMode();
 }
 
 void UCGravityComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)

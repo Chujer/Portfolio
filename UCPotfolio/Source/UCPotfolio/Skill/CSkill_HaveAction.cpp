@@ -56,4 +56,6 @@ void UCSkill_HaveAction::Cansle()
 	EndSkillAction2();
 	EndSkillAction3();
 	EndSkillAction4();
+	End_Skill_Implementation();
+	Attachment->ClearCurrentSkill();
 }

@@ -15,7 +15,6 @@ void UCDoAction_Combo::DoAction()
 {
 	CheckTrue(DoActionDatas.Num() < 1)
 
-
 	if(bEnable)
 	{
 		bEnable = false;

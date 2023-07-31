@@ -67,6 +67,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Skill")
 	TSubclassOf<UCSkill> SkillsClass[(int32)ESkillIndex::MAX];
 
+	UPROPERTY()
 	class UCSkill* Skills[(int32)ESkillIndex::MAX];
 	TWeakObjectPtr<UCSkill> CurrentSkill;
 protected:

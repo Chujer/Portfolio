@@ -17,8 +17,7 @@ protected:
 	virtual void BeginPlay() override;
 public:
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
-
-
+	void OnActorHitted(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit);
 public:
 	virtual void Tick(float DeltaSeconds) override;
 

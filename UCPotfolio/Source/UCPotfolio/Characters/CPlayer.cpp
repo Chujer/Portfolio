@@ -70,7 +70,6 @@ void ACPlayer::BeginPlay()
 	Super::BeginPlay();
 
 	MovementComponent->SetUseControllYaw(false);
-
 }
 
 
@@ -112,5 +111,6 @@ void ACPlayer::Tick(float DeltaSeconds)
 		CLog::Print("true", 20);
 	else
 		CLog::Print("false", 20);
-
 }
+
+

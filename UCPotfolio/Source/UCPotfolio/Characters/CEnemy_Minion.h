@@ -27,8 +27,9 @@ public:
 public:
 	virtual void Tick(float DeltaSeconds) override;
 
-
-
+public:
+	UFUNCTION()
+		void OnEndZeroGravity();
 private:
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCStateComponent* StateComponent;

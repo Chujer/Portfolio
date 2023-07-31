@@ -23,9 +23,30 @@ public:
 	virtual void NativeBeginPlay() override;
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 
+public:
+	UFUNCTION(BlueprintCallable)
+		void SetFrontWakeupMontage(UAnimMontage* InMontage);
+
+	UFUNCTION(BlueprintCallable)
+		void SetBackWakeupMontage(UAnimMontage* InMontage);
+
+	UFUNCTION(BlueprintCallable)
+		void SetAnimDown(float InDownDirection);
 protected:
 	class ACharacter* OwnerCharacter;
 
 private:
 	FRotator PrevRotation;
+
+	float MaxDownTime = 2.0f;
+	float DownTime = 0;
+
+protected:
+	UPROPERTY(BlueprintReadOnly)
+		bool bDown = false;
+	UPROPERTY(BlueprintReadOnly)
+	float DownDirection = 0;
+private:
+	class UAnimMontage* FrontWakeupMontage;
+	class UAnimMontage* BackWakeupMontage;
 };
