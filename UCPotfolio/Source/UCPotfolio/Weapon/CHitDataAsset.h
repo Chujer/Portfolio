@@ -16,5 +16,7 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere)
+		UAnimMontage* IPKnockDownMontage;
+	UPROPERTY(EditAnywhere)
 		FHitData HitDatas[(int32)EDamageType::MAX];
 };

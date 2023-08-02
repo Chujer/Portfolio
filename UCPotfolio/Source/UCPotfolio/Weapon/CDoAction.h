@@ -45,4 +45,5 @@ protected:
 
 	TWeakObjectPtr<ACharacter> OwnerCharacter;
 	TArray<FDoActionData> DoActionDatas;
+
 };

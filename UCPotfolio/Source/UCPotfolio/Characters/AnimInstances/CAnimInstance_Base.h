@@ -35,17 +35,16 @@ public:
 protected:
 	class ACharacter* OwnerCharacter;
 
-private:
+	float MaxDownTime = 1.5f;
 	FRotator PrevRotation;
-
-	float MaxDownTime = 2.0f;
 	float DownTime = 0;
 
 protected:
 	UPROPERTY(BlueprintReadOnly)
 		bool bDown = false;
 	UPROPERTY(BlueprintReadOnly)
-	float DownDirection = 0;
+		float DownDirection = 0;
+
 private:
 	class UAnimMontage* FrontWakeupMontage;
 	class UAnimMontage* BackWakeupMontage;

@@ -95,10 +95,13 @@ public:
 		float StopTime;
 
 	UPROPERTY(EditAnywhere)
-		class USoundWave* Sound;
+		class USoundWave* HittingSound;
 
 	UPROPERTY(EditAnywhere)
 		bool bWithLaunch = false;
+public:
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<UMatineeCameraShake> CameraShakeClass;
 
 public:
 	void PlayDoAction(class ACharacter* InCharacter);

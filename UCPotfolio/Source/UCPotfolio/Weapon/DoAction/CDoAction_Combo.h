@@ -30,7 +30,7 @@ protected:
 
 	bool bEnable;
 	bool bExist;
-
+	bool bHitStop = false;
 protected:
 	TArray<class ACharacter*> Hitted;
 };

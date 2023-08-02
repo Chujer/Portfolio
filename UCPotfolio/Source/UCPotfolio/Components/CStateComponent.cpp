@@ -1,4 +1,5 @@
 #include "Components/CStateComponent.h"
+#include "Global.h"
 
 UCStateComponent::UCStateComponent()
 {
@@ -79,6 +80,6 @@ void UCStateComponent::ChangeType(EStateType InType)
 void UCStateComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
+	CLog::Print(IsSkillMode());
 }
 

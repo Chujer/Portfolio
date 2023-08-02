@@ -1,11 +1,20 @@
 #include "Weapon/CHitDataAsset.h"
 
 #include "Global.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 void UCHitDataAsset::PlayHitMontage(ACharacter* InCharacter, EDamageType InDamageType)
 {
-	if(!!HitDatas)
-		HitDatas[(int32)InDamageType].PlayHitMontage(InCharacter);
+	if(InCharacter->GetCharacterMovement()->IsFalling())
+	{
+		if (!!IPKnockDownMontage)
+			InCharacter->PlayAnimMontage(IPKnockDownMontage);
+	}
+	else
+	{
+		if (!!HitDatas)
+			HitDatas[(int32)InDamageType].PlayHitMontage(InCharacter);
+	}
 }
 
 void UCHitDataAsset::PlayHitEffect(ACharacter* InCharacter, EDamageType InDamageType)

@@ -10,7 +10,7 @@ void UCombo_AirCombo::BeginPlay(ACharacter* InOwner, const TArray<FDoActionData>
 
 void UCombo_AirCombo::DoAction()
 {
-	UCDoAction_Combo::DoAction();
+	UCDoAction_Combo::DoAction();  
 	CheckFalse(State->IsIdleMode());
 
 	UCGravityComponent* gravityComponent = CHelpers::GetComponent<UCGravityComponent>(OwnerCharacter);
@@ -19,18 +19,28 @@ void UCombo_AirCombo::DoAction()
 
 void UCombo_AirCombo::OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* InAttackCuaser, ACharacter* InOther)
 {
+	CheckTrue(State->IsSkillMode());
 	Super::OnAttachmentBeginOverlap(InAttacker, InAttackCuaser, InOther);
 	UCGravityComponent* gravityComponent = CHelpers::GetComponent<UCGravityComponent>(InAttacker);
 	CheckNull(gravityComponent);
 	CheckFalse(State.Get()->IsAirComboMode());
-	
-	gravityComponent->ResetGravityTime();
-	
 
-	for(ACharacter* target : Hitted)
+	//공중콤보 마지막 공격일시 중력및 가속도 초기화를하지않음
+	if(Index == DoActionDatas.Num() - 1)
 	{
-
-		UCGravityComponent* gravity = CHelpers::GetComponent<UCGravityComponent>(target);
-		gravity->ResetGravityTime();
+		//if(gravityComponent->OnEndZeroGravity.IsBound())
+		//	gravityComponent->OnEndZeroGravity.Broadcast();
 	}
+	else
+	{
+		gravityComponent->ResetGravityTime();
+
+
+		for (ACharacter* target : Hitted)
+		{
+			UCGravityComponent* gravity = CHelpers::GetComponent<UCGravityComponent>(target);
+			gravity->ResetGravityTime();
+		}
+	}
+		
 }

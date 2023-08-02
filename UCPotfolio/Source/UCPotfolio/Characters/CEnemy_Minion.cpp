@@ -42,8 +42,6 @@ void ACEnemy_Minion::ApplyDamage(ACharacter* InAttacker, AActor* InAttackCauser,
 
 	CheckNull(HitDataAssets);
 
-	CLog::Print(InAttacker->GetName());
-
 	StatusComponent->Damage(Power);
 
 	if (StatusComponent->GetHealth() <= 0.0f)
@@ -65,10 +63,12 @@ void ACEnemy_Minion::ApplyDamage(ACharacter* InAttacker, AActor* InAttackCauser,
 		SetActorRotation(rotate);
 	}
 	HitDataAssets->PlayHitEffect(this, InDamageType);
-	HitDataAssets->PlayHitMontage(this, InDamageType);
-	StateComponent->SetHittedMode();
 
+	StateComponent->SetHittedMode();
+	
 	GetCapsuleComponent()->SetCollisionProfileName("HitEnemy");
+
+	HitDataAssets->PlayHitMontage(this, InDamageType);
 }
 
 void ACEnemy_Minion::ApplyDamageTimer(ACharacter* InAttacker, AActor* InAttackCauser, EDamageType InNormalDamageType,
@@ -83,7 +83,6 @@ void ACEnemy_Minion::ApplyDamageTimer(ACharacter* InAttacker, AActor* InAttackCa
 	IICharacter::ApplyDamageTimer(InAttacker, InAttackCauser, InNormalDamageType, InLastDamageType, InNormalPower,
 	                              InLastPower, Interval, EndTime);
 	
-	// TODO : 수정 요망 람다라그런지 적용이 안됨
 	FTimerDelegate timerDelegate;
 	FTimerDelegate timerDelegate2;
 

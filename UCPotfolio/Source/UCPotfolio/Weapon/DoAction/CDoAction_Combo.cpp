@@ -4,7 +4,7 @@
 #include "Components/CGravityComponent.h"
 #include "Components/CStateComponent.h"
 #include "GameFramework/Character.h"
-#include "Utilities/CLog.h"
+#include "Utilities/CWorldController.h"
 #include "Weapon/CAttachment.h"
 
 UCDoAction_Combo::UCDoAction_Combo()
@@ -62,12 +62,24 @@ void UCDoAction_Combo::OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* 
 	//공격 판정
 	Cast<IICharacter>(InOther)->ApplyDamage(InAttacker, InAttackCuaser, *(attachment->GetDamageType()), DoActionDatas[Index].Power);
 
+	if (bHitStop == false)
+	{
+		CWorldController::PlayStopWorld(OwnerCharacter->GetWorld(), DoActionDatas[Index].StopTime);
+		bHitStop = true;
+	}
+
+	//카메라 쉐이크
+	OwnerCharacter->GetController<APlayerController>()->PlayerCameraManager->PlayCameraShake(DoActionDatas[Index].CameraShakeClass);
+
+	if(!!DoActionDatas[Index].HittingSound)
+		UGameplayStatics::SpawnSoundAtLocation(OwnerCharacter->GetWorld(), DoActionDatas[Index].HittingSound, InOther->GetActorLocation());
+
 	DoActionDatas[Index].LaunchCharacter(InAttacker, InOther);
 }
 
 void UCDoAction_Combo::OnAttachmentEndCollision()
 {
 	Super::OnAttachmentEndCollision();
-
+	bHitStop = false;
 	Hitted.Empty();
 }

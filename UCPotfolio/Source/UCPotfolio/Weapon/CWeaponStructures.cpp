@@ -59,14 +59,14 @@ void FDoActionData::LaunchCharacter(class ACharacter* InSelf, class ACharacter* 
 
 	FVector launchVelocity = InSelf->GetActorForwardVector() * Launch.X;
 	
-	launchVelocity.Y = Launch.Y;
+	//launchVelocity.Y = Launch.Y;
 
 	launchVelocity.Z = Launch.Z;
 
-	LaunchCharacter->LaunchCharacter(launchVelocity, false, true);
+	LaunchCharacter->LaunchCharacter(launchVelocity, true, true);
 
 	//공격자도 함께 런치
 	CheckFalse(bWithLaunch);
 	//InSelf->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	InSelf->LaunchCharacter(launchVelocity, false, true);
+	InSelf->LaunchCharacter(launchVelocity, true, true);
 }

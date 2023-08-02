@@ -58,6 +58,6 @@ void UCAnimInstance_Base::SetBackWakeupMontage(UAnimMontage* Montage)
 
 void UCAnimInstance_Base::SetAnimDown(float InDownDirection)
 {
-	this->MaxDownTime = InDownDirection;
+	this->DownDirection = InDownDirection;
 	bDown = true;
 }
