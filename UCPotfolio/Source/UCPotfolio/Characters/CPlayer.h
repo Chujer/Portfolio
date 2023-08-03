@@ -33,4 +33,7 @@ private:
 
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCRollComponent* RollComponent;
+
+	UPROPERTY(VisibleDefaultsOnly)
+		class UCIdentityComponent* IdentityComponent;
 };

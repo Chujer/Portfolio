@@ -9,6 +9,7 @@
 #include "Weapon/CWeaponAsset.h"
 #include "GameFramework/Character.h"
 #include "Components/CStateComponent.h"
+#include "Components/CIdentityComponent.h"
 #include "Utilities/CLog.h"
 
 UCWeaponComponent::UCWeaponComponent()
@@ -186,6 +187,8 @@ void UCWeaponComponent::SetMode(EWeaponType InType)
 		if (newAttachment->OnEquip.IsBound())
 			newAttachment->OnEquip.Broadcast();
 	}
+
+	
 }
 
 void UCWeaponComponent::ChangeType(EWeaponType InType)
@@ -196,6 +199,9 @@ void UCWeaponComponent::ChangeType(EWeaponType InType)
 
 	if (OnWeaponTypeChange.IsBound())
 		OnWeaponTypeChange.Broadcast(prevType, InType);
+
+	if (IdentityComponent->OnSetWeaponType.IsBound())
+		IdentityComponent->OnSetWeapon(InType);
 
 	UCMovementComponent* movementComponent = CHelpers::GetComponent<UCMovementComponent>(OwnerCharacter.Get());
 	CheckNull(movementComponent);
@@ -208,6 +214,7 @@ void UCWeaponComponent::ChangeType(EWeaponType InType)
 	{
 		movementComponent->SetUseControllYaw(true);
 	}
+
 }
 
 
@@ -216,6 +223,7 @@ void UCWeaponComponent::BeginPlay()
 	OwnerCharacter = Cast<ACharacter>(GetOwner());
 	StateComponent = CHelpers::GetComponent<UCStateComponent>(OwnerCharacter);
 	GravityComponent = CHelpers::GetComponent<UCGravityComponent>(OwnerCharacter);
+	IdentityComponent = CHelpers::GetComponent<UCIdentityComponent>(OwnerCharacter);
 
 	for(UCWeaponAsset* Asset : DataAssets)
 	{

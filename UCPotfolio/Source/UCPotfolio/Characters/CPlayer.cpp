@@ -4,6 +4,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/CIdentityComponent.h"
 #include "Components/CMovementComponent.h"
 #include "Components/InputComponent.h"
 #include "Components/CWeaponComponent.h"
@@ -25,6 +26,7 @@ ACPlayer::ACPlayer()
 	CHelpers::CreateActorComponent<UCWeaponComponent>(this, &WeaponComponent, "WeaponComponent");
 	CHelpers::CreateActorComponent<UCStateComponent>(this, &StateComponent, "StateComponent");
 	CHelpers::CreateActorComponent<UCRollComponent>(this, &RollComponent, "RollComponent");
+	CHelpers::CreateActorComponent<UCIdentityComponent>(this, &IdentityComponent, "IdentityComponent");
 
 	//Ä¡Àå (Çï¸ä, °ËÁý)
 	USkeletalMeshComponent* helmet;
@@ -97,6 +99,8 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("SkillV", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillV);
 	PlayerInputComponent->BindAction("SkillE", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillE);
 	PlayerInputComponent->BindAction("SkillQ", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillQ);
+
+	PlayerInputComponent->BindAction("Identity", EInputEvent::IE_Pressed, IdentityComponent, &UCIdentityComponent::DoIdentity);
 
 	PlayerInputComponent->BindAction("SkillF", EInputEvent::IE_Released, WeaponComponent, &UCWeaponComponent::Released);
 	PlayerInputComponent->BindAction("SkillR", EInputEvent::IE_Released, WeaponComponent, &UCWeaponComponent::Released);

@@ -72,4 +72,5 @@ private:
 	EWeaponType Type = EWeaponType::Max;
 	class UCStateComponent* StateComponent;
 	class UCGravityComponent* GravityComponent;
+	class UCIdentityComponent* IdentityComponent;
 };
