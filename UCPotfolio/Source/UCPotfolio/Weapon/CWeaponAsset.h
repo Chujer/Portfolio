@@ -43,6 +43,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 		TArray<FDoActionData> DoAirActionDatas;
+
 private:
 	UPROPERTY()
 		class ACAttachment* Attachment;

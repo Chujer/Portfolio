@@ -5,6 +5,14 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Utilities/CLog.h"
 
+bool UCMovementComponent::IsSprint()
+{
+	bSprint &= !OwnerCharacter->GetMovementComponent()->IsFalling();
+	bSprint &= OwnerCharacter->GetVelocity().Size2D() > 850.0f;
+
+	return bSprint;
+}
+
 UCMovementComponent::UCMovementComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
@@ -71,11 +79,13 @@ void UCMovementComponent::OnSprint()
 {
 	CheckNull(OwnerCharacter);
 	OwnerCharacter->GetCharacterMovement()->MaxWalkSpeed = 1000;
+	bSprint = true;
 }
 
 void UCMovementComponent::OffSprint()
 {
 	CheckNull(OwnerCharacter);
 	OwnerCharacter->GetCharacterMovement()->MaxWalkSpeed = 600;
+	bSprint = false;
 }
 

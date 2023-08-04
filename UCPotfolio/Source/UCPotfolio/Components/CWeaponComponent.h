@@ -51,6 +51,7 @@ public:
 	void DoSkillV();
 	void DoSkillR();
 	void DoSkillQ();
+	void DoDashAttack();
 	void Released();
 
 public:

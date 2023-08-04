@@ -90,7 +90,11 @@ void UCWeaponComponent::SetSpearMode()
 
 void UCWeaponComponent::DoAction()
 {
-	if (!!GetDoAction())
+	if(CHelpers::GetComponent<UCMovementComponent>(OwnerCharacter)->IsSprint())
+	{
+		DoDashAttack();
+	}
+	else if (!!GetDoAction())
 	{
 		GetDoAction()->DoAction();
 	}
@@ -137,6 +141,15 @@ void UCWeaponComponent::DoSkillQ()
 	CheckNull(GetAttachment());
 	CheckFalse(StateComponent->IsIdleMode());
 	GetAttachment()->SetCurrentSKill(GetAttachment()->GetSkill((int32)ESkillIndex::Q));	//현재 스킬 설정
+	CheckNull(GetCurrentSkill());
+	GetCurrentSkill()->Pressed();
+}
+
+void UCWeaponComponent::DoDashAttack()
+{
+	CheckNull(GetAttachment());
+	CheckFalse(StateComponent->IsIdleMode());
+	GetAttachment()->SetCurrentSKill(GetAttachment()->GetSkill((int32)ESkillIndex::DashAttack));	//현재 스킬 설정
 	CheckNull(GetCurrentSkill());
 	GetCurrentSkill()->Pressed();
 }

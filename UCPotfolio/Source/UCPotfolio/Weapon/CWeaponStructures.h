@@ -112,7 +112,7 @@ public:
 UENUM()
 enum class ESkillIndex : uint8
 {
-	F= 0, E, V, R, Q, MAX
+	F= 0, E, V, R, Q, DashAttack, MAX
 };
 
 USTRUCT()

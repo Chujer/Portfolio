@@ -20,6 +20,8 @@ public:
 	FORCEINLINE bool GetFixedCamera() { return bFixedCamera; }
 	FORCEINLINE void EnableFixedCamera() { bFixedCamera = true; }
 	FORCEINLINE void DisableFixedCamera() { bFixedCamera = false; }
+
+	bool IsSprint();
 public:	
 	UCMovementComponent();
 
@@ -53,4 +55,5 @@ private:
 	bool bCanMove = true;
 	bool bFixedCamera;
 	bool bTopViewCamera;
+	bool bSprint = false;
 };
