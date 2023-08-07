@@ -3,14 +3,16 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Components/ArrowComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/CIdentityComponent.h"
 #include "Components/CMovementComponent.h"
 #include "Components/InputComponent.h"
 #include "Components/CWeaponComponent.h"
-#include "Components/SkeletalMeshComponent.h"
 #include "Components/CStateComponent.h"
 #include "Components/CRollComponent.h"
+#include "Components/CParkourComponent.h"
 #include "Skill/CSkill.h"
 #include "Utilities/CLog.h"
 
@@ -27,6 +29,8 @@ ACPlayer::ACPlayer()
 	CHelpers::CreateActorComponent<UCStateComponent>(this, &StateComponent, "StateComponent");
 	CHelpers::CreateActorComponent<UCRollComponent>(this, &RollComponent, "RollComponent");
 	CHelpers::CreateActorComponent<UCIdentityComponent>(this, &IdentityComponent, "IdentityComponent");
+	CHelpers::CreateActorComponent<UCParkourComponent>(this, &ParkourComponent, "ParkourComponent");
+	CHelpers::CreateComponent<USceneComponent>(this, &ArrowGroup, "ArrowGroup", GetCapsuleComponent());
 
 	//Ä¡Àå (Çï¸ä, °ËÁý)
 	USkeletalMeshComponent* helmet;
@@ -62,9 +66,12 @@ ACPlayer::ACPlayer()
 
 	Camera->SetRelativeLocation(FVector(0, 0, 80));
 
+	CreateArrow();
+
 	CheckNull(MovementComponent);
 
 	MovementComponent->OffSprint();
+
 }
 
 void ACPlayer::BeginPlay()
@@ -108,6 +115,14 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("SkillE", EInputEvent::IE_Released, WeaponComponent, &UCWeaponComponent::Released);
 }
 
+
+void ACPlayer::Landed(const FHitResult& Hit)
+{
+	Super::Landed(Hit);
+
+	ParkourComponent->DoParkour(true);
+}
+
 void ACPlayer::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
@@ -115,6 +130,48 @@ void ACPlayer::Tick(float DeltaSeconds)
 		CLog::Print("true", 20);
 	else
 		CLog::Print("false", 20);
+}
+
+void ACPlayer::CreateArrow()
+{
+	Arrows.SetNum((int32)EParkourArrowType::Max);
+
+	for(int32 i = 0; i< Arrows.Num(); i++)
+	{
+		FString name = StaticEnum<EParkourArrowType>()->GetNameStringByIndex(i);
+		CHelpers::CreateComponent<UArrowComponent>(this, &Arrows[i], FName(name), ArrowGroup);
+
+		switch ((EParkourArrowType)i)
+		{
+		case EParkourArrowType::Center:
+			Arrows[i]->ArrowColor = FColor::Red;
+			break;
+		case EParkourArrowType::Ceil:
+			Arrows[i]->ArrowColor = FColor::Green;
+			Arrows[i]->SetRelativeLocation(FVector(0, 0, 100));
+			break;
+		case EParkourArrowType::Floor:
+			Arrows[i]->ArrowColor = FColor::Blue;
+			Arrows[i]->SetRelativeLocation(FVector(0, 0, -80));
+			break;
+
+		case EParkourArrowType::Left:
+			Arrows[i]->ArrowColor = FColor::Magenta;
+			Arrows[i]->SetRelativeLocation(FVector(0, -30, 0));
+			break;
+
+		case EParkourArrowType::Right:
+			Arrows[i]->ArrowColor = FColor::Magenta;
+			Arrows[i]->SetRelativeLocation(FVector(0, 30, 0));
+			break;
+
+		case EParkourArrowType::Land:
+			Arrows[i]->ArrowColor = FColor::Yellow;
+			Arrows[i]->SetRelativeLocation(FVector(200, 0, 100));
+			Arrows[i]->SetRelativeRotation(FRotator(-90, 0, 0));
+			break;
+		}
+	}
 }
 
 

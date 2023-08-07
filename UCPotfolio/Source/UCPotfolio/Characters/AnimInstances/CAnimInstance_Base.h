@@ -42,8 +42,12 @@ protected:
 protected:
 	UPROPERTY(BlueprintReadOnly)
 		bool bDown = false;
+
 	UPROPERTY(BlueprintReadOnly)
 		float DownDirection = 0;
+
+	UPROPERTY(BlueprintReadOnly)
+		bool bFalling = false;
 
 private:
 	class UAnimMontage* FrontWakeupMontage;

@@ -69,7 +69,7 @@ void UCDoAction_Combo::OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* 
 	}
 
 	//카메라 쉐이크
-	OwnerCharacter->GetController<APlayerController>()->PlayerCameraManager->PlayCameraShake(DoActionDatas[Index].CameraShakeClass);
+	OwnerCharacter->GetController<APlayerController>()->PlayerCameraManager->StartCameraShake(DoActionDatas[Index].CameraShakeClass);
 
 	if(!!DoActionDatas[Index].HittingSound)
 		UGameplayStatics::SpawnSoundAtLocation(OwnerCharacter->GetWorld(), DoActionDatas[Index].HittingSound, InOther->GetActorLocation());

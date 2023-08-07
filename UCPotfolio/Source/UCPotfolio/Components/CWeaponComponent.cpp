@@ -2,6 +2,7 @@
 
 #include "CGravityComponent.h"
 #include "CMovementComponent.h"
+#include "CParkourComponent.h"
 #include "Skill/CSkill.h"
 #include "Utilities/CHelpers.h"
 #include "Weapon/CAttachment.h"
@@ -76,7 +77,7 @@ void UCWeaponComponent::SetUnarmedMode()
 void UCWeaponComponent::SetSwordMode()
 {
 	//CLog::Print(StateComponent->IsIdleMode());
-	//CheckFalse(StateComponent->IsIdleMode());
+	CheckFalse(StateComponent->IsIdleMode());
 
 	SetMode(EWeaponType::Sword);
 }
@@ -173,6 +174,8 @@ void UCWeaponComponent::Cansle()
 
 void UCWeaponComponent::SetMode(EWeaponType InType)
 {
+	CheckTrue(ParkourComponent->IsExecuting());
+
 	ACAttachment* prevAttachment = DataAssets[(int32)Type]->GetAttachment();
 	ACAttachment* newAttachment = DataAssets[(int32)InType]->GetAttachment();
 
@@ -237,6 +240,7 @@ void UCWeaponComponent::BeginPlay()
 	StateComponent = CHelpers::GetComponent<UCStateComponent>(OwnerCharacter);
 	GravityComponent = CHelpers::GetComponent<UCGravityComponent>(OwnerCharacter);
 	IdentityComponent = CHelpers::GetComponent<UCIdentityComponent>(OwnerCharacter);
+	ParkourComponent = CHelpers::GetComponent<UCParkourComponent>(OwnerCharacter);
 
 	for(UCWeaponAsset* Asset : DataAssets)
 	{

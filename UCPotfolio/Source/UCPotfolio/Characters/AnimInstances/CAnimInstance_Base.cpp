@@ -1,6 +1,7 @@
 #include "Characters/AnimInstances/CAnimInstance_Base.h"
 #include "Global.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 
 void UCAnimInstance_Base::NativeBeginPlay()
@@ -25,6 +26,8 @@ void UCAnimInstance_Base::NativeUpdateAnimation(float DeltaSeconds)
 	Direction = PrevRotation.Yaw;
 
 	Pitch = UKismetMathLibrary::FInterpTo(Pitch, OwnerCharacter->GetBaseAimRotation().Pitch, DeltaSeconds, 25);
+
+	bFalling = OwnerCharacter->GetCharacterMovement()->IsFalling();
 
 	//다운상태
 	if(bDown)

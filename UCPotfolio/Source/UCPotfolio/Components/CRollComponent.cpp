@@ -1,6 +1,7 @@
 #include "Components/CRollComponent.h"
 
 #include "CMovementComponent.h"
+#include "CParkourComponent.h"
 #include "CStateComponent.h"
 #include "CWeaponComponent.h"
 #include "Global.h"
@@ -33,6 +34,7 @@ void UCRollComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 
 void UCRollComponent::Roll()
 {
+	CheckTrue(CHelpers::GetComponent<UCParkourComponent>(OwnerCharacter)->IsExecuting());
 
 	FVector direction = FVector::ZeroVector;
 

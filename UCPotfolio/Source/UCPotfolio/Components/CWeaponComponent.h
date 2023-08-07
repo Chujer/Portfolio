@@ -74,4 +74,5 @@ private:
 	class UCStateComponent* StateComponent;
 	class UCGravityComponent* GravityComponent;
 	class UCIdentityComponent* IdentityComponent;
+	class UCParkourComponent* ParkourComponent;
 };

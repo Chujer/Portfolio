@@ -1,5 +1,6 @@
 ﻿#include "Components/CIdentityComponent.h"
 #include "Characters/CCharacter_Base.h"
+#include "CParkourComponent.h"
 #include "Global.h"
 
 UCIdentityComponent::UCIdentityComponent()
@@ -14,6 +15,8 @@ void UCIdentityComponent::BeginPlay()
 	OwnerCharacter = Cast<ACharacter>(GetOwner());
 	CheckNull(OwnerCharacter);
 
+	ParkourComponent = CHelpers::GetComponent<UCParkourComponent>(OwnerCharacter);
+
 	WeaponComponent = CHelpers::GetComponent<UCWeaponComponent>(OwnerCharacter);
 	CheckNull(WeaponComponent)
 
@@ -24,9 +27,8 @@ void UCIdentityComponent::DoIdentity()
 {
 	switch (Type)
 	{
-	case EWeaponType::Max:
-		CLog::Log("Unarmde");
-			//맨손 - 파쿠르
+	case EWeaponType::Max:	//맨손 - 파쿠르
+		ParkourComponent->DoParkour(false);
 			break;
 		case EWeaponType::Sword:
 		CLog::Log("SwordMode");

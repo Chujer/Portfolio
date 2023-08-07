@@ -32,5 +32,6 @@ public:
 private:
 	class ACharacter* OwnerCharacter;
 	EWeaponType Type = EWeaponType::Max;
-	UCWeaponComponent* WeaponComponent;
+	class UCWeaponComponent* WeaponComponent;
+	class UCParkourComponent* ParkourComponent;
 };
