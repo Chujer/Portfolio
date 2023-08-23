@@ -6,7 +6,8 @@ public class UCPotfolio : ModuleRules
 {
 	public UCPotfolio(ReadOnlyTargetRules Target) : base(Target)
 	{
-		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+        PrivateDependencyModuleNames.AddRange(new string[] { "SequenceRecorder" });
+        PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
         PublicIncludePaths.Add(ModuleDirectory);    //모듈앞의 경로를 가져옴
 

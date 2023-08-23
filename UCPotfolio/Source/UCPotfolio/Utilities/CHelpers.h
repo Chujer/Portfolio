@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "NiagaraComponent.h"
 #include "Particles/ParticleSystem.h"
 #include "NiagaraSystem.h"
 #include "NiagaraFunctionLibrary.h"
@@ -8,6 +9,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Skill/AddOns/CGhostTrail.h"
 #include "GameFramework/Character.h"
+#include "Particles/ParticleSystemComponent.h"
 
 #define CheckTrue(x) { if(x == true) return; }
 #define CheckFalse(x) {if(x == false) return;}
@@ -118,7 +120,7 @@ public:
 		InActor->AttachToComponent(InParent, FAttachmentTransformRules(EAttachmentRule::KeepRelative, true), InSocketName);
 	}
 
-	static void PlayEffect(UWorld* InWorld, UFXSystemAsset* InEffect, const FTransform& InTransform, USkeletalMeshComponent* InMesh = nullptr, FName InSocketName = NAME_None)
+	static UFXSystemComponent* PlayEffect(UWorld* InWorld, UFXSystemAsset* InEffect, const FTransform& InTransform, USkeletalMeshComponent* InMesh = nullptr, FName InSocketName = NAME_None)
 	{
 		UParticleSystem* particle = Cast<UParticleSystem>(InEffect);
 		UNiagaraSystem* niagara = Cast<UNiagaraSystem>(InEffect);
@@ -131,33 +133,32 @@ public:
 		{
 			if(!!particle)
 			{
-				UGameplayStatics::SpawnEmitterAttached(particle, InMesh, InSocketName, location, rotation, scale);
-
-				return;
+				return UGameplayStatics::SpawnEmitterAttached(particle, InMesh, InSocketName, location, rotation, scale);;
 			}
 			if(!!niagara)
 			{
-				UNiagaraFunctionLibrary::SpawnSystemAttached(niagara, InMesh, InSocketName, location, rotation, scale, EAttachLocation::KeepRelativeOffset, true, ENCPoolMethod::None);
-
-				return;
+				
+				
+				return UNiagaraFunctionLibrary::SpawnSystemAttached(niagara, InMesh, InSocketName, location, rotation, scale, EAttachLocation::KeepRelativeOffset, true, ENCPoolMethod::None);;
 			}
 		}
 		else
 		{
 			if (!!particle)
 			{
-				UGameplayStatics::SpawnEmitterAtLocation(InWorld, particle, InTransform);
+				
 
-				return;
+				return UGameplayStatics::SpawnEmitterAtLocation(InWorld, particle, InTransform);;
 			}
 
 			if (!!niagara)
 			{
-				UNiagaraFunctionLibrary::SpawnSystemAtLocation(InWorld, niagara, location, rotation, scale);
+				
 
-				return;
+				return UNiagaraFunctionLibrary::SpawnSystemAtLocation(InWorld, niagara, location, rotation, scale);;
 			}
 		}
+		return nullptr;
 	}
 
 	static ACGhostTrail* Play_GhostTrial(TSubclassOf<ACGhostTrail>& InClass, class ACharacter* InOwner)

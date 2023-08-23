@@ -31,7 +31,9 @@ void UCIdentityComponent::DoIdentity()
 		ParkourComponent->DoParkour(false);
 			break;
 		case EWeaponType::Sword:
-		CLog::Log("SwordMode");
+			CheckNull(WeaponComponent);
+			CheckNull(WeaponComponent->GetIdentity());
+			WeaponComponent->GetIdentity()->DoIdentityMontage();
 			//검 - 대쉬
 			break;
 		case EWeaponType::Spear:

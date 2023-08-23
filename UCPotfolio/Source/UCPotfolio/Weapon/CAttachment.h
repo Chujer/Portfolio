@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "CWeaponStructures.h"
+#include "Identity/CIdentity.h"
 #include "Skill/CSkill.h"
 #include "CAttachment.generated.h"
 
@@ -37,9 +38,13 @@ public:
 	FORCEINLINE void SetCurrentSKill(UCSkill* InSkill) {  CurrentSkill = InSkill; };
 	FORCEINLINE void ClearCurrentSkill() {CurrentSkill = nullptr; };
 	FORCEINLINE UCSkill* GetSkill(int32 Index) { return Skills[Index]; }
-	FORCEINLINE UCSkill* GetCurrentSkill() { return CurrentSkill.Get(); }
+	UCSkill* GetCurrentSkill(); 
 
 	FORCEINLINE EDamageType* GetDamageType() { return &DamageType; }
+
+public:
+	UCIdentity* GetIdentity() { return Identity; }
+
 
 public:
 	UFUNCTION(BlueprintImplementableEvent)
@@ -52,10 +57,6 @@ protected:
 	UFUNCTION()
 		void PlayEquipAnim();
 
-public:
-	UPROPERTY(EditAnywhere)
-		FEquipData EquipData;
-
 protected:
 	UFUNCTION(BlueprintCallable, Category = "Attach")
 		void AttachTo(FName InSocketName);
@@ -63,20 +64,6 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Attach")
 		void AttachToCollision(FName InSocketName);
 
-protected:
-	UPROPERTY(EditAnywhere, Category = "Skill")
-	TSubclassOf<UCSkill> SkillsClass[(int32)ESkillIndex::MAX];
-
-	UPROPERTY()
-	class UCSkill* Skills[(int32)ESkillIndex::MAX];
-	TWeakObjectPtr<UCSkill> CurrentSkill;
-protected:
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
-		 class USceneComponent* Root;
-
-protected:
-	UPROPERTY(BlueprintReadOnly)
-		TWeakObjectPtr<class ACharacter> OwnerCharacter;
 private:
 	UFUNCTION()
 		void OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -100,9 +87,36 @@ public:
 	FAttachmentBeginOverlap OnAttachmentBeginOverlap;
 	FAttachmentEndOverlap OnAttachmentEndOverlap;
 
+public:
+	UPROPERTY(EditAnywhere)
+		FEquipData EquipData;
+
+protected:
+	UPROPERTY(EditAnywhere, Category = "Skill")
+		TSubclassOf<UCSkill> SkillsClass[(int32)ESkillIndex::MAX];
+
+	UPROPERTY(EditAnywhere, Category = "Identity")
+		TSubclassOf<UCIdentity> IdentityClass;
+
+	UPROPERTY()
+		class UCSkill* Skills[(int32)ESkillIndex::MAX];
+
+	TWeakObjectPtr<UCSkill> CurrentSkill;
+
+	UPROPERTY()
+		class UCIdentity* Identity;
+
+protected:
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+		class USceneComponent* Root;
+
+protected:
+	UPROPERTY(BlueprintReadOnly)
+		TWeakObjectPtr<class ACharacter> OwnerCharacter;
+
 protected:
 	TArray<class UShapeComponent*> Collisions;
 	EDamageType DamageType = EDamageType::NORMAL;
-
+	
 };
 

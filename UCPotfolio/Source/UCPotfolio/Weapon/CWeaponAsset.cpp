@@ -9,6 +9,7 @@ void UCWeaponAsset::SetDoAirAction()
 {
 	if (!!Attachment)
 	{
+		//TODO(2023.08.10) : 기본공격중에 변경은 문제가 없으나 스킬중에는 기본공격을 지우고 스킬로 델리게이트를 변경하여 문제발생 
 		Attachment->OnAttachmentBeginOverlap.RemoveDynamic(DoAction, &UCDoAction::OnAttachmentBeginOverlap);
 		DoAction = DoAirAction;
 		Attachment->OnAttachmentBeginOverlap.AddDynamic(DoAction, &UCDoAction::OnAttachmentBeginOverlap);

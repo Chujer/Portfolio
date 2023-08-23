@@ -1,5 +1,6 @@
 #include "Notifies/CAnimNotify_SetDown.h"
 #include "Global.h"
+#include "Characters/CCharacter_Base.h"
 #include "Characters/AnimInstances/CAnimInstance_Base.h"
 
 FString UCAnimNotify_SetDown::GetNotifyName_Implementation() const
@@ -11,11 +12,11 @@ void UCAnimNotify_SetDown::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenc
 {
 	//TODO : animation으로 캐스팅이 안됨
 	CheckNull(MeshComp);
-	CheckNull(MeshComp->GetAnimInstance());
+	CheckNull(MeshComp->GetOwner());
 	Super::Notify(MeshComp, Animation);
-	UAnimInstance* anim = MeshComp->GetAnimInstance();
 
-	UCAnimInstance_Base* animation = Cast<UCAnimInstance_Base>(anim);
-	CheckNull(animation);
-	animation->SetAnimDown(DownDirection);
+	CheckNull(MeshComp->GetAnimInstance());
+	UCAnimInstance_Base* anim = Cast<UCAnimInstance_Base>(MeshComp->GetAnimInstance());
+	CheckNull(anim);
+	anim->SetDownDirection(DownDirection);
 }

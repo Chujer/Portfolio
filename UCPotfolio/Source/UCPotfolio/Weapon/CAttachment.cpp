@@ -49,7 +49,20 @@ void ACAttachment::BeginPlay()
 		}
 	}
 
+	if(!!IdentityClass)
+	{
+		Identity = NewObject<UCIdentity>(this, IdentityClass);
+		Identity->BeginPlay(this, OwnerCharacter.Get());
+	}
+
 	Super::BeginPlay();
+}
+
+UCSkill* ACAttachment::GetCurrentSkill()
+{
+
+	CheckNullResult(CurrentSkill.Get(), nullptr);
+	return CurrentSkill.Get(); 
 }
 
 

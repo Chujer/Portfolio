@@ -92,7 +92,8 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAxis("VerticalLook", MovementComponent, &UCMovementComponent::OnVerticallLook);
 
 	PlayerInputComponent->BindAction("Sword", EInputEvent::IE_Pressed, WeaponComponent,&UCWeaponComponent::SetSwordMode);
-	PlayerInputComponent->BindAction("Sword", EInputEvent::IE_Pressed, WeaponComponent,&UCWeaponComponent::Released);
+//	PlayerInputComponent->BindAction("Sword", EInputEvent::IE_Pressed, WeaponComponent,&UCWeaponComponent::Released);
+	PlayerInputComponent->BindAction("Spear", EInputEvent::IE_Pressed, WeaponComponent,&UCWeaponComponent::SetSpearMode);
 
 	PlayerInputComponent->BindAction("Action", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoAction);
 

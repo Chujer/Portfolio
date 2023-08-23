@@ -1,13 +1,12 @@
+#include "Skill/Sword/CHaveAction_GhostSlash.h"
+#include "Skill/AddOns/CGhostTrail.h"
 #include "Global.h"
-#include "Skill/CSkill_Nomal.h"
 #include "Components/CStateComponent.h"
 #include "Components/PoseableMeshComponent.h"
 #include "GameFramework/Character.h"
 #include "Characters/CPlayer.h"
 #include "Characters/ICharacter.h"
 #include "Weapon/CAttachment.h"
-#include "Skill/AddOns/CGhostTrail.h"
-#include "Skill/Sword/CHaveAction_GhostSlash.h"
 
 class IICharacter;
 

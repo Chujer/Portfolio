@@ -12,7 +12,11 @@ class UCPOTFOLIO_API UCIdentity : public UObject
 
 public:
 	virtual void DoIdentity() {}
+	virtual void DoIdentityMontage(){}
 	virtual void BeginPlay(ACAttachment* InAttachment, ACharacter* InCharacter);
+
+public:
+	virtual void Tick(float InDeltaTime) {}
 
 protected:
 	class ACharacter* OwnerCharacter;

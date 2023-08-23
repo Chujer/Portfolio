@@ -12,6 +12,7 @@
 #include "Components/CStateComponent.h"
 #include "Components/CIdentityComponent.h"
 #include "Utilities/CLog.h"
+#include "Identity/CIdentity.h"
 
 UCWeaponComponent::UCWeaponComponent()
 {
@@ -61,9 +62,18 @@ ACAttachment* UCWeaponComponent::GetAttachment()
 	return DataAssets[(int32)Type]->GetAttachment();
 }
 
+UCIdentity* UCWeaponComponent::GetIdentity()
+{
+	CheckNullResult(GetAttachment(), nullptr);
+	CheckNullResult(GetAttachment()->GetIdentity(), nullptr);
+
+	return GetAttachment()->GetIdentity();
+}
+
 UCSkill* UCWeaponComponent::GetCurrentSkill()
 {
 	CheckNullResult(GetAttachment(), nullptr);
+	CheckNullResult(GetAttachment()->GetCurrentSkill(), nullptr);
 
 	return GetAttachment()->GetCurrentSkill();
 }
@@ -76,7 +86,6 @@ void UCWeaponComponent::SetUnarmedMode()
 
 void UCWeaponComponent::SetSwordMode()
 {
-	//CLog::Print(StateComponent->IsIdleMode());
 	CheckFalse(StateComponent->IsIdleMode());
 
 	SetMode(EWeaponType::Sword);
@@ -195,13 +204,13 @@ void UCWeaponComponent::SetMode(EWeaponType InType)
 	}
 	else //무기 -> 다른무기
 	{
-		ChangeType(InType);
-
 		if (prevAttachment->OnUnEquip.IsBound())
 			prevAttachment->OnUnEquip.Broadcast();
 
 		if (newAttachment->OnEquip.IsBound())
 			newAttachment->OnEquip.Broadcast();
+
+		ChangeType(InType);
 	}
 
 	
@@ -262,11 +271,11 @@ void UCWeaponComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	CheckNull(GetAttachment());
+	if(!!GetIdentity())
+		GetIdentity()->Tick(DeltaTime);
 
 	if (!!GetCurrentSkill())
 	{
-		CLog::Print(GetCurrentSkill()->GetName(), 3);
 		GetCurrentSkill()->Tick(DeltaTime);
 	}
 	else

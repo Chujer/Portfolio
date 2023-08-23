@@ -31,9 +31,11 @@ public:
 		void SetBackWakeupMontage(UAnimMontage* InMontage);
 
 	UFUNCTION(BlueprintCallable)
-		void SetAnimDown(float InDownDirection);
+		void SetDownDirection(float InDownDirection);
+public:
+	void ResetDownTime();
 protected:
-	class ACharacter* OwnerCharacter;
+	class ACCharacter_Base* OwnerCharacter;
 
 	float MaxDownTime = 1.5f;
 	FRotator PrevRotation;

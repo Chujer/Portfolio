@@ -19,6 +19,10 @@ protected:
 	virtual void BeginPlay() override;
 	void SetMesh(FString InPath);
 
+public:
+	FORCEINLINE bool GetIsDown() { return bDown; }
+	FORCEINLINE void SetIsDown(bool InBool) { bDown = InBool; }
+
 
 public:	
 	virtual void Tick(float DeltaTime) override;
@@ -51,4 +55,6 @@ protected:
 	UPROPERTY(EditAnywhere)
 		class UCHitDataAsset* HitDataAssets;
 
+protected:
+	bool bDown = false;
 };

@@ -39,6 +39,8 @@ void UCMovementComponent::OnMoveForward(float InAxis)
 	
 	FVector direction = UKismetMathLibrary::GetForwardVector(FRotator(0, OwnerCharacter->GetControlRotation().Yaw, 0));
 
+	CLog::Print(direction, 2);
+
 	OwnerCharacter->AddMovementInput(direction, InAxis);
 
 	if(InAxis < 0)	

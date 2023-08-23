@@ -38,6 +38,7 @@ public:
 public:
 	class UCDoAction* GetDoAction();
 	class ACAttachment* GetAttachment();
+	class UCIdentity*  GetIdentity();
 	class UCSkill* GetCurrentSkill();
 public:
 	void SetUnarmedMode();

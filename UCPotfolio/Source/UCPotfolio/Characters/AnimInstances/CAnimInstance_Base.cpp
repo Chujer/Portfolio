@@ -2,13 +2,14 @@
 #include "Global.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Characters/CCharacter_Base.h"
 #include "Kismet/KismetMathLibrary.h"
 
 void UCAnimInstance_Base::NativeBeginPlay()
 {
 	Super::NativeBeginPlay();
 
-	OwnerCharacter = Cast<ACharacter>(TryGetPawnOwner());
+	OwnerCharacter = Cast<ACCharacter_Base>(TryGetPawnOwner());
 	CheckNull(OwnerCharacter);
 }
 
@@ -16,6 +17,8 @@ void UCAnimInstance_Base::NativeUpdateAnimation(float DeltaSeconds)
 {
 	Super::NativeUpdateAnimation(DeltaSeconds);
 	CheckNull(OwnerCharacter);
+
+	//bDown = OwnerCharacter->GetIsDown();
 
 	Speed = OwnerCharacter->GetVelocity().Size2D();
 
@@ -36,8 +39,8 @@ void UCAnimInstance_Base::NativeUpdateAnimation(float DeltaSeconds)
 		if(DownTime > MaxDownTime)
 		{
 			bDown = false;
+			OwnerCharacter->SetIsDown(false);
 			DownTime = 0;
-
 			//기상 애니메이션 재생
 			if (DownDirection > 0)
 			{
@@ -59,8 +62,14 @@ void UCAnimInstance_Base::SetBackWakeupMontage(UAnimMontage* Montage)
 	BackWakeupMontage = Montage;
 }
 
-void UCAnimInstance_Base::SetAnimDown(float InDownDirection)
+void UCAnimInstance_Base::SetDownDirection(float InDownDirection)
 {
+	CheckTrue(InDownDirection > 1 || InDownDirection < -1);
 	this->DownDirection = InDownDirection;
 	bDown = true;
+}
+
+void UCAnimInstance_Base::ResetDownTime()
+{
+	DownTime = 0;
 }

@@ -7,7 +7,7 @@
 UENUM()
 enum class EDamageType : uint8
 {
-	NORMAL, FRONT_NOCKDOWN, BACK_NOCKDOWN, STURN, MAX
+	NORMAL, FRONT_NOCKDOWN, BACK_NOCKDOWN, BACK_NOCKDOWN_IP, STURN, MAX
 };
 
 USTRUCT()
@@ -27,6 +27,9 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		bool bCanMove = true;
+
+	UPROPERTY(EditAnywhere)
+		bool IsDown = false;
 
 	UPROPERTY(EditAnywhere, Category = "Effect")
 		class UFXSystemAsset* Effect;

@@ -4,13 +4,24 @@
 #include "GameFramework/Character.h"
 #include "Components/CMovementComponent.h"
 #include "Animation/AnimMontage.h"
+#include "Characters/CCharacter_Base.h"
+#include "Characters/AnimInstances/CAnimInstance_Base.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 
 void FHitData::PlayHitMontage(ACharacter* InCharacter)
 {
 	CheckNull(InCharacter);
-	
+
+	if (IsDown)
+	{
+		ACCharacter_Base* character = Cast<ACCharacter_Base>(InCharacter);
+		CheckNull(character);
+		UCAnimInstance_Base* anim = Cast<UCAnimInstance_Base>(InCharacter->GetMesh()->GetAnimInstance());
+		CheckNull(anim);
+		anim->ResetDownTime();
+		character->SetIsDown(IsDown);
+	}
 
 	int32 Index = UKismetMathLibrary::RandomInteger(Montage.Num() - 1);
 	CheckNull(Montage[Index]);
