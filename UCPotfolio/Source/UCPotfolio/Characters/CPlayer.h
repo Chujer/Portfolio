@@ -47,6 +47,15 @@ private:
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCParkourComponent* ParkourComponent;
 
+	UPROPERTY(VisibleDefaultsOnly)
+		class UCameraComponent* CineCamera;
+
+public:
+	UPROPERTY(BlueprintReadWrite)
+		class UChildActorComponent* MainCamChildActorComponent;
+	UPROPERTY(BlueprintReadWrite)
+		class UChildActorComponent* CineCamChildActorComponent;
+
 private:
 	UPROPERTY(VisibleDefaultsOnly)
 		class USceneComponent* ArrowGroup;

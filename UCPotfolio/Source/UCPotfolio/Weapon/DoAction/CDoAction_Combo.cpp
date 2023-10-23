@@ -62,7 +62,7 @@ void UCDoAction_Combo::OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* 
 	//공격 판정
 	Cast<IICharacter>(InOther)->ApplyDamage(InAttacker, InAttackCuaser, *(attachment->GetDamageType()), DoActionDatas[Index].Power);
 
-	if (bHitStop == false)
+	if (bHitStop == false)	//히트 스탑
 	{
 		CWorldController::PlayStopWorld(OwnerCharacter->GetWorld(), DoActionDatas[Index].StopTime);
 		bHitStop = true;

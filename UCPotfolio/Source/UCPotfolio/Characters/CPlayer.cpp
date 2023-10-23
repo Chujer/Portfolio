@@ -22,7 +22,13 @@ ACPlayer::ACPlayer()
 
 	SetMesh("SkeletalMesh'/Game/Resource/CharacterAsset/Meshes/Characters/Combines/SK_Arashi_E.SK_Arashi_E'");
 	CHelpers::CreateComponent<USpringArmComponent>(this, &SpringArm, "SpringArm", GetMesh());
+
+	//카메라 설정
 	CHelpers::CreateComponent<UCameraComponent>(this, &Camera, "Camera", SpringArm);
+	CHelpers::CreateComponent<UCameraComponent>(this, &CineCamera, "CineCamera", SpringArm);
+	//카메라 전환을 위한 UCHildActorComponent
+	CHelpers::CreateComponent<UChildActorComponent>(this, &MainCamChildActorComponent, "MainCamChildActorComponent", Camera);
+	CHelpers::CreateComponent<UChildActorComponent>(this, &CineCamChildActorComponent, "CineCamChildActorComponent", CineCamera);
 
 	CHelpers::CreateActorComponent<UCMovementComponent>(this, &MovementComponent, "Movement");
 	CHelpers::CreateActorComponent<UCWeaponComponent>(this, &WeaponComponent, "WeaponComponent");
@@ -65,6 +71,8 @@ ACPlayer::ACPlayer()
 	GetMesh()->SetCollisionProfileName("OverlapAll");
 
 	Camera->SetRelativeLocation(FVector(0, 0, 80));
+	CineCamera->SetRelativeLocation(FVector(-688.914917, 0.006348, 706.122803));
+	CineCamera->SetRelativeRotation(FRotator(-30, 0, 0));
 
 	CreateArrow();
 
@@ -114,6 +122,7 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("SkillR", EInputEvent::IE_Released, WeaponComponent, &UCWeaponComponent::Released);
 	PlayerInputComponent->BindAction("SkillV", EInputEvent::IE_Released, WeaponComponent, &UCWeaponComponent::Released);
 	PlayerInputComponent->BindAction("SkillE", EInputEvent::IE_Released, WeaponComponent, &UCWeaponComponent::Released);
+
 }
 
 

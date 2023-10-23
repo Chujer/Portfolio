@@ -26,9 +26,6 @@ public:
 private:
 	UPROPERTY(EditAnywhere)
 		float RotInitSpeed;
-
-	UPROPERTY(EditAnywhere)
-		float RotMaxSpeed;
 	
 	UPROPERTY(EditAnywhere)
 		float PullSpeed;

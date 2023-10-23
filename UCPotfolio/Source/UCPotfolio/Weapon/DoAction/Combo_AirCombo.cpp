@@ -35,10 +35,17 @@ void UCombo_AirCombo::OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* I
 	{
 		gravityComponent->ResetGravityTime();
 
-
+		//TODO : 2023.10.23 - 히트 판정에 대해서 조금더 생각해서 제작할 필요가 있어보임
 		for (ACharacter* target : Hitted)
 		{
 			UCGravityComponent* gravity = CHelpers::GetComponent<UCGravityComponent>(target);
+			if (bHitStop == false)	//히트 스탑
+			{
+				CWorldController::PlayStopWorld(OwnerCharacter->GetWorld(), DoActionDatas[Index].StopTime);
+				bHitStop = true;
+			}
+			//카메라 쉐이크
+			OwnerCharacter->GetController<APlayerController>()->PlayerCameraManager->StartCameraShake(DoActionDatas[Index].CameraShakeClass);
 			gravity->ResetGravityTime();
 		}
 	}

@@ -3,6 +3,7 @@
 #include "CGravityComponent.h"
 #include "CMovementComponent.h"
 #include "CParkourComponent.h"
+#include "Characters/CPlayer.h"
 #include "Skill/CSkill.h"
 #include "Utilities/CHelpers.h"
 #include "Weapon/CAttachment.h"
@@ -23,6 +24,8 @@ void UCWeaponComponent::OnStartAirCombo()
 {
 	for(UCWeaponAsset* asset : DataAssets)
 	{
+		if (!asset->GetDoAirAction())
+			break;
 		if(!!asset)
 		{
 			if(asset->GetDoAction() != asset->GetDoAirAction())

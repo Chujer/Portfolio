@@ -22,17 +22,13 @@ void ACSpeare_Pull::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	CLog::Print(RotSpeed, 3);
-	if (RotSpeed < RotMaxSpeed)
-		RotSpeed += DeltaTime;
-
 	bool result;
 
 	result = UKismetSystemLibrary::SphereTraceMulti(OwnerCharacter->GetWorld(), Start, Start, 1000.0f, ETraceTypeQuery::TraceTypeQuery2, false, Ignores, EDrawDebugTrace::None, HitResults, true);
 
 	CheckFalse(result);
 
-	for (FHitResult hitResult : HitResults)
+	for (FHitResult hitResult : HitResults)		//범위내 적 회전하면서 끌어당기기
 	{
 		ACharacter* temp = Cast<ACharacter>(hitResult.Actor);
 		if(!!temp)
@@ -47,7 +43,11 @@ void ACSpeare_Pull::Tick(float DeltaTime)
 			FVector rightVector = temp->GetActorRightVector();
 			FVector fowardVector = temp->GetActorForwardVector();
 
-			FVector moveVector = temp->GetActorLocation() + (fowardVector * PullSpeed) + (rightVector * RotSpeed);
+			FVector moveVector = temp->GetActorLocation() + (rightVector * RotSpeed) ;
+
+			if(GetDistanceTo(temp) > 400)
+				moveVector = moveVector + (fowardVector *  PullSpeed);
+
 			temp->SetActorLocation(moveVector);
 			if (temp->GetCapsuleComponent()->GetCollisionProfileName() != "HitEnemy")
 				temp->GetCapsuleComponent()->SetCollisionProfileName("HitEnemy");

@@ -13,13 +13,12 @@ void UCSkill_Nomal_UpperSkill::OnAttachmentBeginOverlap(ACharacter* InAttacker, 
                                                         ACharacter* InOther)
 {
 	Super::OnAttachmentBeginOverlap(InAttacker, InAttackCuaser, InOther);
-	CHelpers::GetComponent<UCGravityComponent>(Cast<AActor>(Character))->StartZeroGravity();
 	Character->LaunchCharacter(LaunchVector, false, true);
-
-	for(ACharacter* target : Hitted)
+	CHelpers::GetComponent<UCGravityComponent>(Character)->StartZeroGravity();
+	
+	for (ACharacter* target : Hitted)
 	{
 		CHelpers::GetComponent<UCGravityComponent>(target)->StartZeroGravity();
 		target->LaunchCharacter(LaunchVector, true, false);
 	}
-	
 }

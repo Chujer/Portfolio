@@ -23,6 +23,7 @@ void UCHaveAction_DragonSpear::SkillAction1()
 	PullAddOn = Cast<ACSpeare_Pull>(Character->GetWorld()->SpawnActor(PullAddOnClass,&transform, params));
 
 	Smoke = Cast<UNiagaraComponent>(CHelpers::PlayEffect(Character->GetWorld(), SmokeNiagara, Character->GetActorTransform()));
+	Character->GetController<APlayerController>()->SetViewTargetWithBlend(Character->CineCamChildActorComponent->GetChildActor(), 0.2f, EViewTargetBlendFunction::VTBlend_Linear);
 }
 
 void UCHaveAction_DragonSpear::SkillAction2()
@@ -66,5 +67,7 @@ void UCHaveAction_DragonSpear::SkillAction3()
 		target->GetCapsuleComponent()->SetCollisionProfileName("Enemy");
 	}
 	PullAddOn->Destroy();
+	Character->GetController<APlayerController>()->SetViewTargetWithBlend(Character->MainCamChildActorComponent->GetChildActor(), 0.2f, EViewTargetBlendFunction::VTBlend_Linear);
+
 }
 
