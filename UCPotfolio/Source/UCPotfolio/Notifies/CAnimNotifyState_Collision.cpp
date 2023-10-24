@@ -23,6 +23,8 @@ void UCAnimNotifyState_Collision::NotifyBegin(USkeletalMeshComponent* MeshComp, 
 
 	*(weaponComponent->GetAttachment()->GetDamageType()) = DamageType;
 	weaponComponent->GetAttachment()->OnCollisions();
+
+	CLog::Print((int32)DamageType, 10);
 }
 
 void UCAnimNotifyState_Collision::NotifyEnd(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation)

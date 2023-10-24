@@ -74,13 +74,14 @@ void UCHaveAction_SwordFlashSlash::Pressed()
 
 void UCHaveAction_SwordFlashSlash::Released()
 {
+	IsChargeEnd = false;
 	if (SlowArea.IsValid())
 		SlowArea->RemoveArea(ChargeTime > MaxChargeTime);
 
 	if (!!ScrewEffect)
 		ScrewEffect->SetActive(false);
 
-	if(ChargeTime > MaxChargeTime)	//차지 완료
+	if(ChargeTime > MaxChargeTime)	//차지 완료시
 	{
 		UCMovementComponent* movementComponent = CHelpers::GetComponent<UCMovementComponent>(Character.Get());
 
@@ -106,7 +107,7 @@ void UCHaveAction_SwordFlashSlash::Released()
 		return;
 	}
 
-	//차지 실패
+	//차지 실패시
 	ChargeTime = 0;
 	Character->StopAnimMontage(Character->GetCurrentMontage());
 	for(USceneComponent* p : Character->GetMesh()->GetAttachChildren())
@@ -137,6 +138,11 @@ void UCHaveAction_SwordFlashSlash::Tick(float DeltaSeconds)
 
 	if (ChargeTime > MaxChargeTime)
 	{
+		if (!IsChargeEnd)
+		{
+			UGameplayStatics::PlaySound2D(this, ChargeSound);
+			IsChargeEnd = true;
+		}
 	}
 
 	CheckNull(SlowArea);

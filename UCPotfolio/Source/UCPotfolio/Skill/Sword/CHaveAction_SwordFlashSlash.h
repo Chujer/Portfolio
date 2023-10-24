@@ -43,6 +43,10 @@ private:
 	UPROPERTY(EditAnywhere)
 		class UNiagaraSystem* FlowerEffect;
 
+public:
+	UPROPERTY(EditAnywhere, Category = "Sound")
+		class USoundBase* ChargeSound;
+
 	//class UNiagaraSystem* 
 private:
 	TWeakObjectPtr<ACSlowArea> SlowArea;

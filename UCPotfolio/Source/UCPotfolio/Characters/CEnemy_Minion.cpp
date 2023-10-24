@@ -69,6 +69,12 @@ void ACEnemy_Minion::ApplyDamage(ACharacter* InAttacker, AActor* InAttackCauser,
 	GetCapsuleComponent()->SetCollisionProfileName("HitEnemy");
 
 	HitDataAssets->PlayHitMontage(this, InDamageType);
+
+	FString EnumToString = TEXT("Invalid");
+	const UEnum* temp = FindObject<UEnum>(ANY_PACKAGE, TEXT("EDamageType"), true);
+	EnumToString = temp->GetNameStringByValue((int64)InDamageType);
+
+	CLog::Print( EnumToString);
 }
 
 void ACEnemy_Minion::ApplyDamageTimer(ACharacter* InAttacker, AActor* InAttackCauser, EDamageType InNormalDamageType,

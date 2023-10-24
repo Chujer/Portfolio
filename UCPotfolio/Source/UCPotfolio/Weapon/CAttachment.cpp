@@ -76,6 +76,7 @@ void ACAttachment::PlayEquipAnim()
 
 void ACAttachment::AttachTo(FName InSocketName)
 {
+	SetActorHiddenInGame(false);
 	AttachToComponent(OwnerCharacter->GetMesh(), FAttachmentTransformRules(EAttachmentRule::KeepRelative, true), InSocketName);
 }
 

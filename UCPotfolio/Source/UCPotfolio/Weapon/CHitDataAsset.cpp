@@ -9,8 +9,6 @@ void UCHitDataAsset::PlayHitMontage(ACharacter* InCharacter, EDamageType InDamag
 {
 	ACCharacter_Base* character = Cast<ACCharacter_Base>(InCharacter);
 
-
-
 	if(character->GetCharacterMovement()->IsFalling() || character->GetIsDown() && InDamageType != EDamageType::BACK_NOCKDOWN)
 	{
 		if (character->GetIsDown())
