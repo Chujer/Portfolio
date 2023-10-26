@@ -9,7 +9,7 @@ void UCHaveAction_TraceSpear::Pressed()
 	Super::Pressed();
 
 	PlayMontage();
-	SkillAction1();	//TODO::2023.10.24 - 생성 테스트 
+	SkillAction1();
 }
 
 void UCHaveAction_TraceSpear::BeginPlay(ACPlayer* InCharacter, ACAttachment* InAttachment)
@@ -20,10 +20,15 @@ void UCHaveAction_TraceSpear::BeginPlay(ACPlayer* InCharacter, ACAttachment* InA
 void UCHaveAction_TraceSpear::SkillAction1()
 {
 	Super::SkillAction1();
-	
+
+	CheckNull(TraceSpearClass);
+
 	FActorSpawnParameters params;
-	params.Name = "TraceSpear";
+	FActorSpawnParameters params2;
 	params.Owner = Attachment.Get();
 
-	TraceSpear = Cast<ACTraceSpear>(Character->GetWorld()->SpawnActor<ACTraceSpear>(TraceSpear->StaticClass(), Attachment->GetActorTransform(),params));
+	
+	TraceSpear = Character->GetWorld()->SpawnActor<ACTraceSpear>(TraceSpearClass, Attachment->GetActorTransform(),params);
 }
+
+

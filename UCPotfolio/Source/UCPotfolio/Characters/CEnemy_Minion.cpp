@@ -47,6 +47,7 @@ void ACEnemy_Minion::ApplyDamage(ACharacter* InAttacker, AActor* InAttackCauser,
 	if (StatusComponent->GetHealth() <= 0.0f)
 	{
 		StateComponent->SetDeadMode();
+		Destroy();
 		CLog::Print("CEnemy_Minion : Death" , 10);
 		return;
 	}

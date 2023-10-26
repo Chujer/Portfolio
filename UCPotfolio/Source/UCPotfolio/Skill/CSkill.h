@@ -34,10 +34,13 @@ public:
 		void End_Skill();
 	virtual void End_Skill_Implementation() {}
 
+	FORCEINLINE ACPlayer* GetPlayer() { return Character.Get(); }
+	FORCEINLINE ACAttachment* GetAttachment() { return Attachment.Get(); }
+
 public:
 	virtual void Cansle() {}
 
-protected:	//component
+protected:
 	TWeakObjectPtr<class ACPlayer> Character;
 	TWeakObjectPtr<class ACAttachment> Attachment;
 	TWeakObjectPtr<class UCStateComponent> StateComponent;

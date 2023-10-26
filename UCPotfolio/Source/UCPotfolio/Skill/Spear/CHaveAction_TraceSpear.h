@@ -15,10 +15,12 @@ public:
 	virtual void SkillAction1() override;
 
 private:
-	class ACTraceSpear* TraceSpear;
+	UPROPERTY()
+		class ACTraceSpear* TraceSpear;
 
 public:
 	UPROPERTY(EditAnywhere, Category = "MakeSpear")
 		 TSubclassOf<class ACTraceSpear> TraceSpearClass;
+
 
 };
