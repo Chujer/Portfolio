@@ -19,8 +19,6 @@ void ACTraceSpear::BeginPlay()
 {
 	Super::BeginPlay();
 
-	CLog::Print(targets.Num());
-
 	Attachment = Cast<ACAttachment>(GetOwner());
 	Character = Cast<ACPlayer>(Attachment->GetOwner());
 

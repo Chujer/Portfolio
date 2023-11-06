@@ -34,8 +34,6 @@ private:
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCStateComponent* StateComponent;
 
-	UPROPERTY(VisibleDefaultsOnly)
-		class UCStatusComponent* StatusComponent;
 
 protected:
 	FTimerHandle timer;

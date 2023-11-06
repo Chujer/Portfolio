@@ -20,7 +20,6 @@ ACEnemy_Minion::ACEnemy_Minion()
 	GetMesh()->SetRelativeScale3D(FVector(1.5f, 1.5f, 2.0f));
 
 	CHelpers::CreateActorComponent<UCStateComponent>(this, &StateComponent, "StateComponent");
-	CHelpers::CreateActorComponent<UCStatusComponent>(this, &StatusComponent, "StatusComponent");
 
 	SetOriginMaterials(GetMesh()->SkeletalMesh);
 }
@@ -48,7 +47,6 @@ void ACEnemy_Minion::ApplyDamage(ACharacter* InAttacker, AActor* InAttackCauser,
 	{
 		StateComponent->SetDeadMode();
 		Destroy();
-		CLog::Print("CEnemy_Minion : Death" , 10);
 		return;
 	}
 

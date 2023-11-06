@@ -43,17 +43,16 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 		class UCGravityComponent* GravityComponent;
 
-	UPROPERTY(EditAnywhere)
-		float MaxHealth;
-
-	UPROPERTY(EditAnywhere)
-		float CurHealth;
 
 	UPROPERTY(VisibleAnywhere)
 		TArray<FSkeletalMaterial> OriginMaterials;
 
 	UPROPERTY(EditAnywhere)
 		class UCHitDataAsset* HitDataAssets;
+
+public:
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly)
+		class UCStatusComponent* StatusComponent;
 
 protected:
 	bool bDown = false;

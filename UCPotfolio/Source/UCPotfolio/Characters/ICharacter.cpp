@@ -16,8 +16,6 @@ void IICharacter::LaunchTarget(ACharacter* InTarget, FVector InLaunchVelocity)
 {
 	CheckNull(InTarget);
 
-	CLog::Print(InTarget->GetName());
-
 	InLaunchVelocity = (InTarget->GetActorForwardVector() * -1) * InLaunchVelocity.X;
 
 	InTarget->LaunchCharacter(InLaunchVelocity, true, true);

@@ -14,8 +14,8 @@ class UCPOTFOLIO_API UCStatusComponent : public UActorComponent
 public:	
 	UCStatusComponent();
 
-private:
-	UPROPERTY(EditAnywhere, Category = "Health")
+public:
+	UPROPERTY(EditAnywhere,BlueprintReadOnly, Category = "Health")
 		float MaxHealth = 100;
 
 public:
@@ -30,6 +30,7 @@ public:
 private:
 	TWeakObjectPtr<class ACharacter> OwnerCharacter;
 
-private:
-	float Health;
+public:
+	UPROPERTY(BlueprintReadOnly)
+		float Health;
 };
