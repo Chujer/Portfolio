@@ -1,5 +1,7 @@
 #pragma once
 
+#include <algorithm>
+
 #include "CoreMinimal.h"
 #include "NiagaraComponent.h"
 #include "Particles/ParticleSystem.h"
@@ -9,6 +11,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Skill/AddOns/CGhostTrail.h"
 #include "GameFramework/Character.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Particles/ParticleSystemComponent.h"
 
 #define CheckTrue(x) { if(x == true) return; }
@@ -179,4 +182,23 @@ public:
 		return InOwner->GetWorld()->SpawnActor<ACGhostTrail>(InClass, transform, params);
 	}
 
+	//Character에 설정한 카메라와 타겟들중 가장 각도차가 적은것
+	static ACharacter* NearyFromCameraFront(ACharacter* Character, TArray<ACharacter*> targets)
+	{
+		ACharacter* candidate = nullptr;
+		float angle = 360;
+		for(ACharacter* target : targets)
+		{
+			// 적 - (플레이어 - 적)벡터와 카메라 정면 백터의 각(내적)
+			float tempAngle = UKismetMathLibrary::Dot_VectorVector(UKismetMathLibrary::GetForwardVector(Character->GetControlRotation()), 
+				UKismetMathLibrary::Normal((target->GetActorLocation() - Character->GetActorLocation())));
+
+			if(tempAngle <= angle)
+			{
+				angle = tempAngle;
+				candidate = target;
+			}
+		}
+		return candidate;
+	}
 };

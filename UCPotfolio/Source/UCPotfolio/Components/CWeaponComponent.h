@@ -47,11 +47,7 @@ public:
 
 	void DoAction();
 
-	void DoSkillF();
-	void DoSkillE();
-	void DoSkillV();
-	void DoSkillR();
-	void DoSkillQ();
+	void DoSkill(ESkillIndex skillIndex);
 	void DoDashAttack();
 	void Released();
 

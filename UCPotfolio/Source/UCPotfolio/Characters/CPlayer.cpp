@@ -13,7 +13,7 @@
 #include "Components/CStateComponent.h"
 #include "Components/CRollComponent.h"
 #include "Components/CParkourComponent.h"
-#include "Skill/CSkill.h"
+#include "Components/CTargettingComponent.h"
 #include "Utilities/CLog.h"
 
 ACPlayer::ACPlayer()
@@ -36,6 +36,7 @@ ACPlayer::ACPlayer()
 	CHelpers::CreateActorComponent<UCRollComponent>(this, &RollComponent, "RollComponent");
 	CHelpers::CreateActorComponent<UCIdentityComponent>(this, &IdentityComponent, "IdentityComponent");
 	CHelpers::CreateActorComponent<UCParkourComponent>(this, &ParkourComponent, "ParkourComponent");
+	CHelpers::CreateActorComponent<UCTargettingComponent>(this, &TargettingComponent, "TargettingComponent");
 	CHelpers::CreateComponent<USceneComponent>(this, &ArrowGroup, "ArrowGroup", GetCapsuleComponent());
 
 	//Ä¡Àå (Çï¸ä, °ËÁý)
@@ -110,13 +111,14 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("Sprint", EInputEvent::IE_Pressed, MovementComponent, &UCMovementComponent::OnSprint);
 	PlayerInputComponent->BindAction("Sprint", EInputEvent::IE_Released, MovementComponent, &UCMovementComponent::OffSprint);
 
-	PlayerInputComponent->BindAction("SkillF", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillF);
-	PlayerInputComponent->BindAction("SkillR", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillR);
-	PlayerInputComponent->BindAction("SkillV", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillV);
-	PlayerInputComponent->BindAction("SkillE", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillE);
-	PlayerInputComponent->BindAction("SkillQ", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkillQ);
+	PlayerInputComponent->BindAction<TDelegate<void(ESkillIndex)>>("SkillF", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkill,ESkillIndex::F);
+	PlayerInputComponent->BindAction<TDelegate<void(ESkillIndex)>>("SkillR", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkill,ESkillIndex::R);
+	PlayerInputComponent->BindAction<TDelegate<void(ESkillIndex)>>("SkillV", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkill,ESkillIndex::V);
+	PlayerInputComponent->BindAction<TDelegate<void(ESkillIndex)>>("SkillE", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkill,ESkillIndex::E);
+	PlayerInputComponent->BindAction<TDelegate<void(ESkillIndex)>>("SkillQ", EInputEvent::IE_Pressed, WeaponComponent, &UCWeaponComponent::DoSkill,ESkillIndex::Q);
 
 	PlayerInputComponent->BindAction("Identity", EInputEvent::IE_Pressed, IdentityComponent, &UCIdentityComponent::DoIdentity);
+	PlayerInputComponent->BindAction("Targetting", EInputEvent::IE_Pressed, TargettingComponent, &UCTargettingComponent::BeginTarget);
 
 	PlayerInputComponent->BindAction("SkillF", EInputEvent::IE_Released, WeaponComponent, &UCWeaponComponent::Released);
 	PlayerInputComponent->BindAction("SkillR", EInputEvent::IE_Released, WeaponComponent, &UCWeaponComponent::Released);

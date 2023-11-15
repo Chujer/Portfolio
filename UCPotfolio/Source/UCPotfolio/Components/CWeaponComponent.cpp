@@ -113,47 +113,11 @@ void UCWeaponComponent::DoAction()
 	}
 }
 
-void UCWeaponComponent::DoSkillF()
+void UCWeaponComponent::DoSkill(ESkillIndex skillIndex)
 {
 	CheckNull(GetAttachment());
 	CheckFalse(StateComponent->IsIdleMode());
-	GetAttachment()->SetCurrentSKill(GetAttachment()->GetSkill((int32)ESkillIndex::F));	//현재 스킬 설정
-	CheckNull(GetCurrentSkill());
-	GetCurrentSkill()->Pressed();		
-}
-
-void UCWeaponComponent::DoSkillE()
-{
-	CheckNull(GetAttachment());
-	CheckFalse(StateComponent->IsIdleMode());
-	GetAttachment()->SetCurrentSKill(GetAttachment()->GetSkill((int32)ESkillIndex::E));	//현재 스킬 설정
-	CheckNull(GetCurrentSkill());
-	GetCurrentSkill()->Pressed();
-}
-
-void UCWeaponComponent::DoSkillV()
-{
-	CheckNull(GetAttachment());
-	CheckFalse(StateComponent->IsIdleMode());
-	GetAttachment()->SetCurrentSKill(GetAttachment()->GetSkill((int32)ESkillIndex::V));	//현재 스킬 설정
-	CheckNull(GetCurrentSkill());
-	GetCurrentSkill()->Pressed();
-}
-
-void UCWeaponComponent::DoSkillR()
-{
-	CheckNull(GetAttachment());
-	CheckFalse(StateComponent->IsIdleMode());
-	GetAttachment()->SetCurrentSKill(GetAttachment()->GetSkill((int32)ESkillIndex::R));	//현재 스킬 설정
-	CheckNull(GetCurrentSkill());
-	GetCurrentSkill()->Pressed();
-}
-
-void UCWeaponComponent::DoSkillQ()
-{
-	CheckNull(GetAttachment());
-	CheckFalse(StateComponent->IsIdleMode());
-	GetAttachment()->SetCurrentSKill(GetAttachment()->GetSkill((int32)ESkillIndex::Q));	//현재 스킬 설정
+	GetAttachment()->SetCurrentSKill(GetAttachment()->GetSkill((int32)skillIndex));	//현재 스킬 설정
 	CheckNull(GetCurrentSkill());
 	GetCurrentSkill()->Pressed();
 }

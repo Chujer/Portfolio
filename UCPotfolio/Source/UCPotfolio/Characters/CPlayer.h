@@ -48,6 +48,9 @@ private:
 		class UCParkourComponent* ParkourComponent;
 
 	UPROPERTY(VisibleDefaultsOnly)
+		class UCTargettingComponent* TargettingComponent;
+
+	UPROPERTY(VisibleDefaultsOnly)
 		class UCameraComponent* CineCamera;
 
 public:
