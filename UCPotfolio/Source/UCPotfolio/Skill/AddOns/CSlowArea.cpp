@@ -31,9 +31,6 @@ void ACSlowArea::BeginPlay()
 		FOnTimelineFloat TimelineEvent;
 		TimelineEvent.BindUFunction(this, "ScaleSettingSphere");
 
-		if (!TimelineEvent.IsBound())
-			CLog::Print("no");
-
 		Timeline->AddInterpFloat(Curve, TimelineEvent);
 		Timeline->SetLooping(false);
 		Timeline->SetPlayRate(1);
@@ -45,8 +42,6 @@ void ACSlowArea::BeginPlay()
 	if (!!Sphere)
 		Sphere->OnComponentBeginOverlap.AddDynamic(this, &ACSlowArea::OnComponentBeginOverlap);
 
-	if (!Sphere->OnComponentBeginOverlap.IsBound())
-		CLog::Print("No");
 	EndTimeLine.BindDynamic(this, &ACSlowArea::Destroyed);
 }
 
@@ -91,9 +86,6 @@ void ACSlowArea::RemoveArea(bool bChargeSucced)
 	{
 		FOnTimelineFloat TimelineEvent;
 		TimelineEvent.BindUFunction(this, "ScaleSettingSphere");
-
-		if (!TimelineEvent.IsBound())
-			CLog::Print("no");
 
 		Timeline->AddInterpFloat(Curve, TimelineEvent);
 		Timeline->SetLooping(false);

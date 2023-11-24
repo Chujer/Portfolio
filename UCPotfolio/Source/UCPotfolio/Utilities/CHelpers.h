@@ -182,7 +182,7 @@ public:
 		return InOwner->GetWorld()->SpawnActor<ACGhostTrail>(InClass, transform, params);
 	}
 
-	//Character에 설정한 카메라와 타겟들중 가장 각도차가 적은것
+	//Character에 설정한 카메라와 타겟들중 가장 각도차가 적은캐릭터를 반환
 	static ACharacter* NearyFromCameraFront(ACharacter* Character, TArray<ACharacter*> targets)
 	{
 		ACharacter* candidate = nullptr;

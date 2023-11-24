@@ -44,8 +44,6 @@ void ACAreaDamage_FlashSkill::ScaleUp(float time)
 {
 	float setScale = UKismetMathLibrary::Lerp(StartTrasnform.GetScale3D().X, UpScale,time);
 	FVector setLocation = UKismetMathLibrary::VLerp(StartTrasnform.GetLocation(),EndLocation, time);
-	CLog::Print(time, 2);
-	CLog::Print(setScale,3);
 
 	UBoxComponent* Box = Cast<UBoxComponent>(MainCollision);
 

@@ -19,7 +19,6 @@ void ACGhostTrail::EndTimer()
 
 void ACGhostTrail::SetOriginMaterial()
 {
-	//TODO : 머테리얼이 안들어감!!
 	TArray<UMaterialInterface*> materials = Owner->GetMesh()->GetMaterials();
 
 	for (UPoseableMeshComponent* mesh : Meshs)
@@ -28,7 +27,6 @@ void ACGhostTrail::SetOriginMaterial()
 		{
 			UMaterialInstanceDynamic* instance = Cast<UMaterialInstanceDynamic>(materials[i]);
 			mesh->SetMaterial(i, instance);
-			//	Mesh->SkeletalMesh->Materials[i] = materials[i];
 		}
 	}
 
