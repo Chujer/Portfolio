@@ -9,7 +9,6 @@ void UCHaveAction_TraceSpear::Pressed()
 	Super::Pressed();
 
 	PlayMontage();
-	SkillAction1();
 }
 
 void UCHaveAction_TraceSpear::BeginPlay(ACPlayer* InCharacter, ACAttachment* InAttachment)

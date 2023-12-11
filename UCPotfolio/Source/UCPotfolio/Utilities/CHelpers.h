@@ -7,12 +7,12 @@
 #include "Particles/ParticleSystem.h"
 #include "NiagaraSystem.h"
 #include "NiagaraFunctionLibrary.h"
+#include "Blueprint/UserWidget.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Skill/AddOns/CGhostTrail.h"
 #include "GameFramework/Character.h"
 #include "Kismet/KismetMathLibrary.h"
-#include "Particles/ParticleSystemComponent.h"
 
 #define CheckTrue(x) { if(x == true) return; }
 #define CheckFalse(x) {if(x == false) return;}
@@ -186,14 +186,14 @@ public:
 	static ACharacter* NearyFromCameraFront(ACharacter* Character, TArray<ACharacter*> targets)
 	{
 		ACharacter* candidate = nullptr;
-		float angle = 360;
-		for(ACharacter* target : targets)
+		float angle = 0;
+		for (ACharacter* target : targets)
 		{
 			// 적 - (플레이어 - 적)벡터와 카메라 정면 백터의 각(내적)
-			float tempAngle = UKismetMathLibrary::Dot_VectorVector(UKismetMathLibrary::GetForwardVector(Character->GetControlRotation()), 
+			float tempAngle = UKismetMathLibrary::Dot_VectorVector(UKismetMathLibrary::GetForwardVector(Character->GetControlRotation()),
 				UKismetMathLibrary::Normal((target->GetActorLocation() - Character->GetActorLocation())));
 
-			if(tempAngle <= angle)
+			if (tempAngle >= angle)
 			{
 				angle = tempAngle;
 				candidate = target;

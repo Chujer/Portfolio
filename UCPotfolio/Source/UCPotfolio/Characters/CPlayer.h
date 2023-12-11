@@ -4,6 +4,7 @@
 #include "Characters/CCharacter_Base.h"
 #include "Components/CParkourComponent.h"
 #include "Components/CStateComponent.h"
+#include "Components/WidgetComponent.h"
 #include "CPlayer.generated.h"
 
 UCLASS(Blueprintable)

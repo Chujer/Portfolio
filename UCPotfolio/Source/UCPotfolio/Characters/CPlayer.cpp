@@ -14,6 +14,7 @@
 #include "Components/CRollComponent.h"
 #include "Components/CParkourComponent.h"
 #include "Components/CTargettingComponent.h"
+#include "Components/WidgetComponent.h"
 #include "Utilities/CLog.h"
 
 ACPlayer::ACPlayer()
@@ -119,6 +120,7 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	PlayerInputComponent->BindAction("Identity", EInputEvent::IE_Pressed, IdentityComponent, &UCIdentityComponent::DoIdentity);
 	PlayerInputComponent->BindAction("Targetting", EInputEvent::IE_Pressed, TargettingComponent, &UCTargettingComponent::BeginTarget);
+	PlayerInputComponent->BindAction("EndTargetting", EInputEvent::IE_Pressed, TargettingComponent, &UCTargettingComponent::EndTarget);
 
 	PlayerInputComponent->BindAction("SkillF", EInputEvent::IE_Released, WeaponComponent, &UCWeaponComponent::Released);
 	PlayerInputComponent->BindAction("SkillR", EInputEvent::IE_Released, WeaponComponent, &UCWeaponComponent::Released);

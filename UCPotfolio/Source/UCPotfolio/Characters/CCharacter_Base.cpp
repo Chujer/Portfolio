@@ -3,8 +3,9 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/CGravityComponent.h"
 #include "Components/CStatusComponent.h"
+#include "Components/WidgetComponent.h"
+#include "Components/WidgetComponent.h"
 #include "Utilities/CHelpers.h"
-#include "Utilities/CLog.h"
 //#include "GameFramework/SpringArmComponent.h"
 //#include "GameFramework/CharacterMovementComponent.h"
 //#include "Camera/CameraComponent.h"
@@ -14,12 +15,14 @@ ACCharacter_Base::ACCharacter_Base()
 	PrimaryActorTick.bCanEverTick = true;
 	CHelpers::CreateActorComponent<UCGravityComponent>(this, &GravityComponent, "GravityComponent");
 	CHelpers::CreateActorComponent<UCStatusComponent>(this, &StatusComponent, "StatusComponent");
+	CHelpers::CreateComponent<UWidgetComponent>(this, &LockOnWidget, "LockOnWidget", GetCapsuleComponent());
 }
 
 void ACCharacter_Base::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	LockOnWidget->SetVisibility(false);
 }
 
 void ACCharacter_Base::SetMesh(FString InPath)
@@ -33,10 +36,14 @@ void ACCharacter_Base::SetMesh(FString InPath)
 	GetMesh()->SetCollisionProfileName("OverlapAll");
 }
 
+void ACCharacter_Base::SetLockOnVisible(bool InBool)
+{
+	LockOnWidget->SetVisibility(InBool);
+}
+
 void ACCharacter_Base::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void ACCharacter_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

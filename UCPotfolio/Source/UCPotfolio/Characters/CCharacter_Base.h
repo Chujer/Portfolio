@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/WidgetComponent.h"
 #include "GameFramework/Character.h"
 #include "Weapon/CHitDataAsset.h"
 #include "CCharacter_Base.generated.h"
@@ -22,7 +23,7 @@ protected:
 public:
 	FORCEINLINE bool GetIsDown() { return bDown; }
 	FORCEINLINE void SetIsDown(bool InBool) { bDown = InBool; }
-
+	void SetLockOnVisible(bool InBool);
 
 public:	
 	virtual void Tick(float DeltaTime) override;
@@ -50,10 +51,14 @@ protected:
 	UPROPERTY(EditAnywhere)
 		class UCHitDataAsset* HitDataAssets;
 
+	UPROPERTY(EditAnywhere)
+		class UWidgetComponent* LockOnWidget;
+
 public:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly)
 		class UCStatusComponent* StatusComponent;
 
 protected:
 	bool bDown = false;
+
 };

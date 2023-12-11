@@ -4,6 +4,7 @@
 #include "Components/CGravityComponent.h"
 #include "Components/CStateComponent.h"
 #include "Components/CStatusComponent.h"
+#include "Components/WidgetComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Utilities/CLog.h"
 
@@ -20,7 +21,6 @@ ACEnemy_Minion::ACEnemy_Minion()
 	GetMesh()->SetRelativeScale3D(FVector(1.5f, 1.5f, 2.0f));
 
 	CHelpers::CreateActorComponent<UCStateComponent>(this, &StateComponent, "StateComponent");
-
 	SetOriginMaterials(GetMesh()->SkeletalMesh);
 }
 

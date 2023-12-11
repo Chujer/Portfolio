@@ -14,11 +14,11 @@ public:
 	UCTargettingComponent();
 
 public:
-	//TODO : 2023.11.15 타게팅 대상지정까지 완료
 	void Toggle_Target();
 	void BeginTarget();
 	void EndTarget();
 	void ChangeTarget(ACharacter* target);
+	void TickTargetting(float DeltaTime);
 
 protected:
 	virtual void BeginPlay() override;
@@ -31,16 +31,20 @@ private:
 	TWeakObjectPtr<class ACharacter> OwnerCharacter;
 	TWeakObjectPtr<class ACharacter> Target;
 	TArray<FHitResult> HitResults;
-	class UFXSystemComponent* ParticleComponent;
 
+private:
+	bool MovingFocus = false;
 
 public:
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "setting")
+		float FinishAngle = 2.0f;
+		UPROPERTY(EditAnywhere, Category = "setting")
+		float InterpSpeed = 5.0f;
+
+	UPROPERTY(EditAnywhere, Category = "setting")
 		float TargettingRange = 1000.0f;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "setting")
 		TEnumAsByte<ETraceTypeQuery> TraceChannel;
 
-	UPROPERTY(EditAnywhere)
-		class UFXSystemAsset* Particle;
 };
