@@ -1,4 +1,0 @@
-,Damage,Montage,PlayRate,CanMove,Launch,HitStop,Sound,ShakeClass,Effect,EffectLocation,EffectScale,UpLaunch,WithLuanch
-1,5,,1,FALSE,100,0,SoundWave'/Game/Sounds/S_OneHand_Hit.S_OneHand_Hit',,,"(X=0,Y=0,Z=0)","(X=1,Y=1,Z=1)",0,TRUE
-2,10,,1,FALSE,100,0,SoundWave'/Game/Sounds/S_OneHand_Hit.S_OneHand_Hit',,,"(X=0,Y=0,Z=0)","(X=1,Y=1,Z=1)",0,TRUE
-3,15,AnimMontage'/Game/Character/Montages/Common/KNockDown1_Montage.KNockDown1_Montage',1,FALSE,100,0,SoundWave'/Game/Sounds/S_OneHand_Hit.S_OneHand_Hit',,,"(X=0,Y=0,Z=-100)","(X=1,Y=1,Z=1)",0,TRUE

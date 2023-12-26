@@ -1,8 +1,0 @@
-,Montage,PlayRate,CanMove,FixedCamera
-1,AnimMontage'/Game/Character/Montages/Katana/WeekAttack/Katana_Blade_Attack_4Combo_1_Inplace_Montage.Katana_Blade_Attack_4Combo_1_Inplace_Montage',1.4,FALSE,FALSE
-2,AnimMontage'/Game/Character/Montages/Katana/WeekAttack/Katana_Blade_Attack_4Combo_2_Inplace_Montage.Katana_Blade_Attack_4Combo_2_Inplace_Montage',1.4,FALSE,FALSE
-3,AnimMontage'/Game/Character/Montages/Katana/WeekAttack/Katana_Blade_Attack_4Combo_3_Inplace_Montage.Katana_Blade_Attack_4Combo_3_Inplace_Montage',1.4,FALSE,FALSE
-4,AnimMontage'/Game/Character/Montages/Katana/WeekAttack/Katana_Blade_Attack_4Combo_4_Inplace_Montage.Katana_Blade_Attack_4Combo_4_Inplace_Montage',1.4,FALSE,FALSE
-5,AnimMontage'/Game/Character/Montages/Katana/DashAttack/DashLeftAttack.DashLeftAttack',1.2,FALSE,FALSE
-6,AnimMontage'/Game/Character/Montages/Katana/DashAttack/DashRightAttack.DashRightAttack',1.2,FALSE,FALSE
-7,AnimMontage'/Game/Character/Montages/Katana/Skill/1/UpperMontage.UpperMontage',1.1,FALSE,FALSE
