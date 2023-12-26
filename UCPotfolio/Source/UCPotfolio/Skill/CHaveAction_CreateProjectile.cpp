@@ -19,7 +19,6 @@ void UCHaveAction_CreateProjectile::SkillAction1()
 	FTransform transform;
 	transform.SetLocation(Attachment.Get()->GetActorLocation());
 	transform.SetRotation(FQuat(Character.Get()->GetActorRotation()));
-
 	ProjectilActor = Character.Get()->GetWorld()->SpawnActor<ACAddon_Projectile>(ProjectileClass, transform);
 	ProjectilActor->OnBeginOverlapEnemy.AddDynamic(this, &UCHaveAction_CreateProjectile::BeginOverlap);
 }

@@ -65,8 +65,10 @@ void ACSlowArea::ScaleSettingSphere(float Output)
 	SetActorScale3D(scale);
 	if (!!MaterialParmater)
 	{
-		UKismetMaterialLibrary::SetVectorParameterValue(Character->GetWorld(), MaterialParmater, "Position", Character->GetActorLocation());
-		UKismetMaterialLibrary::SetScalarParameterValue(Character->GetWorld(), MaterialParmater, "Radius", Output * 10.0f);
+		UKismetMaterialLibrary::SetVectorParameterValue(Character->GetWorld(), MaterialParmater, 
+			"Position", Character->GetActorLocation());
+		UKismetMaterialLibrary::SetScalarParameterValue(Character->GetWorld(), 
+			MaterialParmater, "Radius", Output * 10.0f);
 	}
 }
 
